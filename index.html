@@ -1,795 +1,321 @@
-<!DOCTYPE html>
-<html lang="zh-Hant">
+<script>
 
-<head>
-  <meta charset="UTF-8">
+  const WORKER_URL =
+    "https://xinyao-539-api.love06130430.workers.dev/";
 
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0, viewport-fit=cover"
-  >
 
-  <title>芯瑤💕539趨勢分析</title>
+  const playType =
+    document.getElementById("playType");
 
-  <!-- 瀏覽器圖示 -->
-  <link
-    rel="icon"
-    type="image/png"
-    href="./favicon-64.png"
-  >
+  const missArea =
+    document.getElementById("missArea");
 
-  <!-- iPhone 新增到主畫面 -->
-  <link
-    rel="apple-touch-icon"
-    href="./icon-192(1).png"
-  >
+  const missCount =
+    document.getElementById("missCount");
 
-  <meta name="theme-color" content="#fff6fb">
+  const analyzeBtn =
+    document.getElementById("analyzeBtn");
 
-  <style>
+  const result =
+    document.getElementById("result");
 
-    * {
-      box-sizing: border-box;
+
+  /* =========================
+     多選不中顆數
+  ========================= */
+
+  function updateMissArea() {
+
+    if (playType.value === "多選不中") {
+      missArea.classList.remove("hidden");
+    } else {
+      missArea.classList.add("hidden");
     }
 
-    html,
-    body {
-      margin: 0;
-      padding: 0;
-      min-height: 100%;
+  }
+
+  playType.addEventListener(
+    "change",
+    updateMissArea
+  );
+
+  updateMissArea();
+
+
+  /* =========================
+     HTML 安全處理
+  ========================= */
+
+  function escapeHtml(text) {
+
+    return String(text ?? "")
+      .replaceAll("&", "&amp;")
+      .replaceAll("<", "&lt;")
+      .replaceAll(">", "&gt;")
+      .replaceAll('"', "&quot;")
+      .replaceAll("'", "&#039;");
+
+  }
+
+
+  /* =========================
+     計算下一個539分析日期
+     星期日自動跳過
+  ========================= */
+
+  function getNextDrawDate(latestDate) {
+
+    if (
+      !latestDate ||
+      !latestDate.includes("/")
+    ) {
+      return "";
     }
 
-    body {
-      font-family:
-        -apple-system,
-        BlinkMacSystemFont,
-        "Segoe UI",
-        "Noto Sans TC",
-        sans-serif;
-
-      background:
-        linear-gradient(
-          180deg,
-          #fff6fb 0%,
-          #faf4ff 55%,
-          #fff8fb 100%
-        );
-
-      color: #332638;
-      min-height: 100vh;
-    }
-
-    .app {
-      width: min(92%, 520px);
-      margin: 0 auto;
-      padding: 34px 0 60px;
-    }
-
-    /* =========================
-       頂部
-    ========================= */
-
-    .header {
-      text-align: center;
-      margin-bottom: 28px;
-    }
-
-    .logo {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      margin-bottom: 14px;
-    }
-
-    .logo-img {
-      width: 105px;
-      height: 105px;
-
-      object-fit: cover;
-
-      border-radius: 26px;
-
-      border:
-        3px solid
-        rgba(255, 255, 255, 0.95);
-
-      box-shadow:
-        0 10px 28px
-        rgba(120, 65, 105, 0.16);
-    }
-
-    h1 {
-      margin: 0;
-
-      font-size: 25px;
-      font-weight: 800;
-
-      color: #302237;
-
-      letter-spacing: 0.3px;
-    }
-
-    .sub {
-      margin-top: 10px;
-
-      font-size: 14px;
-      line-height: 1.6;
-
-      color: #9a8192;
-    }
-
-    /* =========================
-       卡片
-    ========================= */
-
-    .card {
-      background:
-        rgba(255, 255, 255, 0.95);
-
-      border-radius: 24px;
-
-      padding: 22px;
-
-      margin-bottom: 18px;
-
-      border:
-        1px solid
-        rgba(255, 255, 255, 0.8);
-
-      box-shadow:
-        0 12px 34px
-        rgba(105, 70, 120, 0.08);
-    }
-
-    /* =========================
-       表單
-    ========================= */
-
-    label {
-      display: block;
-
-      margin-bottom: 9px;
-
-      font-size: 15px;
-      font-weight: 800;
-
-      color: #33283b;
-    }
-
-    select {
-      width: 100%;
-      height: 52px;
-
-      padding: 0 15px;
-
-      border-radius: 15px;
-
-      border:
-        1px solid
-        #e7d9e9;
-
-      background: #ffffff;
-
-      color: #3f3246;
-
-      font-size: 16px;
-
-      outline: none;
-    }
-
-    select:focus {
-      border-color: #d594c2;
-
-      box-shadow:
-        0 0 0 3px
-        rgba(220, 140, 195, 0.12);
-    }
-
-    #missArea {
-      margin-top: 18px;
-    }
-
-    .hidden {
-      display: none;
-    }
-
-    /* =========================
-       按鈕
-    ========================= */
-
-    #analyzeBtn {
-      width: 100%;
-      height: 54px;
-
-      margin-top: 20px;
-
-      border: none;
-
-      border-radius: 16px;
-
-      background:
-        linear-gradient(
-          135deg,
-          #ed79b5,
-          #a879ec
-        );
-
-      color: white;
-
-      font-size: 17px;
-      font-weight: 800;
-
-      cursor: pointer;
-
-      box-shadow:
-        0 10px 24px
-        rgba(181, 108, 198, 0.25);
-
-      transition:
-        transform 0.15s ease,
-        opacity 0.15s ease;
-    }
-
-    #analyzeBtn:active {
-      transform: scale(0.985);
-    }
-
-    #analyzeBtn:disabled {
-      opacity: 0.6;
-      cursor: not-allowed;
-    }
-
-    /* =========================
-       分析結果
-    ========================= */
-
-    .result-title {
-      margin-bottom: 14px;
-
-      font-size: 18px;
-      font-weight: 800;
-
-      color: #33263a;
-    }
-
-    .result {
-      min-height: 92px;
-
-      padding: 18px;
-
-      border-radius: 17px;
-
-      background:
-        linear-gradient(
-          135deg,
-          #fff8fb,
-          #faf6ff
-        );
-
-      color: #604b5e;
-
-      font-size: 16px;
-      line-height: 1.7;
-
-      word-break: break-word;
-
-      /* 重要：避免 HTML 換行被放大 */
-      white-space: normal;
-    }
-
-    .result.loading {
-      color: #a46d94;
-      white-space: pre-line;
-    }
-
-    .result.error {
-      color: #b94f6b;
-
-      background:
-        linear-gradient(
-          135deg,
-          #fff6f8,
-          #fff0f4
-        );
-
-      white-space: pre-line;
-    }
-
-    /* =========================
-       資料資訊
-    ========================= */
-
-    .data-info {
-      padding: 14px 16px;
-      margin-bottom: 18px;
-
-      border-radius: 14px;
-
-      background: #fff3f9;
-
-      color: #74596d;
-
-      font-size: 14px;
-      line-height: 1.7;
-    }
-
-    .data-row {
-      margin-bottom: 5px;
-    }
-
-    .data-row:last-child {
-      margin-bottom: 0;
-    }
-
-    .data-row strong {
-      color: #554250;
-      font-weight: 800;
-    }
-
-    /* =========================
-       正式分析文字
-    ========================= */
-
-    .analysis-output {
-      color: #554653;
-
-      font-size: 16px;
-      line-height: 1.8;
-
-      white-space: pre-line;
-    }
-
-    /* =========================
-       Footer
-    ========================= */
-
-    .footer {
-      text-align: center;
-
-      margin-top: 28px;
-
-      font-size: 12px;
-
-      color: #ae9ca9;
-    }
-
-    /* =========================
-       手機版
-    ========================= */
-
-    @media (max-width: 480px) {
-
-      .app {
-        width: 92%;
-        padding-top: 28px;
-      }
-
-      .logo-img {
-        width: 96px;
-        height: 96px;
-
-        border-radius: 23px;
-      }
-
-      h1 {
-        font-size: 23px;
-      }
-
-      .sub {
-        font-size: 13px;
-      }
-
-      .card {
-        padding: 20px;
-      }
-
-      .data-info {
-        font-size: 14px;
-      }
-
-      .analysis-output {
-        font-size: 16px;
-      }
-
-    }
-
-  </style>
-
-</head>
-
-
-<body>
-
-  <main class="app">
-
-
-    <!-- =========================
-         頂部
-    ========================== -->
-
-    <section class="header">
-
-      <div class="logo">
-
-        <img
-          src="./icon-192(1).png"
-          onerror="this.onerror=null; this.src='./icon-512(1).png';"
-          alt="芯瑤539趨勢分析"
-          class="logo-img"
-        >
-
-      </div>
-
-      <h1>
-        芯瑤💕539趨勢分析
-      </h1>
-
-      <div class="sub">
-        依照個人抓牌板路與歷史趨勢進行系統化分析
-      </div>
-
-    </section>
-
-
-    <!-- =========================
-         玩法選擇
-    ========================== -->
-
-    <section class="card">
-
-      <label for="playType">
-        選擇分析玩法
-      </label>
-
-      <select id="playType">
-
-        <option value="連碰234星">
-          連碰234星
-        </option>
-
-        <option value="全車">
-          全車
-        </option>
-
-        <option value="尾數">
-          尾數
-        </option>
-
-        <option value="多選不中">
-          多選不中
-        </option>
-
-      </select>
-
-
-      <div
-        id="missArea"
-        class="hidden"
-      >
-
-        <label for="missCount">
-          多選不中顆數
-        </label>
-
-        <select id="missCount">
-
-          <option value="5顆">5顆</option>
-          <option value="6顆">6顆</option>
-          <option value="7顆">7顆</option>
-          <option value="8顆">8顆</option>
-          <option value="9顆">9顆</option>
-          <option value="10顆">10顆</option>
-
-        </select>
-
-      </div>
-
-
-      <button id="analyzeBtn">
-        開始分析
-      </button>
-
-    </section>
-
-
-    <!-- =========================
-         分析結果
-    ========================== -->
-
-    <section class="card">
-
-      <div class="result-title">
-        分析結果
-      </div>
-
-      <div
-        id="result"
-        class="result"
-      >
-        請先選擇玩法並點擊「開始分析」
-      </div>
-
-    </section>
-
-
-    <div class="footer">
-      本工具為趨勢資料分析參考
-    </div>
-
-
-  </main>
-
-
-  <script>
-
-    /* =========================
-       Cloudflare Worker
-    ========================= */
-
-    const WORKER_URL =
-      "https://xinyao-539-api.love06130430.workers.dev/";
-
-
-    /* =========================
-       元件
-    ========================= */
-
-    const playType =
-      document.getElementById(
-        "playType"
-      );
-
-    const missArea =
-      document.getElementById(
-        "missArea"
-      );
-
-    const missCount =
-      document.getElementById(
-        "missCount"
-      );
-
-    const analyzeBtn =
-      document.getElementById(
-        "analyzeBtn"
-      );
-
-    const result =
-      document.getElementById(
-        "result"
+    const parts =
+      latestDate.split("/");
+
+    const month =
+      parseInt(parts[0], 10);
+
+    const day =
+      parseInt(parts[1], 10);
+
+
+    const year =
+      parseInt(
+        new Intl.DateTimeFormat(
+          "en",
+          {
+            timeZone: "Asia/Taipei",
+            year: "numeric"
+          }
+        ).format(new Date()),
+        10
       );
 
 
-    /* =========================
-       多選不中顯示
-    ========================= */
-
-    function updateMissArea() {
-
-      if (
-        playType.value ===
-        "多選不中"
-      ) {
-
-        missArea.classList.remove(
-          "hidden"
-        );
-
-      } else {
-
-        missArea.classList.add(
-          "hidden"
-        );
-
-      }
-
-    }
+    const date =
+      new Date(
+        Date.UTC(
+          year,
+          month - 1,
+          day
+        )
+      );
 
 
-    playType.addEventListener(
-      "change",
-      updateMissArea
+    /* 至少往後一天 */
+    do {
+
+      date.setUTCDate(
+        date.getUTCDate() + 1
+      );
+
+    } while (
+      date.getUTCDay() === 0
     );
 
 
-    updateMissArea();
+    const nextMonth =
+      String(
+        date.getUTCMonth() + 1
+      ).padStart(2, "0");
 
 
-    /* =========================
-       HTML 安全處理
-    ========================= */
-
-    function escapeHtml(text) {
-
-      return String(text ?? "")
-        .replaceAll("&", "&amp;")
-        .replaceAll("<", "&lt;")
-        .replaceAll(">", "&gt;")
-        .replaceAll('"', "&quot;")
-        .replaceAll("'", "&#039;");
-
-    }
+    const nextDay =
+      String(
+        date.getUTCDate()
+      ).padStart(2, "0");
 
 
-    /* =========================
-       正式分析
-    ========================= */
+    return (
+      nextMonth +
+      "/" +
+      nextDay
+    );
 
-    analyzeBtn.addEventListener(
-      "click",
-      async () => {
+  }
+
+
+  /* =========================
+     執行分析
+  ========================= */
+
+  analyzeBtn.addEventListener(
+    "click",
+    async () => {
+
+      result.classList.remove("error");
+      result.classList.add("loading");
+
+      analyzeBtn.disabled = true;
+
+      analyzeBtn.textContent =
+        "分析中...";
+
+      result.textContent =
+        "正在取得近期539最新開獎資料...\n正在套用抓牌板路與趨勢分析...";
+
+
+      try {
+
+        const response =
+          await fetch(
+            WORKER_URL,
+            {
+              method: "POST",
+
+              headers: {
+                "Content-Type":
+                  "application/json"
+              },
+
+              body:
+                JSON.stringify({
+
+                  play_type:
+                    playType.value,
+
+                  miss_count:
+                    playType.value ===
+                    "多選不中"
+                      ? missCount.value
+                      : "5顆"
+
+                })
+            }
+          );
+
+
+        const data =
+          await response.json();
+
+
+        if (!response.ok) {
+
+          throw new Error(
+            data?.error ||
+            "分析失敗"
+          );
+
+        }
+
+
+        if (!data.result) {
+
+          throw new Error(
+            "沒有取得分析結果"
+          );
+
+        }
+
 
         result.classList.remove(
-          "error"
-        );
-
-        result.classList.add(
           "loading"
         );
 
 
-        analyzeBtn.disabled =
-          true;
+        const latestDate =
+          data.latest_date ||
+          "未知";
 
 
-        analyzeBtn.textContent =
-          "分析中...";
+        const latestNumbers =
+          data.latest_numbers ||
+          "未知";
 
 
-        result.textContent =
-          "正在取得近期539最新開獎資料...\n正在套用抓牌板路與趨勢分析...";
-
-
-        try {
-
-          const response =
-            await fetch(
-              WORKER_URL,
-              {
-
-                method: "POST",
-
-                headers: {
-                  "Content-Type":
-                    "application/json"
-                },
-
-                body:
-                  JSON.stringify({
-
-                    play_type:
-                      playType.value,
-
-                    miss_count:
-                      (
-                        playType.value ===
-                        "多選不中"
-                      )
-                        ? missCount.value
-                        : "5顆"
-
-                  })
-
-              }
-            );
-
-
-          let data;
-
-
-          try {
-
-            data =
-              await response.json();
-
-          } catch {
-
-            throw new Error(
-              "伺服器回傳格式錯誤"
-            );
-
-          }
-
-
-          if (!response.ok) {
-
-            throw new Error(
-              data?.error ||
-              "分析失敗"
-            );
-
-          }
-
-
-          if (!data.result) {
-
-            throw new Error(
-              "沒有取得分析結果"
-            );
-
-          }
-
-
-          result.classList.remove(
-            "loading"
+        const targetDate =
+          getNextDrawDate(
+            latestDate
           );
 
 
-          const latestDate =
-            data.latest_date ||
-            "未知";
+        let analysisText =
+          data.result;
 
 
-          const latestNumbers =
-            data.latest_numbers ||
-            "未知";
+        /* =========================
+           把日期加到分析標題前
+        ========================= */
 
+        if (
+          analysisText.startsWith("【")
+        ) {
 
-          const analysisText =
-            data.result;
+          analysisText =
+            targetDate +
+            analysisText;
 
+        } else {
 
-          result.innerHTML = `
-            <div class="data-info">
-
-              <div class="data-row">
-                📅 資料基準：
-                <strong>${escapeHtml(latestDate)}</strong>
-              </div>
-
-              <div class="data-row">
-                🎱 最新開獎：
-                <strong>${escapeHtml(latestNumbers)}</strong>
-              </div>
-
-              <div class="data-row">
-                🎯 分析目標：
-                <strong>下一期</strong>
-              </div>
-
-            </div>
-
-            <div class="analysis-output">${escapeHtml(analysisText)}</div>
-          `;
-
-
-        } catch (error) {
-
-          console.error(error);
-
-
-          result.classList.remove(
-            "loading"
-          );
-
-
-          result.classList.add(
-            "error"
-          );
-
-
-          result.textContent =
-            "分析發生錯誤\n\n" +
-            error.message +
-            "\n\n請稍後再試一次。";
-
-
-        } finally {
-
-          analyzeBtn.disabled =
-            false;
-
-
-          analyzeBtn.textContent =
-            "開始分析";
+          analysisText =
+            targetDate +
+            "\n" +
+            analysisText;
 
         }
 
+
+        /* =========================
+           顯示結果
+        ========================= */
+
+        result.innerHTML =
+          '<div class="data-info">' +
+
+            '<div class="data-row">' +
+              '📅 資料基準：<strong>' +
+              escapeHtml(latestDate) +
+              '</strong>' +
+            '</div>' +
+
+            '<div class="data-row">' +
+              '🎱 最新開獎：<strong>' +
+              escapeHtml(latestNumbers) +
+              '</strong>' +
+            '</div>' +
+
+            '<div class="data-row">' +
+              '🎯 分析目標：<strong>下一期</strong>' +
+            '</div>' +
+
+          '</div>' +
+
+          '<div class="analysis-output">' +
+            escapeHtml(analysisText) +
+          '</div>';
+
+
+      } catch (error) {
+
+        console.error(error);
+
+        result.classList.remove(
+          "loading"
+        );
+
+        result.classList.add(
+          "error"
+        );
+
+        result.textContent =
+          "分析發生錯誤\n\n" +
+          error.message +
+          "\n\n請稍後再試一次。";
+
+
+      } finally {
+
+        analyzeBtn.disabled = false;
+
+        analyzeBtn.textContent =
+          "開始分析";
+
       }
-    );
 
-  </script>
+    }
+  );
 
-</body>
-
-</html>
+</script>
