@@ -1,49 +1,597 @@
-<section class="header">
-  <div class="logo">
-    <img src="icon-192.png" alt="芯瑤539" class="logo-img">
-  </div>
+<!DOCTYPE html>
+<html lang="zh-Hant">
 
-  <h1>芯瑤💕539趨勢分析</h1>
+<head>
+  <meta charset="UTF-8" />
 
-  <div class="sub">
-    依照個人抓牌板路與歷史趨勢進行系統化分析
-  </div>
-</section>
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+  />
 
-<section class="card">
-  <label for="playType">選擇分析玩法</label>
+  <title>芯瑤💕539趨勢分析</title>
 
-  <select id="playType">
-    <option value="連碰234星">連碰234星</option>
-    <option value="全車">全車</option>
-    <option value="尾數">尾數</option>
-    <option value="多選不中">多選不中</option>
-  </select>
+  <!-- 瀏覽器小圖示 -->
+  <link
+    rel="icon"
+    type="image/png"
+    href="favicon-64.png"
+  />
 
-  <div id="missArea" class="hidden">
-    <label for="missCount">多選不中顆數</label>
+  <!-- iPhone 新增到主畫面圖示 -->
+  <link
+    rel="apple-touch-icon"
+    href="icon-192.png"
+  />
 
-    <select id="missCount">
-      <option value="5顆">5顆</option>
-      <option value="6顆">6顆</option>
-      <option value="7顆">7顆</option>
-      <option value="8顆">8顆</option>
-      <option value="9顆">9顆</option>
-      <option value="10顆">10顆</option>
-    </select>
-  </div>
+  <meta
+    name="theme-color"
+    content="#f7d4e9"
+  />
 
-  <button id="analyzeBtn">開始分析</button>
-</section>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
 
-<section class="card">
-  <div class="result-title">分析結果</div>
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      min-height: 100%;
+    }
 
-  <div id="result" class="result">
-    請先選擇玩法並點擊「開始分析」
-  </div>
-</section>
+    body {
+      font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        "Noto Sans TC",
+        sans-serif;
 
-<div class="footer">
-  本工具為趨勢資料分析參考
-</div>
+      background:
+        linear-gradient(
+          180deg,
+          #fff6fa 0%,
+          #fbf5ff 55%,
+          #fff8fb 100%
+        );
+
+      color: #332638;
+
+      min-height: 100vh;
+    }
+
+    .app {
+      width: min(92%, 520px);
+      margin: 0 auto;
+      padding:
+        36px
+        0
+        60px;
+    }
+
+    /* =========================
+       頂部
+    ========================= */
+
+    .header {
+      text-align: center;
+      margin-bottom: 28px;
+    }
+
+    .logo {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 14px;
+    }
+
+    .logo-img {
+      width: 108px;
+      height: 108px;
+
+      object-fit: cover;
+
+      border-radius: 26px;
+
+      box-shadow:
+        0 10px 28px
+        rgba(142, 82, 110, 0.18);
+
+      border:
+        3px solid
+        rgba(255, 255, 255, 0.9);
+    }
+
+    h1 {
+      margin: 0;
+
+      font-size: 25px;
+      font-weight: 850;
+
+      letter-spacing: 0.5px;
+
+      color: #302237;
+    }
+
+    .sub {
+      margin-top: 10px;
+
+      color: #9c8195;
+
+      font-size: 14px;
+
+      line-height: 1.7;
+    }
+
+    /* =========================
+       卡片
+    ========================= */
+
+    .card {
+      background:
+        rgba(
+          255,
+          255,
+          255,
+          0.94
+        );
+
+      border-radius: 24px;
+
+      padding: 22px;
+
+      margin-bottom: 18px;
+
+      box-shadow:
+        0 12px 35px
+        rgba(
+          110,
+          73,
+          120,
+          0.08
+        );
+
+      border:
+        1px solid
+        rgba(
+          255,
+          255,
+          255,
+          0.8
+        );
+    }
+
+    label {
+      display: block;
+
+      font-size: 15px;
+      font-weight: 800;
+
+      margin-bottom: 9px;
+
+      color: #33283b;
+    }
+
+    select {
+      width: 100%;
+      height: 52px;
+
+      padding:
+        0
+        15px;
+
+      border-radius: 15px;
+
+      border:
+        1px solid
+        #eadcec;
+
+      background: #fff;
+
+      color: #3d3144;
+
+      font-size: 16px;
+
+      outline: none;
+
+      appearance: auto;
+    }
+
+    select:focus {
+      border-color: #d79ac5;
+
+      box-shadow:
+        0 0 0 3px
+        rgba(
+          220,
+          149,
+          198,
+          0.12
+        );
+    }
+
+    #missArea {
+      margin-top: 18px;
+    }
+
+    /* =========================
+       按鈕
+    ========================= */
+
+    button {
+      width: 100%;
+
+      height: 54px;
+
+      margin-top: 20px;
+
+      border: none;
+
+      border-radius: 16px;
+
+      background:
+        linear-gradient(
+          135deg,
+          #ed79b5,
+          #a779ec
+        );
+
+      color: #fff;
+
+      font-size: 17px;
+      font-weight: 850;
+
+      cursor: pointer;
+
+      box-shadow:
+        0 10px 24px
+        rgba(
+          181,
+          108,
+          198,
+          0.25
+        );
+
+      transition:
+        transform 0.15s ease,
+        opacity 0.15s ease;
+    }
+
+    button:hover {
+      opacity: 0.94;
+    }
+
+    button:active {
+      transform: scale(0.985);
+    }
+
+    button:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    /* =========================
+       分析結果
+    ========================= */
+
+    .result-title {
+      font-size: 18px;
+
+      font-weight: 850;
+
+      margin-bottom: 14px;
+
+      color: #33263a;
+    }
+
+    .result {
+      min-height: 90px;
+
+      padding: 17px;
+
+      border-radius: 17px;
+
+      background:
+        linear-gradient(
+          135deg,
+          #fff8fb,
+          #faf6ff
+        );
+
+      color: #604b5e;
+
+      font-size: 16px;
+
+      line-height: 1.9;
+
+      white-space: pre-line;
+
+      word-break: break-word;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    /* =========================
+       Footer
+    ========================= */
+
+    .footer {
+      text-align: center;
+
+      margin-top: 28px;
+
+      font-size: 12px;
+
+      color: #ae9ca9;
+    }
+
+    /* =========================
+       手機版
+    ========================= */
+
+    @media (max-width: 480px) {
+      .app {
+        width: 92%;
+
+        padding-top: 26px;
+      }
+
+      .logo-img {
+        width: 96px;
+        height: 96px;
+
+        border-radius: 23px;
+      }
+
+      h1 {
+        font-size: 23px;
+      }
+
+      .card {
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <main class="app">
+
+    <!-- =========================
+         頂部
+    ========================== -->
+
+    <section class="header">
+
+      <div class="logo">
+
+        <img
+          src="icon-192.png"
+          alt="芯瑤539趨勢分析"
+          class="logo-img"
+        />
+
+      </div>
+
+      <h1>
+        芯瑤💕539趨勢分析
+      </h1>
+
+      <div class="sub">
+        依照個人抓牌板路與歷史趨勢進行系統化分析
+      </div>
+
+    </section>
+
+
+    <!-- =========================
+         玩法選擇
+    ========================== -->
+
+    <section class="card">
+
+      <label for="playType">
+        選擇分析玩法
+      </label>
+
+      <select id="playType">
+
+        <option value="連碰234星">
+          連碰234星
+        </option>
+
+        <option value="全車">
+          全車
+        </option>
+
+        <option value="尾數">
+          尾數
+        </option>
+
+        <option value="多選不中">
+          多選不中
+        </option>
+
+      </select>
+
+
+      <div
+        id="missArea"
+        class="hidden"
+      >
+
+        <label for="missCount">
+          多選不中顆數
+        </label>
+
+        <select id="missCount">
+
+          <option value="5顆">
+            5顆
+          </option>
+
+          <option value="6顆">
+            6顆
+          </option>
+
+          <option value="7顆">
+            7顆
+          </option>
+
+          <option value="8顆">
+            8顆
+          </option>
+
+          <option value="9顆">
+            9顆
+          </option>
+
+          <option value="10顆">
+            10顆
+          </option>
+
+        </select>
+
+      </div>
+
+
+      <button id="analyzeBtn">
+        開始分析
+      </button>
+
+    </section>
+
+
+    <!-- =========================
+         分析結果
+    ========================== -->
+
+    <section class="card">
+
+      <div class="result-title">
+        分析結果
+      </div>
+
+      <div
+        id="result"
+        class="result"
+      >
+        請先選擇玩法並點擊「開始分析」
+      </div>
+
+    </section>
+
+
+    <div class="footer">
+      本工具為趨勢資料分析參考
+    </div>
+
+  </main>
+
+
+  <script>
+
+    const playType =
+      document.getElementById(
+        "playType"
+      );
+
+    const missArea =
+      document.getElementById(
+        "missArea"
+      );
+
+    const missCount =
+      document.getElementById(
+        "missCount"
+      );
+
+    const analyzeBtn =
+      document.getElementById(
+        "analyzeBtn"
+      );
+
+    const result =
+      document.getElementById(
+        "result"
+      );
+
+
+    /* 多選不中才顯示顆數 */
+
+    playType.addEventListener(
+      "change",
+      () => {
+
+        if (
+          playType.value ===
+          "多選不中"
+        ) {
+
+          missArea.classList.remove(
+            "hidden"
+          );
+
+        } else {
+
+          missArea.classList.add(
+            "hidden"
+          );
+
+        }
+
+      }
+    );
+
+
+    /* 分析按鈕
+       下一步會把這裡接 Dify API
+    */
+
+    analyzeBtn.addEventListener(
+      "click",
+      async () => {
+
+        analyzeBtn.disabled = true;
+
+        analyzeBtn.textContent =
+          "分析中...";
+
+        result.textContent =
+          "正在整理近期539資料並進行趨勢分析...";
+
+
+        /*
+          下一步接 Dify API 後，
+          這段會換成真正的 API 呼叫。
+        */
+
+
+        setTimeout(
+          () => {
+
+            result.textContent =
+              "Dify API 尚未連接。\n\n下一步完成 API 串接後，這裡會直接顯示正式分析結果。";
+
+            analyzeBtn.disabled = false;
+
+            analyzeBtn.textContent =
+              "開始分析";
+
+          },
+          800
+        );
+
+      }
+    );
+
+  </script>
+
+</body>
+
+</html>
