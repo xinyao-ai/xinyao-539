@@ -84,7 +84,6 @@
     .logo-img {
       width: 105px;
       height: 105px;
-
       object-fit: cover;
 
       border-radius: 26px;
@@ -290,6 +289,34 @@
         );
     }
 
+    .data-info {
+      margin-bottom: 16px;
+
+      padding: 14px 15px;
+
+      border-radius: 14px;
+
+      background: #fff3f9;
+
+      color: #74596d;
+
+      font-size: 14px;
+
+      line-height: 1.8;
+    }
+
+    .analysis-output {
+      padding-top: 2px;
+
+      color: #554653;
+
+      font-size: 16px;
+
+      line-height: 1.9;
+
+      white-space: pre-line;
+    }
+
     /* =========================
        Footer
     ========================= */
@@ -374,7 +401,6 @@
     </section>
 
 
-
     <!-- =========================
          玩法選擇
     ========================== -->
@@ -406,8 +432,6 @@
       </select>
 
 
-      <!-- 多選不中顆數 -->
-
       <div
         id="missArea"
         class="hidden"
@@ -419,29 +443,12 @@
 
         <select id="missCount">
 
-          <option value="5顆">
-            5顆
-          </option>
-
-          <option value="6顆">
-            6顆
-          </option>
-
-          <option value="7顆">
-            7顆
-          </option>
-
-          <option value="8顆">
-            8顆
-          </option>
-
-          <option value="9顆">
-            9顆
-          </option>
-
-          <option value="10顆">
-            10顆
-          </option>
+          <option value="5顆">5顆</option>
+          <option value="6顆">6顆</option>
+          <option value="7顆">7顆</option>
+          <option value="8顆">8顆</option>
+          <option value="9顆">9顆</option>
+          <option value="10顆">10顆</option>
 
         </select>
 
@@ -453,7 +460,6 @@
       </button>
 
     </section>
-
 
 
     <!-- =========================
@@ -476,14 +482,12 @@
     </section>
 
 
-
     <div class="footer">
       本工具為趨勢資料分析參考
     </div>
 
 
   </main>
-
 
 
   <script>
@@ -561,9 +565,24 @@
     updateMissArea();
 
 
+    /* =========================
+       HTML 安全處理
+    ========================= */
+
+    function escapeHtml(text) {
+
+      return String(text)
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
+
+    }
+
 
     /* =========================
-       正式執行分析
+       正式分析
     ========================= */
 
     analyzeBtn.addEventListener(
@@ -587,7 +606,7 @@
 
 
         result.textContent =
-          "正在取得近期539開獎資料...\n正在套用抓牌板路與趨勢分析...";
+          "正在取得近期539最新開獎資料...\n正在套用抓牌板路與趨勢分析...";
 
 
         try {
@@ -611,10 +630,8 @@
                       playType.value,
 
                     miss_count:
-                      (
-                        playType.value ===
-                        "多選不中"
-                      )
+                      playType.value ===
+                      "多選不中"
                         ? missCount.value
                         : "5顆"
 
@@ -643,23 +660,9 @@
 
           if (!response.ok) {
 
-            let message =
-              data?.error ||
-              "分析失敗";
-
-
-            if (data?.detail) {
-
-              console.log(
-                "Dify detail:",
-                data.detail
-              );
-
-            }
-
-
             throw new Error(
-              message
+              data?.error ||
+              "分析失敗"
             );
 
           }
@@ -679,8 +682,42 @@
           );
 
 
-          result.textContent =
+          const latestDate =
+            data.latest_date ||
+            "未知";
+
+
+          const latestNumbers =
+            data.latest_numbers ||
+            "未知";
+
+
+          const analysisText =
             data.result;
+
+
+          result.innerHTML = `
+
+            <div class="data-info">
+
+              📅 資料基準：
+              <strong>${escapeHtml(latestDate)}</strong>
+
+              <br>
+
+              🎱 最新開獎：
+              <strong>${escapeHtml(latestNumbers)}</strong>
+
+              <br>
+
+              🎯 分析目標：
+              <strong>下一期</strong>
+
+            </div>
+
+            <div class="analysis-output">${escapeHtml(analysisText)}</div>
+
+          `;
 
 
         } catch (error) {
