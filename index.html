@@ -65,7 +65,9 @@
       padding: 34px 0 60px;
     }
 
-    /* 頂部 */
+    /* =========================
+       頂部
+    ========================= */
 
     .header {
       text-align: center;
@@ -82,11 +84,14 @@
     .logo-img {
       width: 105px;
       height: 105px;
+
       object-fit: cover;
 
       border-radius: 26px;
 
-      border: 3px solid rgba(255, 255, 255, 0.95);
+      border:
+        3px solid
+        rgba(255, 255, 255, 0.95);
 
       box-shadow:
         0 10px 28px
@@ -113,10 +118,13 @@
       color: #9a8192;
     }
 
-    /* 卡片 */
+    /* =========================
+       卡片
+    ========================= */
 
     .card {
-      background: rgba(255, 255, 255, 0.95);
+      background:
+        rgba(255, 255, 255, 0.95);
 
       border-radius: 24px;
 
@@ -124,14 +132,18 @@
 
       margin-bottom: 18px;
 
-      border: 1px solid rgba(255, 255, 255, 0.8);
+      border:
+        1px solid
+        rgba(255, 255, 255, 0.8);
 
       box-shadow:
         0 12px 34px
         rgba(105, 70, 120, 0.08);
     }
 
-    /* 表單 */
+    /* =========================
+       表單
+    ========================= */
 
     label {
       display: block;
@@ -152,7 +164,9 @@
 
       border-radius: 15px;
 
-      border: 1px solid #e7d9e9;
+      border:
+        1px solid
+        #e7d9e9;
 
       background: #ffffff;
 
@@ -179,7 +193,9 @@
       display: none;
     }
 
-    /* 開始分析按鈕 */
+    /* =========================
+       按鈕
+    ========================= */
 
     #analyzeBtn {
       width: 100%;
@@ -223,7 +239,9 @@
       cursor: not-allowed;
     }
 
-    /* 分析結果 */
+    /* =========================
+       分析結果
+    ========================= */
 
     .result-title {
       margin-bottom: 14px;
@@ -257,7 +275,24 @@
       word-break: break-word;
     }
 
-    /* Footer */
+    .result.loading {
+      color: #a46d94;
+    }
+
+    .result.error {
+      color: #b94f6b;
+
+      background:
+        linear-gradient(
+          135deg,
+          #fff6f8,
+          #fff0f4
+        );
+    }
+
+    /* =========================
+       Footer
+    ========================= */
 
     .footer {
       text-align: center;
@@ -269,7 +304,9 @@
       color: #ae9ca9;
     }
 
-    /* 手機版 */
+    /* =========================
+       手機版
+    ========================= */
 
     @media (max-width: 480px) {
 
@@ -297,25 +334,21 @@
         padding: 20px;
       }
 
-      select {
-        font-size: 16px;
-      }
-
-      #analyzeBtn {
-        font-size: 17px;
-      }
-
     }
 
   </style>
 
 </head>
 
+
 <body>
 
   <main class="app">
 
-    <!-- 頂部 -->
+
+    <!-- =========================
+         頂部
+    ========================== -->
 
     <section class="header">
 
@@ -340,7 +373,11 @@
 
     </section>
 
-    <!-- 玩法選擇 -->
+
+
+    <!-- =========================
+         玩法選擇
+    ========================== -->
 
     <section class="card">
 
@@ -368,7 +405,8 @@
 
       </select>
 
-      <!-- 多選不中才顯示 -->
+
+      <!-- 多選不中顆數 -->
 
       <div
         id="missArea"
@@ -409,13 +447,18 @@
 
       </div>
 
+
       <button id="analyzeBtn">
         開始分析
       </button>
 
     </section>
 
-    <!-- 分析結果 -->
+
+
+    <!-- =========================
+         分析結果
+    ========================== -->
 
     <section class="card">
 
@@ -432,39 +475,77 @@
 
     </section>
 
+
+
     <div class="footer">
       本工具為趨勢資料分析參考
     </div>
 
+
   </main>
+
+
 
   <script>
 
+    /* =========================
+       Cloudflare Worker
+    ========================= */
+
+    const WORKER_URL =
+      "https://xinyao-539-api.love06130430.workers.dev/";
+
+
+    /* =========================
+       元件
+    ========================= */
+
     const playType =
-      document.getElementById("playType");
+      document.getElementById(
+        "playType"
+      );
 
     const missArea =
-      document.getElementById("missArea");
+      document.getElementById(
+        "missArea"
+      );
 
     const missCount =
-      document.getElementById("missCount");
+      document.getElementById(
+        "missCount"
+      );
 
     const analyzeBtn =
-      document.getElementById("analyzeBtn");
+      document.getElementById(
+        "analyzeBtn"
+      );
 
     const result =
-      document.getElementById("result");
+      document.getElementById(
+        "result"
+      );
 
+
+    /* =========================
+       多選不中顆數顯示
+    ========================= */
 
     function updateMissArea() {
 
-      if (playType.value === "多選不中") {
+      if (
+        playType.value ===
+        "多選不中"
+      ) {
 
-        missArea.classList.remove("hidden");
+        missArea.classList.remove(
+          "hidden"
+        );
 
       } else {
 
-        missArea.classList.add("hidden");
+        missArea.classList.add(
+          "hidden"
+        );
 
       }
 
@@ -480,39 +561,159 @@
     updateMissArea();
 
 
+
+    /* =========================
+       正式執行分析
+    ========================= */
+
     analyzeBtn.addEventListener(
       "click",
       async () => {
 
-        analyzeBtn.disabled = true;
+        result.classList.remove(
+          "error"
+        );
+
+        result.classList.add(
+          "loading"
+        );
+
+
+        analyzeBtn.disabled =
+          true;
 
         analyzeBtn.textContent =
           "分析中...";
 
+
         result.textContent =
-          "正在整理近期539資料並進行趨勢分析...";
+          "正在取得近期539開獎資料...\n正在套用抓牌板路與趨勢分析...";
 
 
-        /*
-          下一步接 Dify API 後，
-          這裡會改成真正的分析結果。
-        */
+        try {
+
+          const response =
+            await fetch(
+              WORKER_URL,
+              {
+
+                method: "POST",
+
+                headers: {
+                  "Content-Type":
+                    "application/json"
+                },
+
+                body:
+                  JSON.stringify({
+
+                    play_type:
+                      playType.value,
+
+                    miss_count:
+                      (
+                        playType.value ===
+                        "多選不中"
+                      )
+                        ? missCount.value
+                        : "5顆"
+
+                  })
+
+              }
+            );
 
 
-        setTimeout(
-          () => {
+          let data;
 
-            result.textContent =
-              "Dify API 尚未連接。\n\n下一步串接完成後，這裡會直接顯示正式539分析結果。";
 
-            analyzeBtn.disabled = false;
+          try {
 
-            analyzeBtn.textContent =
-              "開始分析";
+            data =
+              await response.json();
 
-          },
-          800
-        );
+          } catch {
+
+            throw new Error(
+              "伺服器回傳格式錯誤"
+            );
+
+          }
+
+
+          if (!response.ok) {
+
+            let message =
+              data?.error ||
+              "分析失敗";
+
+
+            if (data?.detail) {
+
+              console.log(
+                "Dify detail:",
+                data.detail
+              );
+
+            }
+
+
+            throw new Error(
+              message
+            );
+
+          }
+
+
+          if (!data.result) {
+
+            throw new Error(
+              "沒有取得分析結果"
+            );
+
+          }
+
+
+          result.classList.remove(
+            "loading"
+          );
+
+
+          result.textContent =
+            data.result;
+
+
+        } catch (error) {
+
+          console.error(error);
+
+
+          result.classList.remove(
+            "loading"
+          );
+
+
+          result.classList.add(
+            "error"
+          );
+
+
+          result.textContent =
+            "分析發生錯誤\n\n" +
+            error.message +
+            "\n\n請稍後再試一次。";
+
+
+        } finally {
+
+          analyzeBtn.disabled =
+            false;
+
+
+          analyzeBtn.textContent =
+            "開始分析";
+
+        }
 
       }
     );
