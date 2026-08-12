@@ -18,19 +18,15 @@
     href="./favicon-64.png"
   >
 
-  <!-- iPhone 加到主畫面圖示 -->
+  <!-- iPhone 新增到主畫面圖示 -->
   <link
     rel="apple-touch-icon"
-    href="./icon-192.png"
+    href="./icon-192(1).png"
   >
 
   <meta name="theme-color" content="#fff6fb">
 
   <style>
-
-    /* =========================
-       基本設定
-    ========================= */
 
     * {
       box-sizing: border-box;
@@ -63,21 +59,13 @@
       min-height: 100vh;
     }
 
-
-    /* =========================
-       APP 外框
-    ========================= */
-
     .app {
       width: min(92%, 520px);
       margin: 0 auto;
       padding: 34px 0 60px;
     }
 
-
-    /* =========================
-       頂部
-    ========================= */
+    /* 頂部 */
 
     .header {
       text-align: center;
@@ -94,7 +82,6 @@
     .logo-img {
       width: 105px;
       height: 105px;
-
       object-fit: cover;
 
       border-radius: 26px;
@@ -126,10 +113,7 @@
       color: #9a8192;
     }
 
-
-    /* =========================
-       卡片
-    ========================= */
+    /* 卡片 */
 
     .card {
       background: rgba(255, 255, 255, 0.95);
@@ -140,19 +124,14 @@
 
       margin-bottom: 18px;
 
-      border:
-        1px solid
-        rgba(255, 255, 255, 0.8);
+      border: 1px solid rgba(255, 255, 255, 0.8);
 
       box-shadow:
         0 12px 34px
         rgba(105, 70, 120, 0.08);
     }
 
-
-    /* =========================
-       表單
-    ========================= */
+    /* 表單 */
 
     label {
       display: block;
@@ -200,10 +179,7 @@
       display: none;
     }
 
-
-    /* =========================
-       開始分析按鈕
-    ========================= */
+    /* 開始分析按鈕 */
 
     #analyzeBtn {
       width: 100%;
@@ -247,10 +223,7 @@
       cursor: not-allowed;
     }
 
-
-    /* =========================
-       分析結果
-    ========================= */
+    /* 分析結果 */
 
     .result-title {
       margin-bottom: 14px;
@@ -284,10 +257,7 @@
       word-break: break-word;
     }
 
-
-    /* =========================
-       Footer
-    ========================= */
+    /* Footer */
 
     .footer {
       text-align: center;
@@ -299,10 +269,7 @@
       color: #ae9ca9;
     }
 
-
-    /* =========================
-       手機版
-    ========================= */
+    /* 手機版 */
 
     @media (max-width: 480px) {
 
@@ -344,23 +311,19 @@
 
 </head>
 
-
 <body>
 
   <main class="app">
 
-
-    <!-- =========================
-         頂部
-    ========================== -->
+    <!-- 頂部 -->
 
     <section class="header">
 
       <div class="logo">
 
         <img
-          src="./icon-192.png"
-          onerror="this.onerror=null; this.src='./icon-512.png';"
+          src="./icon-192(1).png"
+          onerror="this.onerror=null; this.src='./icon-512(1).png';"
           alt="芯瑤539趨勢分析"
           class="logo-img"
         >
@@ -377,11 +340,7 @@
 
     </section>
 
-
-
-    <!-- =========================
-         玩法選擇
-    ========================== -->
+    <!-- 玩法選擇 -->
 
     <section class="card">
 
@@ -409,8 +368,7 @@
 
       </select>
 
-
-      <!-- 多選不中才會顯示 -->
+      <!-- 多選不中才顯示 -->
 
       <div
         id="missArea"
@@ -451,18 +409,13 @@
 
       </div>
 
-
       <button id="analyzeBtn">
         開始分析
       </button>
 
     </section>
 
-
-
-    <!-- =========================
-         分析結果
-    ========================== -->
+    <!-- 分析結果 -->
 
     <section class="card">
 
@@ -479,16 +432,11 @@
 
     </section>
 
-
-
     <div class="footer">
       本工具為趨勢資料分析參考
     </div>
 
-
   </main>
-
-
 
   <script>
 
@@ -508,25 +456,15 @@
       document.getElementById("result");
 
 
-    /* =========================
-       多選不中顆數顯示控制
-    ========================= */
-
     function updateMissArea() {
 
-      if (
-        playType.value === "多選不中"
-      ) {
+      if (playType.value === "多選不中") {
 
-        missArea.classList.remove(
-          "hidden"
-        );
+        missArea.classList.remove("hidden");
 
       } else {
 
-        missArea.classList.add(
-          "hidden"
-        );
+        missArea.classList.add("hidden");
 
       }
 
@@ -542,12 +480,6 @@
     updateMissArea();
 
 
-
-    /* =========================
-       開始分析
-       下一步會接 Dify API
-    ========================= */
-
     analyzeBtn.addEventListener(
       "click",
       async () => {
@@ -557,21 +489,13 @@
         analyzeBtn.textContent =
           "分析中...";
 
-
         result.textContent =
           "正在整理近期539資料並進行趨勢分析...";
 
 
         /*
-          現在先保留測試狀態。
-
-          下一步接上 Dify API 後，
-          這裡就會真的把：
-
-          play_type
-          miss_count
-
-          傳給你的 Dify 工作流。
+          下一步接 Dify API 後，
+          這裡會改成真正的分析結果。
         */
 
 
@@ -581,8 +505,7 @@
             result.textContent =
               "Dify API 尚未連接。\n\n下一步串接完成後，這裡會直接顯示正式539分析結果。";
 
-            analyzeBtn.disabled =
-              false;
+            analyzeBtn.disabled = false;
 
             analyzeBtn.textContent =
               "開始分析";
