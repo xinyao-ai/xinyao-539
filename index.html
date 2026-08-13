@@ -2,6 +2,7 @@
 <html lang="zh-Hant">
 
 <head>
+
   <meta charset="UTF-8">
 
   <meta
@@ -9,11 +10,12 @@
     content="width=device-width, initial-scale=1.0, viewport-fit=cover"
   >
 
-  <title>芯瑤💕539趨勢分析</title>
+  <title>
+    芯瑤💕539趨勢分析
+  </title>
 
   <link
     rel="icon"
-    type="image/png"
     href="./favicon-64.png"
   >
 
@@ -24,55 +26,70 @@
 
   <meta
     name="theme-color"
-    content="#FFF4D9"
+    content="#FFF1CE"
   >
+
 
   <style>
 
-    /* =========================================
-       基本設定
-    ========================================= */
-
     :root {
-      --cream: #fffaf0;
-      --cream-2: #fff3d8;
-      --soft-yellow: #ffe7a2;
 
-      --gold: #ffc34d;
-      --gold-light: #ffd976;
+      --orange:
+        #F59A32;
 
-      --orange: #f6a23a;
-      --orange-dark: #e88321;
+      --orange-dark:
+        #DF771C;
 
-      --brown: #5a412f;
-      --brown-soft: #816650;
+      --gold:
+        #FFC84F;
 
-      --white: #ffffff;
+      --yellow:
+        #FFE59A;
 
-      --shadow:
-        0 14px 38px
-        rgba(177, 111, 37, 0.12);
+      --cream:
+        #FFF8E7;
+
+      --cream2:
+        #FFF1CF;
+
+      --brown:
+        #543B29;
+
+      --soft-brown:
+        #87694F;
+
+      --white:
+        #FFFFFF;
+
     }
 
 
     * {
-      box-sizing: border-box;
+      box-sizing:
+        border-box;
     }
 
 
     html,
     body {
+
       margin: 0;
+
       padding: 0;
 
-      min-height: 100%;
+      min-height:
+        100%;
+
     }
 
 
     body {
-      min-height: 100vh;
 
-      overflow-x: hidden;
+      min-height:
+        100vh;
+
+      overflow-x:
+        hidden;
 
       font-family:
         -apple-system,
@@ -81,333 +98,503 @@
         "Noto Sans TC",
         sans-serif;
 
-      color: var(--brown);
+      color:
+        var(--brown);
 
       background:
         radial-gradient(
           circle at 15% 10%,
-          rgba(255, 211, 104, 0.38),
-          transparent 28%
+          rgba(
+            255,
+            209,
+            93,
+            0.45
+          ),
+          transparent 27%
         ),
+
         radial-gradient(
-          circle at 90% 20%,
-          rgba(255, 171, 68, 0.20),
+          circle at 90% 30%,
+          rgba(
+            245,
+            154,
+            50,
+            0.20
+          ),
           transparent 30%
         ),
+
         linear-gradient(
           180deg,
-          #fff8e8 0%,
-          #fff2d5 48%,
-          #fff9ec 100%
+          #FFF7E4,
+          #FFEDC8 50%,
+          #FFF9EB
         );
+
     }
 
 
     button,
+    input,
     select {
-      font-family: inherit;
-    }
 
-
-    /* =========================================
-       背景光暈
-    ========================================= */
-
-    .glow {
-      position: fixed;
-
-      border-radius: 999px;
-
-      filter: blur(8px);
-
-      pointer-events: none;
-
-      z-index: 0;
-
-      opacity: 0.55;
-    }
-
-
-    .glow-one {
-      width: 180px;
-      height: 180px;
-
-      top: -40px;
-      left: -60px;
-
-      background:
-        rgba(255, 203, 82, 0.32);
-
-      animation:
-        glowMoveOne 8s
-        ease-in-out
-        infinite alternate;
-    }
-
-
-    .glow-two {
-      width: 230px;
-      height: 230px;
-
-      right: -100px;
-      top: 35%;
-
-      background:
-        rgba(246, 162, 58, 0.17);
-
-      animation:
-        glowMoveTwo 10s
-        ease-in-out
-        infinite alternate;
-    }
-
-
-    @keyframes glowMoveOne {
-
-      from {
-        transform:
-          translate(
-            0,
-            0
-          );
-      }
-
-      to {
-        transform:
-          translate(
-            25px,
-            35px
-          );
-      }
+      font-family:
+        inherit;
 
     }
 
 
-    @keyframes glowMoveTwo {
+    .hidden {
 
-      from {
-        transform:
-          translate(
-            0,
-            0
-          );
-      }
-
-      to {
-        transform:
-          translate(
-            -30px,
-            25px
-          );
-      }
+      display:
+        none !important;
 
     }
 
 
-    /* =========================================
-       小光點
-    ========================================= */
+    /* ====================================
+       背景動畫
+    ==================================== */
 
-    .sparkle-layer {
-      position: fixed;
+    .background-effects {
+
+      position:
+        fixed;
 
       inset: 0;
 
-      overflow: hidden;
-
-      pointer-events: none;
-
       z-index: 0;
+
+      pointer-events:
+        none;
+
+      overflow:
+        hidden;
+
     }
 
 
-    .sparkle {
-      position: absolute;
+    .bg-orb {
 
-      width: 7px;
-      height: 7px;
+      position:
+        absolute;
 
-      border-radius: 50%;
+      border-radius:
+        50%;
+
+      filter:
+        blur(10px);
+
+      opacity:
+        0.55;
+
+    }
+
+
+    .orb1 {
+
+      width:
+        230px;
+
+      height:
+        230px;
+
+      left:
+        -90px;
+
+      top:
+        -50px;
 
       background:
-        rgba(255, 194, 63, 0.60);
-
-      box-shadow:
-        0 0 13px
-        rgba(255, 192, 57, 0.45);
+        rgba(
+          255,
+          201,
+          72,
+          0.38
+        );
 
       animation:
-        sparkleFloat
-        6s
+        orbFloat1
+        8s
+        ease-in-out
+        infinite alternate;
+
+    }
+
+
+    .orb2 {
+
+      width:
+        280px;
+
+      height:
+        280px;
+
+      right:
+        -130px;
+
+      top:
+        45%;
+
+      background:
+        rgba(
+          241,
+          145,
+          45,
+          0.19
+        );
+
+      animation:
+        orbFloat2
+        10s
+        ease-in-out
+        infinite alternate;
+
+    }
+
+
+    @keyframes orbFloat1 {
+
+      to {
+
+        transform:
+          translate(
+            35px,
+            45px
+          );
+
+      }
+
+    }
+
+
+    @keyframes orbFloat2 {
+
+      to {
+
+        transform:
+          translate(
+            -40px,
+            30px
+          );
+
+      }
+
+    }
+
+
+    .spark {
+
+      position:
+        absolute;
+
+      width:
+        6px;
+
+      height:
+        6px;
+
+      border-radius:
+        50%;
+
+      background:
+        #FFD064;
+
+      box-shadow:
+        0 0 15px
+        rgba(
+          255,
+          187,
+          43,
+          0.65
+        );
+
+      animation:
+        sparkFloat
+        5s
         ease-in-out
         infinite;
+
     }
 
 
-    .sparkle:nth-child(1) {
+    .spark:nth-child(3) {
+
       left: 8%;
-      top: 18%;
+      top: 22%;
 
-      animation-delay: 0s;
     }
 
 
-    .sparkle:nth-child(2) {
-      right: 11%;
-      top: 12%;
+    .spark:nth-child(4) {
 
-      animation-delay: 1.3s;
+      right: 12%;
+      top: 15%;
+
+      animation-delay:
+        1s;
+
     }
 
 
-    .sparkle:nth-child(3) {
-      left: 15%;
-      top: 63%;
+    .spark:nth-child(5) {
 
-      animation-delay: 2.1s;
+      left: 18%;
+      top: 75%;
+
+      animation-delay:
+        2s;
+
     }
 
 
-    .sparkle:nth-child(4) {
-      right: 8%;
-      top: 72%;
+    .spark:nth-child(6) {
 
-      animation-delay: 3.2s;
+      right: 10%;
+      top: 70%;
+
+      animation-delay:
+        3s;
+
     }
 
 
-    .sparkle:nth-child(5) {
-      left: 50%;
+    .spark:nth-child(7) {
+
+      left: 52%;
       top: 8%;
 
-      width: 5px;
-      height: 5px;
+      animation-delay:
+        4s;
 
-      animation-delay: 4s;
     }
 
 
-    @keyframes sparkleFloat {
+    @keyframes sparkFloat {
 
       0%,
       100% {
+
         transform:
           translateY(0)
-          scale(0.8);
+          scale(0.7);
 
-        opacity: 0.30;
+        opacity:
+          0.3;
+
       }
 
+
       50% {
+
         transform:
           translateY(-18px)
-          scale(1.25);
+          scale(1.3);
 
-        opacity: 0.90;
+        opacity:
+          1;
+
       }
 
     }
 
 
-    /* =========================================
-       主版面
-    ========================================= */
+    /* ====================================
+       LOGIN
+    ==================================== */
 
-    .app {
-      position: relative;
+    #loginView {
+
+      position:
+        relative;
 
       z-index: 2;
 
-      width: min(92%, 520px);
+      width:
+        min(
+          92%,
+          430px
+        );
 
-      margin: 0 auto;
+      min-height:
+        100vh;
+
+      margin:
+        auto;
+
+      display:
+        flex;
+
+      align-items:
+        center;
+
+      justify-content:
+        center;
 
       padding:
-        34px
-        0
-        60px;
+        35px 0;
+
     }
 
 
-    /* =========================================
-       Header
-    ========================================= */
+    .login-wrap {
 
-    .header {
-      text-align: center;
+      width:
+        100%;
 
-      margin-bottom: 28px;
+      text-align:
+        center;
 
       animation:
-        fadeUp
-        0.7s
-        ease
+        loginEnter
+        0.8s
+        cubic-bezier(
+          .2,
+          .9,
+          .3,
+          1
+        )
         both;
+
     }
 
 
-    .logo-wrap {
-      position: relative;
+    @keyframes loginEnter {
 
-      display: inline-flex;
+      from {
 
-      align-items: center;
-      justify-content: center;
+        opacity:
+          0;
 
-      margin-bottom: 14px;
+        transform:
+          translateY(25px)
+          scale(0.96);
+
+      }
+
+
+      to {
+
+        opacity:
+          1;
+
+        transform:
+          translateY(0)
+          scale(1);
+
+      }
+
     }
 
 
-    .logo-ring {
-      position: absolute;
+    .login-logo-area {
 
-      width: 114px;
-      height: 114px;
+      position:
+        relative;
 
-      border-radius: 30px;
+      display:
+        inline-flex;
+
+      align-items:
+        center;
+
+      justify-content:
+        center;
+
+      width:
+        140px;
+
+      height:
+        140px;
+
+      margin-bottom:
+        8px;
+
+    }
+
+
+    .login-logo-glow {
+
+      position:
+        absolute;
+
+      width:
+        125px;
+
+      height:
+        125px;
+
+      border-radius:
+        38px;
 
       background:
         linear-gradient(
           135deg,
-          rgba(255, 217, 117, 0.70),
-          rgba(246, 162, 58, 0.30)
+          rgba(
+            255,
+            221,
+            116,
+            .8
+          ),
+          rgba(
+            244,
+            150,
+            45,
+            .25
+          )
         );
 
-      filter: blur(7px);
+      filter:
+        blur(9px);
 
       animation:
-        logoGlow
-        2.8s
+        pulseGlow
+        2.5s
         ease-in-out
         infinite;
+
     }
 
 
-    .logo-img {
-      position: relative;
+    .login-logo {
 
-      z-index: 2;
+      position:
+        relative;
 
-      width: 100px;
-      height: 100px;
+      z-index:
+        3;
 
-      object-fit: cover;
+      width:
+        104px;
 
-      border-radius: 26px;
+      height:
+        104px;
+
+      object-fit:
+        cover;
+
+      border-radius:
+        28px;
 
       border:
         3px solid
-        rgba(255, 255, 255, 0.96);
+        white;
 
       box-shadow:
-        0 12px 32px
-        rgba(180, 110, 31, 0.20);
+        0 15px 35px
+        rgba(
+          171,
+          96,
+          25,
+          .22
+        );
 
       animation:
         logoFloat
-        3.8s
+        3.2s
         ease-in-out
         infinite;
+
     }
 
 
@@ -415,285 +602,525 @@
 
       0%,
       100% {
+
         transform:
           translateY(0);
+
       }
 
+
       50% {
+
         transform:
-          translateY(-7px);
+          translateY(-8px);
+
       }
 
     }
 
 
-    @keyframes logoGlow {
+    @keyframes pulseGlow {
 
       0%,
       100% {
-        transform:
-          scale(0.95);
 
-        opacity: 0.45;
+        transform:
+          scale(.94);
+
+        opacity:
+          .45;
+
       }
 
+
       50% {
+
         transform:
           scale(1.08);
 
-        opacity: 0.85;
+        opacity:
+          .9;
+
       }
 
     }
 
 
-    h1 {
-      margin: 0;
+    /* 漂浮539球 */
 
-      font-size: 25px;
-      font-weight: 900;
+    .orbit-ball {
 
-      letter-spacing: 0.2px;
+      position:
+        absolute;
 
-      color: #4d3828;
-    }
+      display:
+        flex;
 
+      align-items:
+        center;
 
-    .title-highlight {
-      background:
-        linear-gradient(
-          90deg,
-          #e7811f,
-          #f3aa34
-        );
+      justify-content:
+        center;
 
-      -webkit-background-clip:
-        text;
+      width:
+        34px;
 
-      background-clip:
-        text;
+      height:
+        34px;
+
+      border-radius:
+        50%;
 
       color:
-        transparent;
-    }
+        white;
 
+      font-size:
+        12px;
 
-    .sub {
-      margin-top: 9px;
-
-      color: #9a7a5d;
-
-      font-size: 13.5px;
-      line-height: 1.6;
-    }
-
-
-    .mini-stars {
-      margin-top: 9px;
-
-      color: #eeb242;
-
-      font-size: 12px;
-
-      letter-spacing: 9px;
-    }
-
-
-    /* =========================================
-       卡片
-    ========================================= */
-
-    .card {
-      position: relative;
-
-      width: 100%;
-
-      padding: 22px;
-
-      margin-bottom: 18px;
-
-      overflow: hidden;
-
-      border:
-        1px solid
-        rgba(255, 213, 137, 0.55);
-
-      border-radius: 25px;
+      font-weight:
+        900;
 
       background:
-        rgba(255, 255, 255, 0.90);
-
-      box-shadow:
-        var(--shadow);
-
-      backdrop-filter:
-        blur(12px);
-
-      -webkit-backdrop-filter:
-        blur(12px);
-
-      animation:
-        fadeUp
-        0.7s
-        ease
-        both;
-    }
-
-
-    .form-card {
-      animation-delay:
-        0.08s;
-    }
-
-
-    .result-card {
-      animation-delay:
-        0.16s;
-    }
-
-
-    @keyframes fadeUp {
-
-      from {
-        opacity: 0;
-
-        transform:
-          translateY(18px);
-      }
-
-      to {
-        opacity: 1;
-
-        transform:
-          translateY(0);
-      }
-
-    }
-
-
-    /* =========================================
-       表單
-    ========================================= */
-
-    label {
-      display: block;
-
-      margin-bottom: 9px;
-
-      color: #594231;
-
-      font-size: 15px;
-      font-weight: 800;
-    }
-
-
-    select {
-      width: 100%;
-      height: 52px;
-
-      padding:
-        0
-        15px;
-
-      border:
-        1px solid
-        #f0d6a8;
-
-      border-radius: 15px;
-
-      outline: none;
-
-      background:
-        linear-gradient(
-          180deg,
-          #ffffff,
-          #fffdf8
+        radial-gradient(
+          circle at 30% 25%,
+          #FFE386,
+          #F6A131 45%,
+          #DF7317
         );
 
-      color: #5d4838;
+      border:
+        2px solid
+        rgba(
+          255,
+          255,
+          255,
+          .85
+        );
 
-      font-size: 16px;
+      box-shadow:
+        0 6px 13px
+        rgba(
+          204,
+          104,
+          19,
+          .22
+        );
 
-      transition:
-        0.2s ease;
     }
 
 
-    select:focus {
+    .orbit-a {
+
+      left:
+        0;
+
+      top:
+        26px;
+
+      animation:
+        floatBallA
+        3.5s
+        ease-in-out
+        infinite;
+
+    }
+
+
+    .orbit-b {
+
+      right:
+        0;
+
+      top:
+        15px;
+
+      animation:
+        floatBallB
+        4s
+        ease-in-out
+        infinite;
+
+    }
+
+
+    .orbit-c {
+
+      right:
+        10px;
+
+      bottom:
+        9px;
+
+      animation:
+        floatBallA
+        3.8s
+        ease-in-out
+        infinite reverse;
+
+    }
+
+
+    @keyframes floatBallA {
+
+      50% {
+
+        transform:
+          translate(
+            7px,
+            -8px
+          )
+          rotate(10deg);
+
+      }
+
+    }
+
+
+    @keyframes floatBallB {
+
+      50% {
+
+        transform:
+          translate(
+            -8px,
+            8px
+          )
+          rotate(-12deg);
+
+      }
+
+    }
+
+
+    .login-title {
+
+      margin:
+        4px 0 6px;
+
+      font-size:
+        25px;
+
+      font-weight:
+        900;
+
+      color:
+        #4C3627;
+
+    }
+
+
+    .login-title span {
+
+      color:
+        #EA8722;
+
+    }
+
+
+    .login-sub {
+
+      margin-bottom:
+        23px;
+
+      color:
+        #967457;
+
+      font-size:
+        13px;
+
+    }
+
+
+    .login-card {
+
+      position:
+        relative;
+
+      overflow:
+        hidden;
+
+      padding:
+        25px 22px;
+
+      border-radius:
+        27px;
+
+      background:
+        rgba(
+          255,
+          255,
+          255,
+          .91
+        );
+
+      border:
+        1px solid
+        rgba(
+          255,
+          203,
+          110,
+          .55
+        );
+
+      box-shadow:
+        0 18px 45px
+        rgba(
+          161,
+          99,
+          30,
+          .13
+        );
+
+      backdrop-filter:
+        blur(15px);
+
+      -webkit-backdrop-filter:
+        blur(15px);
+
+    }
+
+
+    .login-card::before {
+
+      content:
+        "";
+
+      position:
+        absolute;
+
+      width:
+        170px;
+
+      height:
+        170px;
+
+      right:
+        -90px;
+
+      top:
+        -100px;
+
+      border-radius:
+        50%;
+
+      background:
+        rgba(
+          255,
+          207,
+          92,
+          .20
+        );
+
+    }
+
+
+    .login-card-title {
+
+      position:
+        relative;
+
+      margin-bottom:
+        18px;
+
+      text-align:
+        left;
+
+      font-size:
+        17px;
+
+      font-weight:
+        900;
+
+      color:
+        #58402F;
+
+    }
+
+
+    .login-label {
+
+      position:
+        relative;
+
+      display:
+        block;
+
+      margin-bottom:
+        8px;
+
+      text-align:
+        left;
+
+      color:
+        #75573F;
+
+      font-size:
+        13px;
+
+      font-weight:
+        800;
+
+    }
+
+
+    .login-input-wrap {
+
+      position:
+        relative;
+
+    }
+
+
+    #memberAccount {
+
+      position:
+        relative;
+
+      width:
+        100%;
+
+      height:
+        55px;
+
+      padding:
+        0 47px 0 16px;
+
+      outline:
+        none;
+
+      border:
+        1px solid
+        #EDD3A6;
+
+      border-radius:
+        16px;
+
+      background:
+        #FFFEFA;
+
+      color:
+        #503A2B;
+
+      font-size:
+        16px;
+
+      transition:
+        .2s;
+
+    }
+
+
+    #memberAccount:focus {
+
       border-color:
-        #f1a744;
+        #F3A348;
 
       box-shadow:
         0 0 0 4px
-        rgba(246, 162, 58, 0.11);
+        rgba(
+          243,
+          163,
+          72,
+          .12
+        );
+
     }
 
 
-    #missArea {
-      margin-top: 18px;
+    .input-icon {
+
+      position:
+        absolute;
+
+      right:
+        16px;
+
+      top:
+        50%;
+
+      transform:
+        translateY(-50%);
+
+      font-size:
+        18px;
+
     }
 
 
-    .hidden {
-      display: none !important;
-    }
+    #loginBtn {
 
+      position:
+        relative;
 
-    /* =========================================
-       開始分析按鈕
-    ========================================= */
+      width:
+        100%;
 
-    #analyzeBtn {
-      position: relative;
+      height:
+        55px;
 
-      width: 100%;
-      height: 55px;
+      margin-top:
+        16px;
 
-      margin-top: 20px;
+      overflow:
+        hidden;
 
-      overflow: hidden;
+      border:
+        none;
 
-      border: none;
+      border-radius:
+        17px;
 
-      border-radius: 17px;
+      color:
+        white;
+
+      font-size:
+        16px;
+
+      font-weight:
+        900;
 
       background:
         linear-gradient(
           110deg,
-          #e98424 0%,
-          #f7aa3d 50%,
-          #ffc957 100%
+          #E77C1C,
+          #F5A038,
+          #FFC754
         );
 
-      color: white;
-
-      font-size: 17px;
-      font-weight: 900;
-
-      letter-spacing: 0.5px;
-
-      cursor: pointer;
-
       box-shadow:
-        0 10px 25px
-        rgba(226, 130, 35, 0.28);
+        0 11px 25px
+        rgba(
+          220,
+          117,
+          23,
+          .27
+        );
 
-      transition:
-        transform 0.18s ease,
-        box-shadow 0.18s ease;
+      cursor:
+        pointer;
+
     }
 
 
-    #analyzeBtn::after {
-      content: "";
+    #loginBtn::after {
 
-      position: absolute;
+      content:
+        "";
 
-      top: -50%;
-      left: -55%;
+      position:
+        absolute;
 
-      width: 35%;
-      height: 200%;
+      width:
+        35%;
+
+      height:
+        200%;
+
+      left:
+        -60%;
+
+      top:
+        -50%;
 
       transform:
         rotate(20deg);
@@ -702,607 +1129,1106 @@
         linear-gradient(
           90deg,
           transparent,
-          rgba(255, 255, 255, 0.65),
+          rgba(
+            255,
+            255,
+            255,
+            .7
+          ),
           transparent
         );
 
       animation:
-        buttonShine
-        3.1s
+        shine
+        2.8s
         ease-in-out
         infinite;
+
     }
 
 
-    #analyzeBtn:hover {
-      transform:
-        translateY(-2px);
+    @keyframes shine {
 
-      box-shadow:
-        0 14px 30px
-        rgba(226, 130, 35, 0.33);
-    }
-
-
-    #analyzeBtn:active {
-      transform:
-        scale(0.985);
-    }
-
-
-    #analyzeBtn:disabled {
-      opacity: 0.75;
-
-      cursor: not-allowed;
-
-      transform: none;
-    }
-
-
-    @keyframes buttonShine {
-
-      0% {
-        left: -55%;
-      }
-
-      55%,
+      60%,
       100% {
-        left: 125%;
+
+        left:
+          130%;
+
       }
 
     }
 
 
-    /* =========================================
-       結果標題
-    ========================================= */
+    #loginBtn:active {
 
-    .result-title {
-      display: flex;
+      transform:
+        scale(.985);
 
-      align-items: center;
-
-      gap: 8px;
-
-      margin-bottom: 14px;
-
-      color: #513b2b;
-
-      font-size: 18px;
-      font-weight: 900;
     }
 
 
-    .result-title-icon {
-      display: inline-flex;
+    #loginBtn:disabled {
 
-      width: 29px;
-      height: 29px;
+      opacity:
+        .65;
 
-      align-items: center;
-      justify-content: center;
+    }
 
-      border-radius: 10px;
+
+    .login-message {
+
+      min-height:
+        24px;
+
+      padding-top:
+        12px;
+
+      color:
+        #B65336;
+
+      font-size:
+        13px;
+
+    }
+
+
+    .login-message.success {
+
+      color:
+        #BA761E;
+
+    }
+
+
+    .login-success-animation {
+
+      animation:
+        loginLeave
+        .45s
+        ease
+        forwards;
+
+    }
+
+
+    @keyframes loginLeave {
+
+      to {
+
+        opacity:
+          0;
+
+        transform:
+          translateY(-12px)
+          scale(.97);
+
+      }
+
+    }
+
+
+    /* ====================================
+       APP
+    ==================================== */
+
+    #appView {
+
+      position:
+        relative;
+
+      z-index:
+        2;
+
+      width:
+        min(
+          92%,
+          520px
+        );
+
+      margin:
+        auto;
+
+      padding:
+        28px 0 60px;
+
+      animation:
+        appEnter
+        .65s
+        ease
+        both;
+
+    }
+
+
+    @keyframes appEnter {
+
+      from {
+
+        opacity:
+          0;
+
+        transform:
+          translateY(15px);
+
+      }
+
+
+      to {
+
+        opacity:
+          1;
+
+        transform:
+          translateY(0);
+
+      }
+
+    }
+
+
+    .top-member {
+
+      display:
+        flex;
+
+      justify-content:
+        flex-end;
+
+      align-items:
+        center;
+
+      gap:
+        8px;
+
+      margin-bottom:
+        13px;
+
+    }
+
+
+    .member-chip {
+
+      padding:
+        7px 11px;
+
+      border-radius:
+        999px;
 
       background:
-        #fff1cf;
+        rgba(
+          255,
+          255,
+          255,
+          .78
+        );
 
-      font-size: 15px;
+      color:
+        #866146;
+
+      font-size:
+        11px;
+
+      box-shadow:
+        0 6px 16px
+        rgba(
+          170,
+          103,
+          30,
+          .08
+        );
+
     }
 
 
-    /* =========================================
-       結果框
-    ========================================= */
+    #logoutBtn {
 
-    .result {
-      display: block;
+      border:
+        0;
 
-      width: 100%;
+      padding:
+        7px 11px;
 
-      min-height: 0;
+      border-radius:
+        999px;
 
-      padding: 17px;
+      background:
+        #FFE6B4;
+
+      color:
+        #B26721;
+
+      font-size:
+        11px;
+
+      font-weight:
+        800;
+
+      cursor:
+        pointer;
+
+    }
+
+
+    .header {
+
+      text-align:
+        center;
+
+      margin-bottom:
+        25px;
+
+    }
+
+
+    .app-logo {
+
+      width:
+        96px;
+
+      height:
+        96px;
+
+      object-fit:
+        cover;
+
+      border-radius:
+        25px;
+
+      border:
+        3px solid
+        white;
+
+      box-shadow:
+        0 12px 30px
+        rgba(
+          178,
+          101,
+          28,
+          .18
+        );
+
+      animation:
+        logoFloat
+        3.4s
+        ease-in-out
+        infinite;
+
+    }
+
+
+    h1 {
+
+      margin:
+        10px 0 0;
+
+      color:
+        #4D3828;
+
+      font-size:
+        24px;
+
+      font-weight:
+        900;
+
+    }
+
+
+    .highlight {
+
+      color:
+        #E98522;
+
+    }
+
+
+    .sub {
+
+      margin-top:
+        8px;
+
+      color:
+        #977557;
+
+      font-size:
+        13px;
+
+    }
+
+
+    .mini-stars {
+
+      margin-top:
+        8px;
+
+      color:
+        #EFAF3C;
+
+      letter-spacing:
+        8px;
+
+    }
+
+
+    .card {
+
+      position:
+        relative;
+
+      width:
+        100%;
+
+      padding:
+        21px;
+
+      margin-bottom:
+        17px;
+
+      overflow:
+        hidden;
 
       border:
         1px solid
-        rgba(246, 180, 69, 0.25);
+        rgba(
+          255,
+          202,
+          111,
+          .50
+        );
 
-      border-radius: 18px;
+      border-radius:
+        24px;
+
+      background:
+        rgba(
+          255,
+          255,
+          255,
+          .91
+        );
+
+      box-shadow:
+        0 13px 35px
+        rgba(
+          158,
+          94,
+          27,
+          .10
+        );
+
+      backdrop-filter:
+        blur(12px);
+
+    }
+
+
+    label {
+
+      display:
+        block;
+
+      margin-bottom:
+        8px;
+
+      color:
+        #5C4431;
+
+      font-size:
+        14px;
+
+      font-weight:
+        900;
+
+    }
+
+
+    select {
+
+      width:
+        100%;
+
+      height:
+        52px;
+
+      padding:
+        0 14px;
+
+      border:
+        1px solid
+        #EED5A9;
+
+      border-radius:
+        15px;
+
+      outline:
+        none;
+
+      background:
+        white;
+
+      color:
+        #594333;
+
+      font-size:
+        16px;
+
+    }
+
+
+    #missArea {
+
+      margin-top:
+        17px;
+
+    }
+
+
+    #analyzeBtn {
+
+      position:
+        relative;
+
+      width:
+        100%;
+
+      height:
+        55px;
+
+      margin-top:
+        19px;
+
+      overflow:
+        hidden;
+
+      border:
+        0;
+
+      border-radius:
+        17px;
+
+      color:
+        white;
+
+      font-size:
+        17px;
+
+      font-weight:
+        900;
+
+      background:
+        linear-gradient(
+          110deg,
+          #E87C1D,
+          #F5A13A,
+          #FFCA58
+        );
+
+      box-shadow:
+        0 10px 24px
+        rgba(
+          220,
+          119,
+          27,
+          .27
+        );
+
+      cursor:
+        pointer;
+
+    }
+
+
+    #analyzeBtn::after {
+
+      content:
+        "";
+
+      position:
+        absolute;
+
+      top:
+        -50%;
+
+      left:
+        -55%;
+
+      width:
+        35%;
+
+      height:
+        200%;
+
+      transform:
+        rotate(20deg);
+
+      background:
+        linear-gradient(
+          90deg,
+          transparent,
+          rgba(
+            255,
+            255,
+            255,
+            .7
+          ),
+          transparent
+        );
+
+      animation:
+        shine
+        3s
+        infinite;
+
+    }
+
+
+    .result-title {
+
+      display:
+        flex;
+
+      gap:
+        8px;
+
+      align-items:
+        center;
+
+      margin-bottom:
+        13px;
+
+      font-size:
+        17px;
+
+      font-weight:
+        900;
+
+    }
+
+
+    .result {
+
+      padding:
+        16px;
+
+      border-radius:
+        18px;
+
+      border:
+        1px solid
+        rgba(
+          245,
+          164,
+          54,
+          .22
+        );
 
       background:
         linear-gradient(
           145deg,
-          #fffdf8,
-          #fff6df
+          #FFFEFA,
+          #FFF6DF
         );
 
-      color: #624c3c;
+      color:
+        #624B3A;
 
-      line-height: 1.7;
+      line-height:
+        1.7;
 
-      word-break: break-word;
     }
 
 
     .result.empty {
-      color: #9b8067;
-
-      font-size: 14px;
-
-      text-align: center;
 
       padding:
-        23px
-        16px;
+        23px 15px;
+
+      text-align:
+        center;
+
+      color:
+        #987A61;
+
+      font-size:
+        13px;
+
     }
 
 
-    /* =========================================
-       資料資訊
-    ========================================= */
-
     .data-info {
-      display: block;
 
-      margin-bottom: 17px;
+      margin-bottom:
+        16px;
 
       padding:
-        12px
-        14px;
+        11px 13px;
 
-      border-radius: 14px;
+      border-radius:
+        14px;
 
       background:
         linear-gradient(
           135deg,
-          #fff0c9,
-          #fff8e7
+          #FFF0C9,
+          #FFF8E7
         );
 
-      border:
-        1px solid
-        rgba(246, 168, 57, 0.17);
+      color:
+        #70543F;
 
-      color: #73573f;
-
-      font-size: 14px;
-      line-height: 1.65;
+      font-size:
+        14px;
 
       animation:
-        resultReveal
-        0.45s
+        reveal
+        .4s
         ease
         both;
+
     }
 
 
     .data-row {
-      margin: 0 0 5px 0;
+
+      margin-bottom:
+        4px;
+
     }
 
 
     .data-row:last-child {
-      margin-bottom: 0;
+
+      margin-bottom:
+        0;
+
     }
 
 
     .data-row strong {
-      color: #50392a;
-      font-weight: 900;
+
+      color:
+        #4D392B;
+
     }
 
-
-    /* =========================================
-       分析結果區
-    ========================================= */
 
     .analysis-box {
+
       animation:
-        resultReveal
-        0.55s
+        reveal
+        .5s
         ease
         both;
+
     }
 
 
-    @keyframes resultReveal {
+    @keyframes reveal {
 
       from {
-        opacity: 0;
+
+        opacity:
+          0;
 
         transform:
-          translateY(9px);
+          translateY(8px);
+
       }
 
+
       to {
-        opacity: 1;
+
+        opacity:
+          1;
 
         transform:
           translateY(0);
+
       }
 
     }
 
 
     .analysis-title {
-      margin-bottom: 14px;
 
-      color: #563b28;
+      margin-bottom:
+        13px;
 
-      font-size: 17px;
-      font-weight: 900;
+      font-size:
+        17px;
+
+      font-weight:
+        900;
+
+      color:
+        #553B27;
+
     }
 
 
     .analysis-line {
-      margin-top: 15px;
+
+      margin-top:
+        14px;
+
     }
 
 
     .analysis-label {
-      margin-bottom: 8px;
 
-      color: #806048;
+      margin-bottom:
+        7px;
 
-      font-size: 13px;
-      font-weight: 800;
+      color:
+        #846249;
+
+      font-size:
+        13px;
+
+      font-weight:
+        800;
+
     }
 
 
-    /* =========================================
-       開獎球
-    ========================================= */
-
     .number-balls {
-      display: flex;
 
-      flex-wrap: wrap;
+      display:
+        flex;
 
-      gap: 9px;
+      flex-wrap:
+        wrap;
 
-      align-items: center;
+      gap:
+        8px;
+
     }
 
 
     .number-ball {
-      display: inline-flex;
 
-      width: 48px;
-      height: 48px;
+      display:
+        inline-flex;
 
-      align-items: center;
-      justify-content: center;
+      align-items:
+        center;
 
-      border-radius: 50%;
+      justify-content:
+        center;
 
-      color: #ffffff;
+      width:
+        48px;
 
-      font-size: 17px;
-      font-weight: 900;
+      height:
+        48px;
+
+      border-radius:
+        50%;
+
+      border:
+        2px solid
+        rgba(
+          255,
+          255,
+          255,
+          .9
+        );
+
+      color:
+        white;
+
+      font-size:
+        17px;
+
+      font-weight:
+        900;
 
       background:
         radial-gradient(
           circle at 30% 25%,
-          #ffd86d 0%,
-          #f7aa34 35%,
-          #ea831f 75%,
-          #d96a14 100%
+          #FFDE78,
+          #F7AA35 40%,
+          #E67819 80%
         );
 
-      border:
-        2px solid
-        rgba(255, 255, 255, 0.85);
-
       box-shadow:
-        inset
-        0 2px 4px
-        rgba(255, 255, 255, 0.30),
-
         0 7px 15px
-        rgba(213, 111, 21, 0.22);
+        rgba(
+          207,
+          100,
+          15,
+          .22
+        );
 
-      opacity: 0;
+      opacity:
+        0;
 
       transform:
-        translateY(16px)
-        scale(0.6);
+        translateY(14px)
+        scale(.6);
 
       animation:
         ballPop
-        0.48s
+        .48s
         cubic-bezier(
-          0.22,
+          .22,
           1.35,
-          0.5,
+          .5,
           1
         )
         forwards;
+
     }
 
 
     .number-ball.small {
-      width: 40px;
-      height: 40px;
 
-      font-size: 15px;
+      width:
+        40px;
+
+      height:
+        40px;
+
+      color:
+        #67451E;
+
+      font-size:
+        15px;
 
       background:
         radial-gradient(
           circle at 30% 25%,
-          #fff0a6,
-          #ffc95b 45%,
-          #eea038 100%
+          #FFF1AD,
+          #FFCB5D,
+          #EFA23A
         );
 
-      color: #62431f;
     }
 
 
     @keyframes ballPop {
 
-      0% {
-        opacity: 0;
-
-        transform:
-          translateY(16px)
-          scale(0.55);
-      }
-
       70% {
-        opacity: 1;
+
+        opacity:
+          1;
 
         transform:
           translateY(-4px)
           scale(1.08);
+
       }
 
+
       100% {
-        opacity: 1;
+
+        opacity:
+          1;
 
         transform:
           translateY(0)
           scale(1);
+
       }
 
     }
 
 
-    /* =========================================
-       一般文字膠囊
-    ========================================= */
-
     .text-pill {
-      display: inline-flex;
+
+      display:
+        inline-flex;
 
       padding:
-        8px
-        13px;
+        8px 13px;
 
-      border-radius: 999px;
+      border-radius:
+        999px;
 
       background:
-        #fff0c9;
+        #FFF0C8;
 
       color:
-        #d5741c;
+        #D27119;
 
-      font-size: 15px;
-      font-weight: 900;
+      font-weight:
+        900;
+
     }
 
-
-    /* =========================================
-       Loading
-    ========================================= */
 
     .loading-wrap {
+
+      text-align:
+        center;
+
       padding:
-        8px
-        0
-        4px;
+        8px 0;
 
-      text-align: center;
-    }
-
-
-    .loading-text {
-      margin-top: 11px;
-
-      color:
-        #9b7655;
-
-      font-size: 13px;
     }
 
 
     .loading-balls {
-      display: flex;
 
-      justify-content: center;
+      display:
+        flex;
 
-      gap: 8px;
+      justify-content:
+        center;
+
+      gap:
+        7px;
+
     }
 
 
     .loading-ball {
-      width: 15px;
-      height: 15px;
 
-      border-radius: 50%;
+      width:
+        15px;
+
+      height:
+        15px;
+
+      border-radius:
+        50%;
 
       background:
         linear-gradient(
           135deg,
-          #ffc957,
-          #eb8524
+          #FFC755,
+          #E98221
         );
 
       animation:
         loadingBounce
-        0.9s
+        .9s
         ease-in-out
         infinite;
+
     }
 
 
     .loading-ball:nth-child(2) {
+
       animation-delay:
-        0.10s;
+        .1s;
+
     }
 
 
     .loading-ball:nth-child(3) {
+
       animation-delay:
-        0.20s;
+        .2s;
+
     }
 
 
     .loading-ball:nth-child(4) {
+
       animation-delay:
-        0.30s;
+        .3s;
+
     }
 
 
     .loading-ball:nth-child(5) {
+
       animation-delay:
-        0.40s;
+        .4s;
+
     }
 
 
     @keyframes loadingBounce {
 
-      0%,
-      100% {
-        transform:
-          translateY(0)
-          scale(0.85);
-
-        opacity: 0.55;
-      }
-
       50% {
-        transform:
-          translateY(-9px)
-          scale(1.05);
 
-        opacity: 1;
+        transform:
+          translateY(-9px);
+
       }
 
     }
 
 
-    /* =========================================
-       錯誤
-    ========================================= */
+    .loading-text {
+
+      margin-top:
+        10px;
+
+      color:
+        #997353;
+
+      font-size:
+        13px;
+
+    }
+
 
     .error-box {
-      color: #b65437;
 
-      font-size: 14px;
+      white-space:
+        pre-line;
 
-      white-space: pre-line;
+      color:
+        #B65336;
+
+      font-size:
+        13px;
+
     }
 
-
-    /* =========================================
-       Footer
-    ========================================= */
 
     .footer {
-      margin-top: 27px;
 
-      text-align: center;
+      margin-top:
+        25px;
 
-      color: #aa8969;
+      text-align:
+        center;
 
-      font-size: 12px;
+      color:
+        #AA8768;
+
+      font-size:
+        11px;
+
     }
 
-
-    /* =========================================
-       手機
-    ========================================= */
 
     @media (
       max-width: 480px
     ) {
 
-      .app {
-        width: 92%;
-
-        padding-top: 28px;
-      }
-
-
-      .logo-img {
-        width: 94px;
-        height: 94px;
-      }
-
-
-      .logo-ring {
-        width: 107px;
-        height: 107px;
-      }
-
-
-      h1 {
-        font-size: 23px;
-      }
-
-
       .card {
-        padding: 19px;
-      }
 
+        padding:
+          19px;
 
-      .result {
-        padding: 15px;
-      }
-
-
-      .number-balls {
-        gap: 7px;
       }
 
 
       .number-ball {
-        width: 45px;
-        height: 45px;
 
-        font-size: 16px;
+        width:
+          45px;
+
+        height:
+          45px;
+
       }
 
 
       .number-ball.small {
-        width: 38px;
-        height: 38px;
-      }
 
-    }
+        width:
+          38px;
 
+        height:
+          38px;
 
-    /* =========================================
-       減少動畫偏好
-    ========================================= */
-
-    @media (
-      prefers-reduced-motion:
-      reduce
-    ) {
-
-      *,
-      *::before,
-      *::after {
-        animation-duration:
-          0.01ms !important;
-
-        animation-iteration-count:
-          1 !important;
-
-        scroll-behavior:
-          auto !important;
       }
 
     }
@@ -1314,51 +2240,186 @@
 
 <body>
 
-  <!-- 背景動畫 -->
 
-  <div class="glow glow-one"></div>
-  <div class="glow glow-two"></div>
+  <div class="background-effects">
 
+    <div class="bg-orb orb1"></div>
 
-  <div class="sparkle-layer">
+    <div class="bg-orb orb2"></div>
 
-    <span class="sparkle"></span>
-    <span class="sparkle"></span>
-    <span class="sparkle"></span>
-    <span class="sparkle"></span>
-    <span class="sparkle"></span>
+    <span class="spark"></span>
+    <span class="spark"></span>
+    <span class="spark"></span>
+    <span class="spark"></span>
+    <span class="spark"></span>
 
   </div>
 
 
-  <main class="app">
+  <!-- =====================================
+       LOGIN VIEW
+  ====================================== -->
+
+  <section id="loginView">
+
+    <div
+      id="loginWrap"
+      class="login-wrap"
+    >
 
 
-    <!-- =====================================
-         HEADER
-    ====================================== -->
+      <div class="login-logo-area">
 
-    <section class="header">
+        <div
+          class="login-logo-glow"
+        ></div>
 
-      <div class="logo-wrap">
 
-        <div class="logo-ring"></div>
+        <span
+          class="orbit-ball orbit-a"
+        >
+          05
+        </span>
+
+
+        <span
+          class="orbit-ball orbit-b"
+        >
+          18
+        </span>
+
+
+        <span
+          class="orbit-ball orbit-c"
+        >
+          27
+        </span>
+
 
         <img
           src="./icon-192(1).png"
-          onerror="this.onerror=null; this.src='./icon-512(1).png';"
-          alt="芯瑤539趨勢分析"
-          class="logo-img"
+          onerror="this.onerror=null;this.src='./icon-512(1).png';"
+          class="login-logo"
         >
 
       </div>
 
 
-      <h1>
+      <div class="login-title">
+
         芯瑤💕
-        <span class="title-highlight">
+        <span>
+          539
+        </span>
+
+      </div>
+
+
+      <div class="login-sub">
+        趨勢分析會員系統
+      </div>
+
+
+      <div class="login-card">
+
+        <div class="login-card-title">
+          ✨ 會員登入
+        </div>
+
+
+        <form id="loginForm">
+
+          <label
+            class="login-label"
+            for="memberAccount"
+          >
+            會員帳號
+          </label>
+
+
+          <div
+            class="login-input-wrap"
+          >
+
+            <input
+              id="memberAccount"
+              type="text"
+              autocomplete="username"
+              placeholder="請輸入會員帳號"
+            >
+
+            <span class="input-icon">
+              👤
+            </span>
+
+          </div>
+
+
+          <button
+            id="loginBtn"
+            type="submit"
+          >
+            ✨ 登入分析系統
+          </button>
+
+
+          <div
+            id="loginMessage"
+            class="login-message"
+          ></div>
+
+        </form>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =====================================
+       APP VIEW
+  ====================================== -->
+
+  <main
+    id="appView"
+    class="hidden"
+  >
+
+
+    <div class="top-member">
+
+      <div
+        id="memberChip"
+        class="member-chip"
+      >
+        👤 會員
+      </div>
+
+
+      <button id="logoutBtn">
+        登出
+      </button>
+
+    </div>
+
+
+    <section class="header">
+
+      <img
+        src="./icon-192(1).png"
+        onerror="this.onerror=null;this.src='./icon-512(1).png';"
+        class="app-logo"
+      >
+
+
+      <h1>
+
+        芯瑤💕
+        <span class="highlight">
           539趨勢分析
         </span>
+
       </h1>
 
 
@@ -1374,11 +2435,7 @@
     </section>
 
 
-    <!-- =====================================
-         玩法
-    ====================================== -->
-
-    <section class="card form-card">
+    <section class="card">
 
       <label for="playType">
         選擇分析玩法
@@ -1418,29 +2475,12 @@
 
         <select id="missCount">
 
-          <option value="5顆">
-            5顆
-          </option>
-
-          <option value="6顆">
-            6顆
-          </option>
-
-          <option value="7顆">
-            7顆
-          </option>
-
-          <option value="8顆">
-            8顆
-          </option>
-
-          <option value="9顆">
-            9顆
-          </option>
-
-          <option value="10顆">
-            10顆
-          </option>
+          <option value="5顆">5顆</option>
+          <option value="6顆">6顆</option>
+          <option value="7顆">7顆</option>
+          <option value="8顆">8顆</option>
+          <option value="9顆">9顆</option>
+          <option value="10顆">10顆</option>
 
         </select>
 
@@ -1454,20 +2494,10 @@
     </section>
 
 
-    <!-- =====================================
-         結果
-    ====================================== -->
-
-    <section class="card result-card">
+    <section class="card">
 
       <div class="result-title">
-
-        <span class="result-title-icon">
-          🎱
-        </span>
-
-        分析結果
-
+        🎱 分析結果
       </div>
 
 
@@ -1485,23 +2515,72 @@
       趨勢資料分析僅供參考
     </div>
 
-
   </main>
 
 
   <script>
 
-    /* =====================================
-       Cloudflare Worker
-    ====================================== */
-
     const WORKER_URL =
       "https://xinyao-539-api.love06130430.workers.dev/";
 
 
-    /* =====================================
-       DOM
-    ====================================== */
+    const TOKEN_KEY =
+      "xinyao539_member_token";
+
+
+    const loginView =
+      document.getElementById(
+        "loginView"
+      );
+
+
+    const loginWrap =
+      document.getElementById(
+        "loginWrap"
+      );
+
+
+    const appView =
+      document.getElementById(
+        "appView"
+      );
+
+
+    const loginForm =
+      document.getElementById(
+        "loginForm"
+      );
+
+
+    const memberAccount =
+      document.getElementById(
+        "memberAccount"
+      );
+
+
+    const loginBtn =
+      document.getElementById(
+        "loginBtn"
+      );
+
+
+    const loginMessage =
+      document.getElementById(
+        "loginMessage"
+      );
+
+
+    const memberChip =
+      document.getElementById(
+        "memberChip"
+      );
+
+
+    const logoutBtn =
+      document.getElementById(
+        "logoutBtn"
+      );
+
 
     const playType =
       document.getElementById(
@@ -1533,9 +2612,390 @@
       );
 
 
-    /* =====================================
-       多選不中
-    ====================================== */
+    // =====================================
+    // TOKEN
+    // =====================================
+
+    function getSavedToken() {
+
+      return localStorage.getItem(
+        TOKEN_KEY
+      ) || "";
+
+    }
+
+
+    function saveToken(
+      token
+    ) {
+
+      localStorage.setItem(
+        TOKEN_KEY,
+        token
+      );
+
+    }
+
+
+    function clearToken() {
+
+      localStorage.removeItem(
+        TOKEN_KEY
+      );
+
+    }
+
+
+    // =====================================
+    // API
+    // =====================================
+
+    async function callAPI(
+      payload,
+      requireAuth = false
+    ) {
+
+      const headers = {
+        "Content-Type":
+          "application/json"
+      };
+
+
+      if (requireAuth) {
+
+        const token =
+          getSavedToken();
+
+
+        if (token) {
+
+          headers.Authorization =
+            "Bearer " +
+            token;
+
+        }
+
+      }
+
+
+      const response =
+        await fetch(
+          WORKER_URL,
+          {
+            method:
+              "POST",
+
+            headers:
+              headers,
+
+            body:
+              JSON.stringify(
+                payload
+              )
+          }
+        );
+
+
+      let data;
+
+
+      try {
+
+        data =
+          await response.json();
+
+      } catch {
+
+        throw new Error(
+          "伺服器回傳格式錯誤"
+        );
+
+      }
+
+
+      if (!response.ok) {
+
+        const error =
+          new Error(
+            data?.error ||
+            "系統發生錯誤"
+          );
+
+
+        error.status =
+          response.status;
+
+
+        throw error;
+
+      }
+
+
+      return data;
+
+    }
+
+
+    // =====================================
+    // 顯示登入
+    // =====================================
+
+    function showLogin() {
+
+      appView.classList.add(
+        "hidden"
+      );
+
+
+      loginView.classList.remove(
+        "hidden"
+      );
+
+
+      loginWrap.classList.remove(
+        "login-success-animation"
+      );
+
+
+      loginMessage.textContent =
+        "";
+
+    }
+
+
+    // =====================================
+    // 顯示 APP
+    // =====================================
+
+    function showApp(
+      account,
+      memberName
+    ) {
+
+      loginView.classList.add(
+        "hidden"
+      );
+
+
+      appView.classList.remove(
+        "hidden"
+      );
+
+
+      memberChip.textContent =
+        "👤 " +
+        (
+          memberName ||
+          account ||
+          "會員"
+        );
+
+    }
+
+
+    // =====================================
+    // 登入
+    // =====================================
+
+    loginForm.addEventListener(
+      "submit",
+      async event => {
+
+        event.preventDefault();
+
+
+        const account =
+          memberAccount.value
+            .trim()
+            .toLowerCase();
+
+
+        if (!account) {
+
+          loginMessage.textContent =
+            "請輸入會員帳號";
+
+          return;
+
+        }
+
+
+        loginBtn.disabled =
+          true;
+
+
+        loginBtn.textContent =
+          "✨ 驗證中...";
+
+
+        loginMessage.classList.remove(
+          "success"
+        );
+
+
+        loginMessage.textContent =
+          "正在確認會員使用權限...";
+
+
+        try {
+
+          const data =
+            await callAPI(
+              {
+                action:
+                  "login",
+
+                account:
+                  account
+              }
+            );
+
+
+          saveToken(
+            data.token
+          );
+
+
+          loginMessage.classList.add(
+            "success"
+          );
+
+
+          loginMessage.textContent =
+            "✨ 登入成功";
+
+
+          loginWrap.classList.add(
+            "login-success-animation"
+          );
+
+
+          setTimeout(
+            () => {
+
+              showApp(
+                data.account,
+                data.member_name
+              );
+
+            },
+            400
+          );
+
+
+        } catch (
+          error
+        ) {
+
+          loginMessage.textContent =
+            error.message;
+
+        } finally {
+
+          loginBtn.disabled =
+            false;
+
+
+          loginBtn.textContent =
+            "✨ 登入分析系統";
+
+        }
+
+      }
+    );
+
+
+    // =====================================
+    // 自動恢復登入
+    // =====================================
+
+    async function restoreSession() {
+
+      const token =
+        getSavedToken();
+
+
+      if (!token) {
+
+        showLogin();
+
+        return;
+
+      }
+
+
+      loginMessage.textContent =
+        "正在恢復登入狀態...";
+
+
+      try {
+
+        const data =
+          await callAPI(
+            {
+              action:
+                "session"
+            },
+            true
+          );
+
+
+        showApp(
+          data.account,
+          data.member_name
+        );
+
+
+      } catch {
+
+        clearToken();
+
+        showLogin();
+
+      }
+
+    }
+
+
+    // =====================================
+    // 登出
+    // =====================================
+
+    logoutBtn.addEventListener(
+      "click",
+      async () => {
+
+        try {
+
+          await callAPI(
+            {
+              action:
+                "logout"
+            },
+            true
+          );
+
+        } catch {
+          // ignore
+        }
+
+
+        clearToken();
+
+
+        memberAccount.value =
+          "";
+
+
+        showLogin();
+
+      }
+    );
+
+
+    // =====================================
+    // 多選不中
+    // =====================================
 
     function updateMissArea() {
 
@@ -1568,11 +3028,13 @@
     updateMissArea();
 
 
-    /* =====================================
-       HTML 安全
-    ====================================== */
+    // =====================================
+    // HTML escape
+    // =====================================
 
-    function escapeHtml(text) {
+    function escapeHtml(
+      text
+    ) {
 
       return String(
         text ?? ""
@@ -1606,10 +3068,10 @@
     }
 
 
-    /* =====================================
-       下一個539日期
-       星期日跳過
-    ====================================== */
+    // =====================================
+    // 下一開獎日
+    // 星期日跳過
+    // =====================================
 
     function getNextDrawDate(
       latestDate
@@ -1625,26 +3087,17 @@
       }
 
 
-      const parts =
-        latestDate.split("/");
-
-
-      const month =
-        parseInt(
-          parts[0],
-          10
-        );
-
-
-      const day =
-        parseInt(
-          parts[1],
-          10
-        );
+      const [
+        month,
+        day
+      ] =
+        latestDate
+          .split("/")
+          .map(Number);
 
 
       const year =
-        parseInt(
+        Number(
 
           new Intl.DateTimeFormat(
             "en",
@@ -1659,9 +3112,8 @@
 
           .format(
             new Date()
-          ),
+          )
 
-          10
         );
 
 
@@ -1686,63 +3138,60 @@
       );
 
 
-      const nextMonth =
+      return (
+
         String(
           date.getUTCMonth() + 1
         )
+          .padStart(
+            2,
+            "0"
+          )
 
-        .padStart(
-          2,
-          "0"
-        );
+        +
 
+        "/"
 
-      const nextDay =
+        +
+
         String(
           date.getUTCDate()
         )
+          .padStart(
+            2,
+            "0"
+          )
 
-        .padStart(
-          2,
-          "0"
-        );
-
-
-      return (
-        nextMonth +
-        "/" +
-        nextDay
       );
 
     }
 
 
-    /* =====================================
-       抓取 01～39
-    ====================================== */
+    // =====================================
+    // 號碼
+    // =====================================
 
     function extractNumbers(
       text
     ) {
 
-      const matches =
+      return (
         String(
           text || ""
         )
-
         .match(
           /\b(?:0[1-9]|[12][0-9]|3[0-9])\b/g
-        );
-
-
-      return matches || [];
+        )
+        ||
+        []
+      );
 
     }
 
 
-    /* =====================================
-       建立號碼球
-    ====================================== */
+    // =====================================
+    // 球
+    // =====================================
 
     function createBalls(
       numbers,
@@ -1750,7 +3199,6 @@
     ) {
 
       return numbers
-
         .map(
           (
             number,
@@ -1760,21 +3208,31 @@
             const delay =
               (
                 index *
-                0.11
-              ).toFixed(2);
+                .11
+              )
+              .toFixed(2);
 
 
             return (
+
               '<span ' +
+
               'class="number-ball' +
+
               (
                 small
-                  ? ' small'
-                  : ''
-              ) +
-              '" ' +
-              'style="animation-delay:' +
+                  ?
+                  ' small'
+                  :
+                  ''
+              )
+
+              +
+
+              '" style="animation-delay:' +
+
               delay +
+
               's">' +
 
               escapeHtml(
@@ -1782,54 +3240,35 @@
               ) +
 
               '</span>'
+
             );
 
           }
         )
-
         .join("");
 
     }
 
 
-    /* =====================================
-       將 Dify 結果變漂亮
-    ====================================== */
+    // =====================================
+    // 結果渲染
+    // =====================================
 
     function renderAnalysis(
       analysisText,
       targetDate
     ) {
 
-      const rawLines =
+      const lines =
         String(
           analysisText || ""
         )
-
-        .split("\n")
-
-        .map(
-          line =>
-            line.trim()
-        )
-
-        .filter(
-          line =>
-            line.length > 0
-        );
-
-
-      if (
-        rawLines.length === 0
-      ) {
-
-        return (
-          '<div class="error-box">' +
-          '沒有取得分析內容' +
-          '</div>'
-        );
-
-      }
+          .split("\n")
+          .map(
+            line =>
+              line.trim()
+          )
+          .filter(Boolean);
 
 
       let html =
@@ -1840,15 +3279,8 @@
         false;
 
 
-      rawLines.forEach(
-        (
-          line,
-          lineIndex
-        ) => {
-
-          /* =========================
-             標題
-          ========================= */
+      lines.forEach(
+        line => {
 
           if (
             !titleUsed &&
@@ -1872,34 +3304,29 @@
             titleUsed =
               true;
 
-
             return;
 
           }
 
 
-          /* =========================
-             有冒號的行
-          ========================= */
-
           if (
             line.includes("：")
           ) {
 
-            const colonIndex =
+            const index =
               line.indexOf("：");
 
 
             const label =
               line.substring(
                 0,
-                colonIndex
+                index
               );
 
 
             const content =
               line.substring(
-                colonIndex + 1
+                index + 1
               );
 
 
@@ -1909,16 +3336,15 @@
               );
 
 
-            /* 有2顆以上號碼 → 球 */
-
             if (
               numbers.length >= 2
             ) {
 
-              const useSmall =
+              const small =
                 !label.includes(
                   "主選5顆"
-                ) &&
+                )
+                &&
                 !label.includes(
                   "連碰5顆"
                 );
@@ -1927,20 +3353,22 @@
               html +=
                 '<div class="analysis-line">' +
 
-                  '<div class="analysis-label">' +
-                    escapeHtml(
-                      label
-                    ) +
-                  '</div>' +
+                '<div class="analysis-label">' +
 
-                  '<div class="number-balls">' +
+                escapeHtml(
+                  label
+                ) +
 
-                    createBalls(
-                      numbers,
-                      useSmall
-                    ) +
+                '</div>' +
 
-                  '</div>' +
+                '<div class="number-balls">' +
+
+                createBalls(
+                  numbers,
+                  small
+                ) +
+
+                '</div>' +
 
                 '</div>';
 
@@ -1950,22 +3378,24 @@
             }
 
 
-            /* 單純文字 */
-
             html +=
               '<div class="analysis-line">' +
 
-                '<div class="analysis-label">' +
-                  escapeHtml(
-                    label
-                  ) +
-                '</div>' +
+              '<div class="analysis-label">' +
 
-                '<span class="text-pill">' +
-                  escapeHtml(
-                    content
-                  ) +
-                '</span>' +
+              escapeHtml(
+                label
+              ) +
+
+              '</div>' +
+
+              '<span class="text-pill">' +
+
+              escapeHtml(
+                content
+              ) +
+
+              '</span>' +
 
               '</div>';
 
@@ -1974,11 +3404,6 @@
 
           }
 
-
-          /* =========================
-             純號碼行
-             多選不中會用到
-          ========================= */
 
           const numbers =
             extractNumbers(
@@ -1993,14 +3418,13 @@
             html +=
               '<div class="analysis-line">' +
 
-                '<div class="number-balls">' +
+              '<div class="number-balls">' +
 
-                  createBalls(
-                    numbers,
-                    false
-                  ) +
+              createBalls(
+                numbers
+              ) +
 
-                '</div>' +
+              '</div>' +
 
               '</div>';
 
@@ -2010,16 +3434,12 @@
           }
 
 
-          /* =========================
-             其他文字
-          ========================= */
-
           html +=
             '<div class="analysis-line">' +
 
-              escapeHtml(
-                line
-              ) +
+            escapeHtml(
+              line
+            ) +
 
             '</div>';
 
@@ -2036,9 +3456,9 @@
     }
 
 
-    /* =====================================
-       Loading
-    ====================================== */
+    // =====================================
+    // Loading
+    // =====================================
 
     function showLoading() {
 
@@ -2048,30 +3468,33 @@
 
 
       result.innerHTML =
+
         '<div class="loading-wrap">' +
 
-          '<div class="loading-balls">' +
+        '<div class="loading-balls">' +
 
-            '<span class="loading-ball"></span>' +
-            '<span class="loading-ball"></span>' +
-            '<span class="loading-ball"></span>' +
-            '<span class="loading-ball"></span>' +
-            '<span class="loading-ball"></span>' +
+        '<span class="loading-ball"></span>' +
+        '<span class="loading-ball"></span>' +
+        '<span class="loading-ball"></span>' +
+        '<span class="loading-ball"></span>' +
+        '<span class="loading-ball"></span>' +
 
-          '</div>' +
+        '</div>' +
 
-          '<div class="loading-text">' +
-            '正在分析近期539趨勢...' +
-          '</div>' +
+        '<div class="loading-text">' +
+
+        '正在分析近期539趨勢...' +
+
+        '</div>' +
 
         '</div>';
 
     }
 
 
-    /* =====================================
-       執行分析
-    ====================================== */
+    // =====================================
+    // ANALYZE
+    // =====================================
 
     analyzeBtn.addEventListener(
       "click",
@@ -2090,75 +3513,27 @@
 
         try {
 
-          const response =
-            await fetch(
-              WORKER_URL,
+          const data =
+            await callAPI(
               {
 
-                method:
-                  "POST",
+                action:
+                  "analyze",
 
-                headers: {
-                  "Content-Type":
-                    "application/json"
-                },
+                play_type:
+                  playType.value,
 
-                body:
-                  JSON.stringify({
+                miss_count:
+                  playType.value ===
+                  "多選不中"
+                    ?
+                    missCount.value
+                    :
+                    "5顆"
 
-                    play_type:
-                      playType.value,
-
-                    miss_count:
-                      playType.value ===
-                      "多選不中"
-                        ? missCount.value
-                        : "5顆"
-
-                  })
-
-              }
+              },
+              true
             );
-
-
-          let data;
-
-
-          try {
-
-            data =
-              await response.json();
-
-          } catch {
-
-            throw new Error(
-              "伺服器回傳格式錯誤"
-            );
-
-          }
-
-
-          if (
-            !response.ok
-          ) {
-
-            throw new Error(
-              data?.error ||
-              "分析失敗"
-            );
-
-          }
-
-
-          if (
-            !data.result
-          ) {
-
-            throw new Error(
-              "沒有取得分析結果"
-            );
-
-          }
 
 
           const latestDate =
@@ -2177,69 +3552,67 @@
             );
 
 
-          const analysisHtml =
+          result.classList.remove(
+            "empty"
+          );
+
+
+          result.innerHTML =
+
+            '<div class="data-info">' +
+
+            '<div class="data-row">' +
+
+            '📅 資料基準：<strong>' +
+
+            escapeHtml(
+              latestDate
+            ) +
+
+            '</strong></div>' +
+
+            '<div class="data-row">' +
+
+            '🎱 最新開獎：<strong>' +
+
+            escapeHtml(
+              latestNumbers
+            ) +
+
+            '</strong></div>' +
+
+            '<div class="data-row">' +
+
+            '🎯 分析目標：<strong>' +
+
+            '下一期' +
+
+            '</strong></div>' +
+
+            '</div>' +
+
             renderAnalysis(
               data.result,
               targetDate
             );
 
 
-          result.classList.remove(
-            "empty"
-          );
-
-
-          result.innerHTML =
-            '<div class="data-info">' +
-
-              '<div class="data-row">' +
-
-                '📅 資料基準：' +
-
-                '<strong>' +
-                  escapeHtml(
-                    latestDate
-                  ) +
-                '</strong>' +
-
-              '</div>' +
-
-
-              '<div class="data-row">' +
-
-                '🎱 最新開獎：' +
-
-                '<strong>' +
-                  escapeHtml(
-                    latestNumbers
-                  ) +
-                '</strong>' +
-
-              '</div>' +
-
-
-              '<div class="data-row">' +
-
-                '🎯 分析目標：' +
-
-                '<strong>' +
-                  '下一期' +
-                '</strong>' +
-
-              '</div>' +
-
-            '</div>' +
-
-            analysisHtml;
-
-
         } catch (
           error
         ) {
 
-          console.error(
-            error
-          );
+
+          if (
+            error.status === 401
+          ) {
+
+            clearToken();
+
+            showLogin();
+
+            return;
+
+          }
 
 
           result.classList.remove(
@@ -2248,6 +3621,7 @@
 
 
           result.innerHTML =
+
             '<div class="error-box">' +
 
             '分析發生錯誤\n\n' +
@@ -2256,10 +3630,7 @@
               error.message
             ) +
 
-            '\n\n請稍後再試一次。' +
-
             '</div>';
-
 
         } finally {
 
@@ -2274,6 +3645,13 @@
 
       }
     );
+
+
+    // =====================================
+    // START
+    // =====================================
+
+    restoreSession();
 
   </script>
 
