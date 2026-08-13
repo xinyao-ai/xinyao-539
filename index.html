@@ -22,21 +22,58 @@
     href="./icon-192(1).png"
   >
 
-  <meta name="theme-color" content="#fff6fb">
+  <meta
+    name="theme-color"
+    content="#FFF4D9"
+  >
 
   <style>
+
+    /* =========================================
+       基本設定
+    ========================================= */
+
+    :root {
+      --cream: #fffaf0;
+      --cream-2: #fff3d8;
+      --soft-yellow: #ffe7a2;
+
+      --gold: #ffc34d;
+      --gold-light: #ffd976;
+
+      --orange: #f6a23a;
+      --orange-dark: #e88321;
+
+      --brown: #5a412f;
+      --brown-soft: #816650;
+
+      --white: #ffffff;
+
+      --shadow:
+        0 14px 38px
+        rgba(177, 111, 37, 0.12);
+    }
+
+
     * {
       box-sizing: border-box;
     }
+
 
     html,
     body {
       margin: 0;
       padding: 0;
+
       min-height: 100%;
     }
 
+
     body {
+      min-height: 100vh;
+
+      overflow-x: hidden;
+
       font-family:
         -apple-system,
         BlinkMacSystemFont,
@@ -44,286 +81,1328 @@
         "Noto Sans TC",
         sans-serif;
 
+      color: var(--brown);
+
       background:
+        radial-gradient(
+          circle at 15% 10%,
+          rgba(255, 211, 104, 0.38),
+          transparent 28%
+        ),
+        radial-gradient(
+          circle at 90% 20%,
+          rgba(255, 171, 68, 0.20),
+          transparent 30%
+        ),
         linear-gradient(
           180deg,
-          #fff6fb 0%,
-          #faf4ff 55%,
-          #fff8fb 100%
+          #fff8e8 0%,
+          #fff2d5 48%,
+          #fff9ec 100%
         );
-
-      color: #332638;
-      min-height: 100vh;
     }
+
+
+    button,
+    select {
+      font-family: inherit;
+    }
+
+
+    /* =========================================
+       背景光暈
+    ========================================= */
+
+    .glow {
+      position: fixed;
+
+      border-radius: 999px;
+
+      filter: blur(8px);
+
+      pointer-events: none;
+
+      z-index: 0;
+
+      opacity: 0.55;
+    }
+
+
+    .glow-one {
+      width: 180px;
+      height: 180px;
+
+      top: -40px;
+      left: -60px;
+
+      background:
+        rgba(255, 203, 82, 0.32);
+
+      animation:
+        glowMoveOne 8s
+        ease-in-out
+        infinite alternate;
+    }
+
+
+    .glow-two {
+      width: 230px;
+      height: 230px;
+
+      right: -100px;
+      top: 35%;
+
+      background:
+        rgba(246, 162, 58, 0.17);
+
+      animation:
+        glowMoveTwo 10s
+        ease-in-out
+        infinite alternate;
+    }
+
+
+    @keyframes glowMoveOne {
+
+      from {
+        transform:
+          translate(
+            0,
+            0
+          );
+      }
+
+      to {
+        transform:
+          translate(
+            25px,
+            35px
+          );
+      }
+
+    }
+
+
+    @keyframes glowMoveTwo {
+
+      from {
+        transform:
+          translate(
+            0,
+            0
+          );
+      }
+
+      to {
+        transform:
+          translate(
+            -30px,
+            25px
+          );
+      }
+
+    }
+
+
+    /* =========================================
+       小光點
+    ========================================= */
+
+    .sparkle-layer {
+      position: fixed;
+
+      inset: 0;
+
+      overflow: hidden;
+
+      pointer-events: none;
+
+      z-index: 0;
+    }
+
+
+    .sparkle {
+      position: absolute;
+
+      width: 7px;
+      height: 7px;
+
+      border-radius: 50%;
+
+      background:
+        rgba(255, 194, 63, 0.60);
+
+      box-shadow:
+        0 0 13px
+        rgba(255, 192, 57, 0.45);
+
+      animation:
+        sparkleFloat
+        6s
+        ease-in-out
+        infinite;
+    }
+
+
+    .sparkle:nth-child(1) {
+      left: 8%;
+      top: 18%;
+
+      animation-delay: 0s;
+    }
+
+
+    .sparkle:nth-child(2) {
+      right: 11%;
+      top: 12%;
+
+      animation-delay: 1.3s;
+    }
+
+
+    .sparkle:nth-child(3) {
+      left: 15%;
+      top: 63%;
+
+      animation-delay: 2.1s;
+    }
+
+
+    .sparkle:nth-child(4) {
+      right: 8%;
+      top: 72%;
+
+      animation-delay: 3.2s;
+    }
+
+
+    .sparkle:nth-child(5) {
+      left: 50%;
+      top: 8%;
+
+      width: 5px;
+      height: 5px;
+
+      animation-delay: 4s;
+    }
+
+
+    @keyframes sparkleFloat {
+
+      0%,
+      100% {
+        transform:
+          translateY(0)
+          scale(0.8);
+
+        opacity: 0.30;
+      }
+
+      50% {
+        transform:
+          translateY(-18px)
+          scale(1.25);
+
+        opacity: 0.90;
+      }
+
+    }
+
+
+    /* =========================================
+       主版面
+    ========================================= */
 
     .app {
+      position: relative;
+
+      z-index: 2;
+
       width: min(92%, 520px);
+
       margin: 0 auto;
-      padding: 34px 0 60px;
+
+      padding:
+        34px
+        0
+        60px;
     }
+
+
+    /* =========================================
+       Header
+    ========================================= */
 
     .header {
       text-align: center;
+
       margin-bottom: 28px;
+
+      animation:
+        fadeUp
+        0.7s
+        ease
+        both;
     }
 
-    .logo {
-      display: flex;
+
+    .logo-wrap {
+      position: relative;
+
+      display: inline-flex;
+
+      align-items: center;
       justify-content: center;
+
       margin-bottom: 14px;
     }
 
+
+    .logo-ring {
+      position: absolute;
+
+      width: 114px;
+      height: 114px;
+
+      border-radius: 30px;
+
+      background:
+        linear-gradient(
+          135deg,
+          rgba(255, 217, 117, 0.70),
+          rgba(246, 162, 58, 0.30)
+        );
+
+      filter: blur(7px);
+
+      animation:
+        logoGlow
+        2.8s
+        ease-in-out
+        infinite;
+    }
+
+
     .logo-img {
-      width: 105px;
-      height: 105px;
+      position: relative;
+
+      z-index: 2;
+
+      width: 100px;
+      height: 100px;
+
       object-fit: cover;
+
       border-radius: 26px;
 
       border:
         3px solid
-        rgba(255, 255, 255, 0.95);
+        rgba(255, 255, 255, 0.96);
 
       box-shadow:
-        0 10px 28px
-        rgba(120, 65, 105, 0.16);
+        0 12px 32px
+        rgba(180, 110, 31, 0.20);
+
+      animation:
+        logoFloat
+        3.8s
+        ease-in-out
+        infinite;
     }
+
+
+    @keyframes logoFloat {
+
+      0%,
+      100% {
+        transform:
+          translateY(0);
+      }
+
+      50% {
+        transform:
+          translateY(-7px);
+      }
+
+    }
+
+
+    @keyframes logoGlow {
+
+      0%,
+      100% {
+        transform:
+          scale(0.95);
+
+        opacity: 0.45;
+      }
+
+      50% {
+        transform:
+          scale(1.08);
+
+        opacity: 0.85;
+      }
+
+    }
+
 
     h1 {
       margin: 0;
+
       font-size: 25px;
-      font-weight: 800;
-      color: #302237;
+      font-weight: 900;
+
+      letter-spacing: 0.2px;
+
+      color: #4d3828;
     }
+
+
+    .title-highlight {
+      background:
+        linear-gradient(
+          90deg,
+          #e7811f,
+          #f3aa34
+        );
+
+      -webkit-background-clip:
+        text;
+
+      background-clip:
+        text;
+
+      color:
+        transparent;
+    }
+
 
     .sub {
-      margin-top: 10px;
-      font-size: 14px;
+      margin-top: 9px;
+
+      color: #9a7a5d;
+
+      font-size: 13.5px;
       line-height: 1.6;
-      color: #9a8192;
     }
+
+
+    .mini-stars {
+      margin-top: 9px;
+
+      color: #eeb242;
+
+      font-size: 12px;
+
+      letter-spacing: 9px;
+    }
+
+
+    /* =========================================
+       卡片
+    ========================================= */
 
     .card {
+      position: relative;
+
       width: 100%;
+
       padding: 22px;
+
       margin-bottom: 18px;
 
-      background:
-        rgba(255, 255, 255, 0.95);
+      overflow: hidden;
 
-      border-radius: 24px;
+      border:
+        1px solid
+        rgba(255, 213, 137, 0.55);
+
+      border-radius: 25px;
+
+      background:
+        rgba(255, 255, 255, 0.90);
 
       box-shadow:
-        0 12px 34px
-        rgba(105, 70, 120, 0.08);
+        var(--shadow);
+
+      backdrop-filter:
+        blur(12px);
+
+      -webkit-backdrop-filter:
+        blur(12px);
+
+      animation:
+        fadeUp
+        0.7s
+        ease
+        both;
     }
+
+
+    .form-card {
+      animation-delay:
+        0.08s;
+    }
+
+
+    .result-card {
+      animation-delay:
+        0.16s;
+    }
+
+
+    @keyframes fadeUp {
+
+      from {
+        opacity: 0;
+
+        transform:
+          translateY(18px);
+      }
+
+      to {
+        opacity: 1;
+
+        transform:
+          translateY(0);
+      }
+
+    }
+
+
+    /* =========================================
+       表單
+    ========================================= */
 
     label {
       display: block;
+
       margin-bottom: 9px;
+
+      color: #594231;
 
       font-size: 15px;
       font-weight: 800;
-
-      color: #33283b;
     }
+
 
     select {
       width: 100%;
       height: 52px;
 
-      padding: 0 15px;
+      padding:
+        0
+        15px;
+
+      border:
+        1px solid
+        #f0d6a8;
 
       border-radius: 15px;
-      border: 1px solid #e7d9e9;
 
-      background: #fff;
+      outline: none;
 
-      color: #3f3246;
+      background:
+        linear-gradient(
+          180deg,
+          #ffffff,
+          #fffdf8
+        );
+
+      color: #5d4838;
+
       font-size: 16px;
+
+      transition:
+        0.2s ease;
     }
+
+
+    select:focus {
+      border-color:
+        #f1a744;
+
+      box-shadow:
+        0 0 0 4px
+        rgba(246, 162, 58, 0.11);
+    }
+
 
     #missArea {
       margin-top: 18px;
     }
 
+
     .hidden {
       display: none !important;
     }
 
+
+    /* =========================================
+       開始分析按鈕
+    ========================================= */
+
     #analyzeBtn {
+      position: relative;
+
       width: 100%;
-      height: 54px;
+      height: 55px;
 
       margin-top: 20px;
 
+      overflow: hidden;
+
       border: none;
-      border-radius: 16px;
-
-      background:
-        linear-gradient(
-          135deg,
-          #ed79b5,
-          #a879ec
-        );
-
-      color: white;
-
-      font-size: 17px;
-      font-weight: 800;
-
-      box-shadow:
-        0 10px 24px
-        rgba(181, 108, 198, 0.25);
-    }
-
-    #analyzeBtn:disabled {
-      opacity: 0.6;
-    }
-
-    .result-title {
-      margin-bottom: 14px;
-
-      font-size: 18px;
-      font-weight: 800;
-
-      color: #33263a;
-    }
-
-    .result {
-      width: 100%;
-      height: auto;
-      min-height: 0;
-
-      padding: 18px;
 
       border-radius: 17px;
 
       background:
         linear-gradient(
-          135deg,
-          #fff8fb,
-          #faf6ff
+          110deg,
+          #e98424 0%,
+          #f7aa3d 50%,
+          #ffc957 100%
         );
 
-      color: #604b5e;
+      color: white;
 
-      font-size: 16px;
+      font-size: 17px;
+      font-weight: 900;
+
+      letter-spacing: 0.5px;
+
+      cursor: pointer;
+
+      box-shadow:
+        0 10px 25px
+        rgba(226, 130, 35, 0.28);
+
+      transition:
+        transform 0.18s ease,
+        box-shadow 0.18s ease;
+    }
+
+
+    #analyzeBtn::after {
+      content: "";
+
+      position: absolute;
+
+      top: -50%;
+      left: -55%;
+
+      width: 35%;
+      height: 200%;
+
+      transform:
+        rotate(20deg);
+
+      background:
+        linear-gradient(
+          90deg,
+          transparent,
+          rgba(255, 255, 255, 0.65),
+          transparent
+        );
+
+      animation:
+        buttonShine
+        3.1s
+        ease-in-out
+        infinite;
+    }
+
+
+    #analyzeBtn:hover {
+      transform:
+        translateY(-2px);
+
+      box-shadow:
+        0 14px 30px
+        rgba(226, 130, 35, 0.33);
+    }
+
+
+    #analyzeBtn:active {
+      transform:
+        scale(0.985);
+    }
+
+
+    #analyzeBtn:disabled {
+      opacity: 0.75;
+
+      cursor: not-allowed;
+
+      transform: none;
+    }
+
+
+    @keyframes buttonShine {
+
+      0% {
+        left: -55%;
+      }
+
+      55%,
+      100% {
+        left: 125%;
+      }
+
+    }
+
+
+    /* =========================================
+       結果標題
+    ========================================= */
+
+    .result-title {
+      display: flex;
+
+      align-items: center;
+
+      gap: 8px;
+
+      margin-bottom: 14px;
+
+      color: #513b2b;
+
+      font-size: 18px;
+      font-weight: 900;
+    }
+
+
+    .result-title-icon {
+      display: inline-flex;
+
+      width: 29px;
+      height: 29px;
+
+      align-items: center;
+      justify-content: center;
+
+      border-radius: 10px;
+
+      background:
+        #fff1cf;
+
+      font-size: 15px;
+    }
+
+
+    /* =========================================
+       結果框
+    ========================================= */
+
+    .result {
+      display: block;
+
+      width: 100%;
+
+      min-height: 0;
+
+      padding: 17px;
+
+      border:
+        1px solid
+        rgba(246, 180, 69, 0.25);
+
+      border-radius: 18px;
+
+      background:
+        linear-gradient(
+          145deg,
+          #fffdf8,
+          #fff6df
+        );
+
+      color: #624c3c;
+
       line-height: 1.7;
 
       word-break: break-word;
     }
 
-    .result.loading,
-    .result.error {
-      white-space: pre-line;
-    }
 
-    .result.error {
-      color: #b94f6b;
-      background: #fff3f6;
-    }
-
-    .data-info {
-      padding: 12px 14px;
-      margin-bottom: 16px;
-
-      border-radius: 14px;
-      background: #fff2f8;
-
-      color: #74596d;
+    .result.empty {
+      color: #9b8067;
 
       font-size: 14px;
-      line-height: 1.7;
+
+      text-align: center;
+
+      padding:
+        23px
+        16px;
     }
 
-    .data-row {
-      margin-bottom: 5px;
+
+    /* =========================================
+       資料資訊
+    ========================================= */
+
+    .data-info {
+      display: block;
+
+      margin-bottom: 17px;
+
+      padding:
+        12px
+        14px;
+
+      border-radius: 14px;
+
+      background:
+        linear-gradient(
+          135deg,
+          #fff0c9,
+          #fff8e7
+        );
+
+      border:
+        1px solid
+        rgba(246, 168, 57, 0.17);
+
+      color: #73573f;
+
+      font-size: 14px;
+      line-height: 1.65;
+
+      animation:
+        resultReveal
+        0.45s
+        ease
+        both;
     }
+
+
+    .data-row {
+      margin: 0 0 5px 0;
+    }
+
 
     .data-row:last-child {
       margin-bottom: 0;
     }
 
+
     .data-row strong {
-      color: #4e3d4a;
+      color: #50392a;
+      font-weight: 900;
     }
 
-    .analysis-output {
-      color: #554653;
 
-      font-size: 16px;
-      line-height: 1.75;
+    /* =========================================
+       分析結果區
+    ========================================= */
 
-      white-space: pre-wrap;
+    .analysis-box {
+      animation:
+        resultReveal
+        0.55s
+        ease
+        both;
     }
+
+
+    @keyframes resultReveal {
+
+      from {
+        opacity: 0;
+
+        transform:
+          translateY(9px);
+      }
+
+      to {
+        opacity: 1;
+
+        transform:
+          translateY(0);
+      }
+
+    }
+
+
+    .analysis-title {
+      margin-bottom: 14px;
+
+      color: #563b28;
+
+      font-size: 17px;
+      font-weight: 900;
+    }
+
+
+    .analysis-line {
+      margin-top: 15px;
+    }
+
+
+    .analysis-label {
+      margin-bottom: 8px;
+
+      color: #806048;
+
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+
+    /* =========================================
+       開獎球
+    ========================================= */
+
+    .number-balls {
+      display: flex;
+
+      flex-wrap: wrap;
+
+      gap: 9px;
+
+      align-items: center;
+    }
+
+
+    .number-ball {
+      display: inline-flex;
+
+      width: 48px;
+      height: 48px;
+
+      align-items: center;
+      justify-content: center;
+
+      border-radius: 50%;
+
+      color: #ffffff;
+
+      font-size: 17px;
+      font-weight: 900;
+
+      background:
+        radial-gradient(
+          circle at 30% 25%,
+          #ffd86d 0%,
+          #f7aa34 35%,
+          #ea831f 75%,
+          #d96a14 100%
+        );
+
+      border:
+        2px solid
+        rgba(255, 255, 255, 0.85);
+
+      box-shadow:
+        inset
+        0 2px 4px
+        rgba(255, 255, 255, 0.30),
+
+        0 7px 15px
+        rgba(213, 111, 21, 0.22);
+
+      opacity: 0;
+
+      transform:
+        translateY(16px)
+        scale(0.6);
+
+      animation:
+        ballPop
+        0.48s
+        cubic-bezier(
+          0.22,
+          1.35,
+          0.5,
+          1
+        )
+        forwards;
+    }
+
+
+    .number-ball.small {
+      width: 40px;
+      height: 40px;
+
+      font-size: 15px;
+
+      background:
+        radial-gradient(
+          circle at 30% 25%,
+          #fff0a6,
+          #ffc95b 45%,
+          #eea038 100%
+        );
+
+      color: #62431f;
+    }
+
+
+    @keyframes ballPop {
+
+      0% {
+        opacity: 0;
+
+        transform:
+          translateY(16px)
+          scale(0.55);
+      }
+
+      70% {
+        opacity: 1;
+
+        transform:
+          translateY(-4px)
+          scale(1.08);
+      }
+
+      100% {
+        opacity: 1;
+
+        transform:
+          translateY(0)
+          scale(1);
+      }
+
+    }
+
+
+    /* =========================================
+       一般文字膠囊
+    ========================================= */
+
+    .text-pill {
+      display: inline-flex;
+
+      padding:
+        8px
+        13px;
+
+      border-radius: 999px;
+
+      background:
+        #fff0c9;
+
+      color:
+        #d5741c;
+
+      font-size: 15px;
+      font-weight: 900;
+    }
+
+
+    /* =========================================
+       Loading
+    ========================================= */
+
+    .loading-wrap {
+      padding:
+        8px
+        0
+        4px;
+
+      text-align: center;
+    }
+
+
+    .loading-text {
+      margin-top: 11px;
+
+      color:
+        #9b7655;
+
+      font-size: 13px;
+    }
+
+
+    .loading-balls {
+      display: flex;
+
+      justify-content: center;
+
+      gap: 8px;
+    }
+
+
+    .loading-ball {
+      width: 15px;
+      height: 15px;
+
+      border-radius: 50%;
+
+      background:
+        linear-gradient(
+          135deg,
+          #ffc957,
+          #eb8524
+        );
+
+      animation:
+        loadingBounce
+        0.9s
+        ease-in-out
+        infinite;
+    }
+
+
+    .loading-ball:nth-child(2) {
+      animation-delay:
+        0.10s;
+    }
+
+
+    .loading-ball:nth-child(3) {
+      animation-delay:
+        0.20s;
+    }
+
+
+    .loading-ball:nth-child(4) {
+      animation-delay:
+        0.30s;
+    }
+
+
+    .loading-ball:nth-child(5) {
+      animation-delay:
+        0.40s;
+    }
+
+
+    @keyframes loadingBounce {
+
+      0%,
+      100% {
+        transform:
+          translateY(0)
+          scale(0.85);
+
+        opacity: 0.55;
+      }
+
+      50% {
+        transform:
+          translateY(-9px)
+          scale(1.05);
+
+        opacity: 1;
+      }
+
+    }
+
+
+    /* =========================================
+       錯誤
+    ========================================= */
+
+    .error-box {
+      color: #b65437;
+
+      font-size: 14px;
+
+      white-space: pre-line;
+    }
+
+
+    /* =========================================
+       Footer
+    ========================================= */
 
     .footer {
-      margin-top: 28px;
+      margin-top: 27px;
 
       text-align: center;
 
+      color: #aa8969;
+
       font-size: 12px;
-      color: #ae9ca9;
     }
 
-    @media (max-width: 480px) {
+
+    /* =========================================
+       手機
+    ========================================= */
+
+    @media (
+      max-width: 480px
+    ) {
+
       .app {
         width: 92%;
+
         padding-top: 28px;
       }
 
+
       .logo-img {
-        width: 96px;
-        height: 96px;
-        border-radius: 23px;
+        width: 94px;
+        height: 94px;
       }
+
+
+      .logo-ring {
+        width: 107px;
+        height: 107px;
+      }
+
 
       h1 {
         font-size: 23px;
       }
 
+
       .card {
-        padding: 20px;
+        padding: 19px;
       }
+
+
+      .result {
+        padding: 15px;
+      }
+
+
+      .number-balls {
+        gap: 7px;
+      }
+
+
+      .number-ball {
+        width: 45px;
+        height: 45px;
+
+        font-size: 16px;
+      }
+
+
+      .number-ball.small {
+        width: 38px;
+        height: 38px;
+      }
+
     }
+
+
+    /* =========================================
+       減少動畫偏好
+    ========================================= */
+
+    @media (
+      prefers-reduced-motion:
+      reduce
+    ) {
+
+      *,
+      *::before,
+      *::after {
+        animation-duration:
+          0.01ms !important;
+
+        animation-iteration-count:
+          1 !important;
+
+        scroll-behavior:
+          auto !important;
+      }
+
+    }
+
   </style>
+
 </head>
+
 
 <body>
 
+  <!-- 背景動畫 -->
+
+  <div class="glow glow-one"></div>
+  <div class="glow glow-two"></div>
+
+
+  <div class="sparkle-layer">
+
+    <span class="sparkle"></span>
+    <span class="sparkle"></span>
+    <span class="sparkle"></span>
+    <span class="sparkle"></span>
+    <span class="sparkle"></span>
+
+  </div>
+
+
   <main class="app">
+
+
+    <!-- =====================================
+         HEADER
+    ====================================== -->
 
     <section class="header">
 
-      <div class="logo">
+      <div class="logo-wrap">
+
+        <div class="logo-ring"></div>
+
         <img
           src="./icon-192(1).png"
           onerror="this.onerror=null; this.src='./icon-512(1).png';"
           alt="芯瑤539趨勢分析"
           class="logo-img"
         >
+
       </div>
 
-      <h1>芯瑤💕539趨勢分析</h1>
+
+      <h1>
+        芯瑤💕
+        <span class="title-highlight">
+          539趨勢分析
+        </span>
+      </h1>
+
 
       <div class="sub">
         依照個人抓牌板路與歷史趨勢進行系統化分析
       </div>
 
+
+      <div class="mini-stars">
+        ✦ ✧ ✦
+      </div>
+
     </section>
 
 
-    <section class="card">
+    <!-- =====================================
+         玩法
+    ====================================== -->
+
+    <section class="card form-card">
 
       <label for="playType">
         選擇分析玩法
       </label>
 
+
       <select id="playType">
-        <option value="連碰234星">連碰234星</option>
-        <option value="全車">全車</option>
-        <option value="尾數">尾數</option>
-        <option value="多選不中">多選不中</option>
+
+        <option value="連碰234星">
+          連碰234星
+        </option>
+
+        <option value="全車">
+          全車
+        </option>
+
+        <option value="尾數">
+          尾數
+        </option>
+
+        <option value="多選不中">
+          多選不中
+        </option>
+
       </select>
 
 
@@ -336,79 +1415,144 @@
           多選不中顆數
         </label>
 
+
         <select id="missCount">
-          <option value="5顆">5顆</option>
-          <option value="6顆">6顆</option>
-          <option value="7顆">7顆</option>
-          <option value="8顆">8顆</option>
-          <option value="9顆">9顆</option>
-          <option value="10顆">10顆</option>
+
+          <option value="5顆">
+            5顆
+          </option>
+
+          <option value="6顆">
+            6顆
+          </option>
+
+          <option value="7顆">
+            7顆
+          </option>
+
+          <option value="8顆">
+            8顆
+          </option>
+
+          <option value="9顆">
+            9顆
+          </option>
+
+          <option value="10顆">
+            10顆
+          </option>
+
         </select>
 
       </div>
 
 
       <button id="analyzeBtn">
-        開始分析
+        ✨ 開始分析
       </button>
 
     </section>
 
 
-    <section class="card">
+    <!-- =====================================
+         結果
+    ====================================== -->
+
+    <section class="card result-card">
 
       <div class="result-title">
+
+        <span class="result-title-icon">
+          🎱
+        </span>
+
         分析結果
+
       </div>
+
 
       <div
         id="result"
-        class="result"
+        class="result empty"
       >
-        請先選擇玩法並點擊「開始分析」
+        選擇玩法後，點擊「開始分析」
       </div>
 
     </section>
 
 
     <div class="footer">
-      本工具為趨勢資料分析參考
+      趨勢資料分析僅供參考
     </div>
+
 
   </main>
 
 
   <script>
 
+    /* =====================================
+       Cloudflare Worker
+    ====================================== */
+
     const WORKER_URL =
       "https://xinyao-539-api.love06130430.workers.dev/";
 
 
+    /* =====================================
+       DOM
+    ====================================== */
+
     const playType =
-      document.getElementById("playType");
+      document.getElementById(
+        "playType"
+      );
+
 
     const missArea =
-      document.getElementById("missArea");
+      document.getElementById(
+        "missArea"
+      );
+
 
     const missCount =
-      document.getElementById("missCount");
+      document.getElementById(
+        "missCount"
+      );
+
 
     const analyzeBtn =
-      document.getElementById("analyzeBtn");
+      document.getElementById(
+        "analyzeBtn"
+      );
+
 
     const result =
-      document.getElementById("result");
+      document.getElementById(
+        "result"
+      );
 
+
+    /* =====================================
+       多選不中
+    ====================================== */
 
     function updateMissArea() {
 
-      if (playType.value === "多選不中") {
+      if (
+        playType.value ===
+        "多選不中"
+      ) {
 
-        missArea.classList.remove("hidden");
+        missArea.classList.remove(
+          "hidden"
+        );
 
       } else {
 
-        missArea.classList.add("hidden");
+        missArea.classList.add(
+          "hidden"
+        );
 
       }
 
@@ -420,28 +1564,64 @@
       updateMissArea
     );
 
+
     updateMissArea();
 
 
+    /* =====================================
+       HTML 安全
+    ====================================== */
+
     function escapeHtml(text) {
 
-      return String(text ?? "")
-        .replaceAll("&", "&amp;")
-        .replaceAll("<", "&lt;")
-        .replaceAll(">", "&gt;")
-        .replaceAll('"', "&quot;")
-        .replaceAll("'", "&#039;");
+      return String(
+        text ?? ""
+      )
+
+      .replaceAll(
+        "&",
+        "&amp;"
+      )
+
+      .replaceAll(
+        "<",
+        "&lt;"
+      )
+
+      .replaceAll(
+        ">",
+        "&gt;"
+      )
+
+      .replaceAll(
+        '"',
+        "&quot;"
+      )
+
+      .replaceAll(
+        "'",
+        "&#039;"
+      );
 
     }
 
 
-    function getNextDrawDate(latestDate) {
+    /* =====================================
+       下一個539日期
+       星期日跳過
+    ====================================== */
+
+    function getNextDrawDate(
+      latestDate
+    ) {
 
       if (
         !latestDate ||
         !latestDate.includes("/")
       ) {
+
         return "";
+
       }
 
 
@@ -450,22 +1630,37 @@
 
 
       const month =
-        parseInt(parts[0], 10);
+        parseInt(
+          parts[0],
+          10
+        );
 
 
       const day =
-        parseInt(parts[1], 10);
+        parseInt(
+          parts[1],
+          10
+        );
 
 
       const year =
         parseInt(
+
           new Intl.DateTimeFormat(
             "en",
             {
-              timeZone: "Asia/Taipei",
-              year: "numeric"
+              timeZone:
+                "Asia/Taipei",
+
+              year:
+                "numeric"
             }
-          ).format(new Date()),
+          )
+
+          .format(
+            new Date()
+          ),
+
           10
         );
 
@@ -494,13 +1689,23 @@
       const nextMonth =
         String(
           date.getUTCMonth() + 1
-        ).padStart(2, "0");
+        )
+
+        .padStart(
+          2,
+          "0"
+        );
 
 
       const nextDay =
         String(
           date.getUTCDate()
-        ).padStart(2, "0");
+        )
+
+        .padStart(
+          2,
+          "0"
+        );
 
 
       return (
@@ -512,20 +1717,375 @@
     }
 
 
+    /* =====================================
+       抓取 01～39
+    ====================================== */
+
+    function extractNumbers(
+      text
+    ) {
+
+      const matches =
+        String(
+          text || ""
+        )
+
+        .match(
+          /\b(?:0[1-9]|[12][0-9]|3[0-9])\b/g
+        );
+
+
+      return matches || [];
+
+    }
+
+
+    /* =====================================
+       建立號碼球
+    ====================================== */
+
+    function createBalls(
+      numbers,
+      small = false
+    ) {
+
+      return numbers
+
+        .map(
+          (
+            number,
+            index
+          ) => {
+
+            const delay =
+              (
+                index *
+                0.11
+              ).toFixed(2);
+
+
+            return (
+              '<span ' +
+              'class="number-ball' +
+              (
+                small
+                  ? ' small'
+                  : ''
+              ) +
+              '" ' +
+              'style="animation-delay:' +
+              delay +
+              's">' +
+
+              escapeHtml(
+                number
+              ) +
+
+              '</span>'
+            );
+
+          }
+        )
+
+        .join("");
+
+    }
+
+
+    /* =====================================
+       將 Dify 結果變漂亮
+    ====================================== */
+
+    function renderAnalysis(
+      analysisText,
+      targetDate
+    ) {
+
+      const rawLines =
+        String(
+          analysisText || ""
+        )
+
+        .split("\n")
+
+        .map(
+          line =>
+            line.trim()
+        )
+
+        .filter(
+          line =>
+            line.length > 0
+        );
+
+
+      if (
+        rawLines.length === 0
+      ) {
+
+        return (
+          '<div class="error-box">' +
+          '沒有取得分析內容' +
+          '</div>'
+        );
+
+      }
+
+
+      let html =
+        '<div class="analysis-box">';
+
+
+      let titleUsed =
+        false;
+
+
+      rawLines.forEach(
+        (
+          line,
+          lineIndex
+        ) => {
+
+          /* =========================
+             標題
+          ========================= */
+
+          if (
+            !titleUsed &&
+            line.includes("【")
+          ) {
+
+            html +=
+              '<div class="analysis-title">' +
+
+              escapeHtml(
+                targetDate
+              ) +
+
+              escapeHtml(
+                line
+              ) +
+
+              '</div>';
+
+
+            titleUsed =
+              true;
+
+
+            return;
+
+          }
+
+
+          /* =========================
+             有冒號的行
+          ========================= */
+
+          if (
+            line.includes("：")
+          ) {
+
+            const colonIndex =
+              line.indexOf("：");
+
+
+            const label =
+              line.substring(
+                0,
+                colonIndex
+              );
+
+
+            const content =
+              line.substring(
+                colonIndex + 1
+              );
+
+
+            const numbers =
+              extractNumbers(
+                content
+              );
+
+
+            /* 有2顆以上號碼 → 球 */
+
+            if (
+              numbers.length >= 2
+            ) {
+
+              const useSmall =
+                !label.includes(
+                  "主選5顆"
+                ) &&
+                !label.includes(
+                  "連碰5顆"
+                );
+
+
+              html +=
+                '<div class="analysis-line">' +
+
+                  '<div class="analysis-label">' +
+                    escapeHtml(
+                      label
+                    ) +
+                  '</div>' +
+
+                  '<div class="number-balls">' +
+
+                    createBalls(
+                      numbers,
+                      useSmall
+                    ) +
+
+                  '</div>' +
+
+                '</div>';
+
+
+              return;
+
+            }
+
+
+            /* 單純文字 */
+
+            html +=
+              '<div class="analysis-line">' +
+
+                '<div class="analysis-label">' +
+                  escapeHtml(
+                    label
+                  ) +
+                '</div>' +
+
+                '<span class="text-pill">' +
+                  escapeHtml(
+                    content
+                  ) +
+                '</span>' +
+
+              '</div>';
+
+
+            return;
+
+          }
+
+
+          /* =========================
+             純號碼行
+             多選不中會用到
+          ========================= */
+
+          const numbers =
+            extractNumbers(
+              line
+            );
+
+
+          if (
+            numbers.length >= 2
+          ) {
+
+            html +=
+              '<div class="analysis-line">' +
+
+                '<div class="number-balls">' +
+
+                  createBalls(
+                    numbers,
+                    false
+                  ) +
+
+                '</div>' +
+
+              '</div>';
+
+
+            return;
+
+          }
+
+
+          /* =========================
+             其他文字
+          ========================= */
+
+          html +=
+            '<div class="analysis-line">' +
+
+              escapeHtml(
+                line
+              ) +
+
+            '</div>';
+
+        }
+      );
+
+
+      html +=
+        '</div>';
+
+
+      return html;
+
+    }
+
+
+    /* =====================================
+       Loading
+    ====================================== */
+
+    function showLoading() {
+
+      result.classList.remove(
+        "empty"
+      );
+
+
+      result.innerHTML =
+        '<div class="loading-wrap">' +
+
+          '<div class="loading-balls">' +
+
+            '<span class="loading-ball"></span>' +
+            '<span class="loading-ball"></span>' +
+            '<span class="loading-ball"></span>' +
+            '<span class="loading-ball"></span>' +
+            '<span class="loading-ball"></span>' +
+
+          '</div>' +
+
+          '<div class="loading-text">' +
+            '正在分析近期539趨勢...' +
+          '</div>' +
+
+        '</div>';
+
+    }
+
+
+    /* =====================================
+       執行分析
+    ====================================== */
+
     analyzeBtn.addEventListener(
       "click",
       async () => {
 
-        result.classList.remove("error");
-        result.classList.add("loading");
+        showLoading();
 
-        analyzeBtn.disabled = true;
+
+        analyzeBtn.disabled =
+          true;
+
 
         analyzeBtn.textContent =
-          "分析中...";
-
-        result.textContent =
-          "正在取得近期539最新開獎資料...\n正在套用抓牌板路與趨勢分析...";
+          "✨ 分析中...";
 
 
         try {
@@ -534,7 +2094,9 @@
             await fetch(
               WORKER_URL,
               {
-                method: "POST",
+
+                method:
+                  "POST",
 
                 headers: {
                   "Content-Type":
@@ -554,15 +2116,31 @@
                         : "5顆"
 
                   })
+
               }
             );
 
 
-          const data =
-            await response.json();
+          let data;
 
 
-          if (!response.ok) {
+          try {
+
+            data =
+              await response.json();
+
+          } catch {
+
+            throw new Error(
+              "伺服器回傳格式錯誤"
+            );
+
+          }
+
+
+          if (
+            !response.ok
+          ) {
 
             throw new Error(
               data?.error ||
@@ -572,18 +2150,15 @@
           }
 
 
-          if (!data.result) {
+          if (
+            !data.result
+          ) {
 
             throw new Error(
               "沒有取得分析結果"
             );
 
           }
-
-
-          result.classList.remove(
-            "loading"
-          );
 
 
           const latestDate =
@@ -602,77 +2177,98 @@
             );
 
 
-          let analysisText =
-            data.result;
+          const analysisHtml =
+            renderAnalysis(
+              data.result,
+              targetDate
+            );
 
 
-          if (
-            analysisText.startsWith("【")
-          ) {
-
-            analysisText =
-              targetDate +
-              analysisText;
-
-          } else {
-
-            analysisText =
-              targetDate +
-              "\n" +
-              analysisText;
-
-          }
+          result.classList.remove(
+            "empty"
+          );
 
 
           result.innerHTML =
             '<div class="data-info">' +
 
               '<div class="data-row">' +
-                '📅 資料基準：<strong>' +
-                escapeHtml(latestDate) +
+
+                '📅 資料基準：' +
+
+                '<strong>' +
+                  escapeHtml(
+                    latestDate
+                  ) +
                 '</strong>' +
+
               '</div>' +
 
-              '<div class="data-row">' +
-                '🎱 最新開獎：<strong>' +
-                escapeHtml(latestNumbers) +
-                '</strong>' +
-              '</div>' +
 
               '<div class="data-row">' +
-                '🎯 分析目標：<strong>下一期</strong>' +
+
+                '🎱 最新開獎：' +
+
+                '<strong>' +
+                  escapeHtml(
+                    latestNumbers
+                  ) +
+                '</strong>' +
+
+              '</div>' +
+
+
+              '<div class="data-row">' +
+
+                '🎯 分析目標：' +
+
+                '<strong>' +
+                  '下一期' +
+                '</strong>' +
+
               '</div>' +
 
             '</div>' +
 
-            '<div class="analysis-output">' +
-              escapeHtml(analysisText) +
-            '</div>';
+            analysisHtml;
 
 
-        } catch (error) {
+        } catch (
+          error
+        ) {
+
+          console.error(
+            error
+          );
+
 
           result.classList.remove(
-            "loading"
-          );
-
-          result.classList.add(
-            "error"
+            "empty"
           );
 
 
-          result.textContent =
-            "分析發生錯誤\n\n" +
-            error.message +
-            "\n\n請稍後再試一次。";
+          result.innerHTML =
+            '<div class="error-box">' +
+
+            '分析發生錯誤\n\n' +
+
+            escapeHtml(
+              error.message
+            ) +
+
+            '\n\n請稍後再試一次。' +
+
+            '</div>';
 
 
         } finally {
 
-          analyzeBtn.disabled = false;
+          analyzeBtn.disabled =
+            false;
+
 
           analyzeBtn.textContent =
-            "開始分析";
+            "✨ 開始分析";
 
         }
 
