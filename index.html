@@ -3,2237 +3,1372 @@
 
 <head>
 
-  <meta charset="UTF-8">
+<meta charset="UTF-8">
+
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+>
+
+<title>芯瑤💕539趨勢分析</title>
+
+<link
+  rel="icon"
+  href="./favicon-64.png"
+>
 
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0, viewport-fit=cover"
-  >
+<link
+  rel="apple-touch-icon"
+  href="./icon-192(1).png"
+>
 
-  <title>
-    芯瑤💕539趨勢分析
-  </title>
+<meta
+  name="theme-color"
+  content="#FFF1CE"
+>
 
-  <link
-    rel="icon"
-    href="./favicon-64.png"
-  >
 
-  <link
-    rel="apple-touch-icon"
-    href="./icon-192(1).png"
-  >
+<style>
 
-  <meta
-    name="theme-color"
-    content="#FFF1CE"
-  >
+:root {
+  --orange:#F49A32;
+  --orange-dark:#DF761A;
+  --gold:#FFC84F;
+  --cream:#FFF7E2;
+  --brown:#533B2A;
+  --soft:#8D6A4E;
+}
 
+* {
+  box-sizing:border-box;
+}
 
-  <style>
+html,
+body {
+  margin:0;
+  padding:0;
+  min-height:100%;
+}
 
-    :root {
+body {
 
-      --orange:
-        #F59A32;
+  min-height:100vh;
 
-      --orange-dark:
-        #DF771C;
+  overflow-x:hidden;
 
-      --gold:
-        #FFC84F;
+  font-family:
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    "Noto Sans TC",
+    sans-serif;
 
-      --yellow:
-        #FFE59A;
+  color:var(--brown);
 
-      --cream:
-        #FFF8E7;
+  background:
+    radial-gradient(
+      circle at 15% 10%,
+      rgba(255,210,91,.42),
+      transparent 28%
+    ),
+    radial-gradient(
+      circle at 90% 35%,
+      rgba(246,155,49,.20),
+      transparent 30%
+    ),
+    linear-gradient(
+      180deg,
+      #FFF8E7,
+      #FFEDC9 52%,
+      #FFF8EA
+    );
+}
 
-      --cream2:
-        #FFF1CF;
+button,
+input,
+select {
+  font-family:inherit;
+}
 
-      --brown:
-        #543B29;
+.hidden {
+  display:none !important;
+}
 
-      --soft-brown:
-        #87694F;
 
-      --white:
-        #FFFFFF;
+/* =============================
+   背景動畫
+============================= */
 
-    }
+.bg-effects {
 
+  position:fixed;
 
-    * {
-      box-sizing:
-        border-box;
-    }
+  inset:0;
 
+  overflow:hidden;
 
-    html,
-    body {
+  pointer-events:none;
 
-      margin: 0;
+  z-index:0;
+}
 
-      padding: 0;
+.orb {
 
-      min-height:
-        100%;
+  position:absolute;
 
-    }
+  border-radius:50%;
 
+  filter:blur(10px);
 
-    body {
+  animation:
+    floatOrb 8s
+    ease-in-out
+    infinite alternate;
+}
 
-      min-height:
-        100vh;
+.orb.one {
 
-      overflow-x:
-        hidden;
+  width:220px;
+  height:220px;
 
-      font-family:
-        -apple-system,
-        BlinkMacSystemFont,
-        "Segoe UI",
-        "Noto Sans TC",
-        sans-serif;
+  top:-80px;
+  left:-70px;
 
-      color:
-        var(--brown);
+  background:
+    rgba(255,199,67,.35);
+}
 
-      background:
-        radial-gradient(
-          circle at 15% 10%,
-          rgba(
-            255,
-            209,
-            93,
-            0.45
-          ),
-          transparent 27%
-        ),
+.orb.two {
 
-        radial-gradient(
-          circle at 90% 30%,
-          rgba(
-            245,
-            154,
-            50,
-            0.20
-          ),
-          transparent 30%
-        ),
+  width:270px;
+  height:270px;
 
-        linear-gradient(
-          180deg,
-          #FFF7E4,
-          #FFEDC8 50%,
-          #FFF9EB
-        );
+  right:-120px;
+  top:45%;
 
-    }
+  background:
+    rgba(241,139,37,.17);
 
+  animation-delay:1.5s;
+}
 
-    button,
-    input,
-    select {
+@keyframes floatOrb {
 
-      font-family:
-        inherit;
+  to {
+    transform:
+      translate(30px,35px);
+  }
 
-    }
+}
 
+.spark {
 
-    .hidden {
+  position:absolute;
 
-      display:
-        none !important;
+  width:6px;
+  height:6px;
 
-    }
+  border-radius:50%;
 
+  background:#FFD367;
 
-    /* ====================================
-       背景動畫
-    ==================================== */
+  box-shadow:
+    0 0 13px
+    rgba(255,183,36,.55);
 
-    .background-effects {
+  animation:
+    sparkMove 5s
+    ease-in-out
+    infinite;
+}
 
-      position:
-        fixed;
+.spark.s1 {
+  left:8%;
+  top:20%;
+}
 
-      inset: 0;
+.spark.s2 {
+  right:10%;
+  top:15%;
+  animation-delay:1s;
+}
 
-      z-index: 0;
+.spark.s3 {
+  left:15%;
+  top:72%;
+  animation-delay:2s;
+}
 
-      pointer-events:
-        none;
+.spark.s4 {
+  right:13%;
+  top:70%;
+  animation-delay:3s;
+}
 
-      overflow:
-        hidden;
+@keyframes sparkMove {
 
-    }
+  50% {
 
+    opacity:1;
 
-    .bg-orb {
+    transform:
+      translateY(-18px)
+      scale(1.3);
+  }
 
-      position:
-        absolute;
+}
 
-      border-radius:
-        50%;
 
-      filter:
-        blur(10px);
+/* =============================
+   登入
+============================= */
 
-      opacity:
-        0.55;
+#loginView {
 
-    }
+  position:relative;
 
+  z-index:2;
 
-    .orb1 {
+  width:min(92%,430px);
 
-      width:
-        230px;
+  min-height:100vh;
 
-      height:
-        230px;
+  margin:auto;
 
-      left:
-        -90px;
+  display:flex;
 
-      top:
-        -50px;
+  justify-content:center;
 
-      background:
-        rgba(
-          255,
-          201,
-          72,
-          0.38
-        );
+  align-items:center;
 
-      animation:
-        orbFloat1
-        8s
-        ease-in-out
-        infinite alternate;
+  padding:35px 0;
+}
 
-    }
+.login-wrap {
 
+  width:100%;
 
-    .orb2 {
+  text-align:center;
 
-      width:
-        280px;
+  animation:
+    loginIn .7s
+    ease both;
+}
 
-      height:
-        280px;
+@keyframes loginIn {
 
-      right:
-        -130px;
+  from {
+    opacity:0;
 
-      top:
-        45%;
+    transform:
+      translateY(25px)
+      scale(.96);
+  }
 
-      background:
-        rgba(
-          241,
-          145,
-          45,
-          0.19
-        );
+  to {
+    opacity:1;
 
-      animation:
-        orbFloat2
-        10s
-        ease-in-out
-        infinite alternate;
+    transform:
+      translateY(0)
+      scale(1);
+  }
 
-    }
+}
 
+.login-logo-area {
 
-    @keyframes orbFloat1 {
+  position:relative;
 
-      to {
+  width:145px;
+  height:145px;
 
-        transform:
-          translate(
-            35px,
-            45px
-          );
+  margin:
+    0 auto 6px;
 
-      }
+  display:flex;
 
-    }
+  align-items:center;
 
+  justify-content:center;
+}
 
-    @keyframes orbFloat2 {
+.login-logo-glow {
 
-      to {
+  position:absolute;
 
-        transform:
-          translate(
-            -40px,
-            30px
-          );
+  width:125px;
+  height:125px;
 
-      }
+  border-radius:36px;
 
-    }
+  background:
+    linear-gradient(
+      135deg,
+      #FFE28A,
+      rgba(244,153,45,.30)
+    );
 
+  filter:blur(8px);
 
-    .spark {
+  animation:
+    pulse 2.5s
+    infinite;
+}
 
-      position:
-        absolute;
+@keyframes pulse {
 
-      width:
-        6px;
+  50% {
+    transform:scale(1.1);
+  }
 
-      height:
-        6px;
+}
 
-      border-radius:
-        50%;
+.login-logo {
 
-      background:
-        #FFD064;
+  position:relative;
 
-      box-shadow:
-        0 0 15px
-        rgba(
-          255,
-          187,
-          43,
-          0.65
-        );
+  z-index:3;
 
-      animation:
-        sparkFloat
-        5s
-        ease-in-out
-        infinite;
+  width:104px;
+  height:104px;
 
-    }
+  object-fit:cover;
 
+  border-radius:28px;
 
-    .spark:nth-child(3) {
+  border:3px solid white;
 
-      left: 8%;
-      top: 22%;
+  box-shadow:
+    0 14px 35px
+    rgba(173,97,24,.20);
 
-    }
+  animation:
+    logoFloat 3.2s
+    ease-in-out
+    infinite;
+}
 
+@keyframes logoFloat {
 
-    .spark:nth-child(4) {
+  50% {
+    transform:
+      translateY(-8px);
+  }
 
-      right: 12%;
-      top: 15%;
+}
 
-      animation-delay:
-        1s;
+.orbit-ball {
 
-    }
+  position:absolute;
 
+  width:34px;
+  height:34px;
 
-    .spark:nth-child(5) {
+  border-radius:50%;
 
-      left: 18%;
-      top: 75%;
+  display:flex;
 
-      animation-delay:
-        2s;
+  align-items:center;
 
-    }
+  justify-content:center;
 
+  color:white;
 
-    .spark:nth-child(6) {
+  font-size:12px;
 
-      right: 10%;
-      top: 70%;
+  font-weight:900;
 
-      animation-delay:
-        3s;
+  background:
+    radial-gradient(
+      circle at 30% 25%,
+      #FFE687,
+      #F7A535 45%,
+      #DE7419
+    );
 
-    }
+  border:2px solid white;
 
+  box-shadow:
+    0 6px 13px
+    rgba(195,92,13,.22);
 
-    .spark:nth-child(7) {
+  animation:
+    orbitFloat 3s
+    ease-in-out
+    infinite;
+}
 
-      left: 52%;
-      top: 8%;
+.orbit-ball.a {
+  left:0;
+  top:25px;
+}
 
-      animation-delay:
-        4s;
+.orbit-ball.b {
+  right:0;
+  top:12px;
+  animation-delay:.7s;
+}
 
-    }
+.orbit-ball.c {
+  right:8px;
+  bottom:8px;
+  animation-delay:1.3s;
+}
 
+@keyframes orbitFloat {
 
-    @keyframes sparkFloat {
+  50% {
+    transform:
+      translateY(-8px)
+      rotate(10deg);
+  }
 
-      0%,
-      100% {
+}
 
-        transform:
-          translateY(0)
-          scale(0.7);
+.login-title {
 
-        opacity:
-          0.3;
+  font-size:25px;
 
-      }
+  font-weight:900;
 
+  margin-top:4px;
+}
 
-      50% {
+.login-title span {
+  color:#E98320;
+}
 
-        transform:
-          translateY(-18px)
-          scale(1.3);
+.login-sub {
 
-        opacity:
-          1;
+  margin:
+    6px 0 22px;
 
-      }
+  font-size:13px;
 
-    }
+  color:#977357;
+}
 
+.login-card {
 
-    /* ====================================
-       LOGIN
-    ==================================== */
+  padding:24px 22px;
 
-    #loginView {
+  border-radius:27px;
 
-      position:
-        relative;
+  background:
+    rgba(255,255,255,.91);
 
-      z-index: 2;
+  border:
+    1px solid
+    rgba(255,202,106,.55);
 
-      width:
-        min(
-          92%,
-          430px
-        );
+  box-shadow:
+    0 18px 45px
+    rgba(157,91,25,.13);
+}
 
-      min-height:
-        100vh;
+.login-card-title {
 
-      margin:
-        auto;
+  text-align:left;
 
-      display:
-        flex;
+  margin-bottom:17px;
 
-      align-items:
-        center;
+  font-size:17px;
 
-      justify-content:
-        center;
+  font-weight:900;
+}
 
-      padding:
-        35px 0;
+.login-label {
 
-    }
+  display:block;
 
+  text-align:left;
 
-    .login-wrap {
+  margin-bottom:8px;
 
-      width:
-        100%;
+  font-size:13px;
 
-      text-align:
-        center;
+  font-weight:800;
 
-      animation:
-        loginEnter
-        0.8s
-        cubic-bezier(
-          .2,
-          .9,
-          .3,
-          1
-        )
-        both;
+  color:#76563E;
+}
 
-    }
+.input-wrap {
+  position:relative;
+}
 
+#memberAccount {
 
-    @keyframes loginEnter {
+  width:100%;
 
-      from {
+  height:55px;
 
-        opacity:
-          0;
+  padding:
+    0 45px 0 16px;
 
-        transform:
-          translateY(25px)
-          scale(0.96);
+  border:
+    1px solid #EDD3A7;
 
-      }
+  border-radius:16px;
 
+  outline:none;
 
-      to {
+  background:#FFFEFA;
 
-        opacity:
-          1;
+  font-size:16px;
+}
 
-        transform:
-          translateY(0)
-          scale(1);
+#memberAccount:focus {
 
-      }
+  border-color:#F3A349;
 
-    }
+  box-shadow:
+    0 0 0 4px
+    rgba(243,163,73,.12);
+}
 
+.input-icon {
 
-    .login-logo-area {
+  position:absolute;
 
-      position:
-        relative;
+  right:15px;
+  top:50%;
 
-      display:
-        inline-flex;
+  transform:
+    translateY(-50%);
+}
 
-      align-items:
-        center;
+.shine-btn {
 
-      justify-content:
-        center;
+  position:relative;
 
-      width:
-        140px;
+  overflow:hidden;
 
-      height:
-        140px;
+  border:0;
 
-      margin-bottom:
-        8px;
+  color:white;
 
-    }
+  font-weight:900;
 
+  background:
+    linear-gradient(
+      110deg,
+      #E67919,
+      #F6A139,
+      #FFCA58
+    );
 
-    .login-logo-glow {
+  box-shadow:
+    0 10px 25px
+    rgba(213,111,20,.27);
 
-      position:
-        absolute;
+  cursor:pointer;
+}
 
-      width:
-        125px;
+.shine-btn::after {
 
-      height:
-        125px;
+  content:"";
 
-      border-radius:
-        38px;
+  position:absolute;
 
-      background:
-        linear-gradient(
-          135deg,
-          rgba(
-            255,
-            221,
-            116,
-            .8
-          ),
-          rgba(
-            244,
-            150,
-            45,
-            .25
-          )
-        );
+  top:-50%;
+  left:-60%;
 
-      filter:
-        blur(9px);
+  width:35%;
+  height:200%;
 
-      animation:
-        pulseGlow
-        2.5s
-        ease-in-out
-        infinite;
+  transform:
+    rotate(20deg);
 
-    }
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(255,255,255,.7),
+      transparent
+    );
 
+  animation:
+    shine 3s
+    infinite;
+}
 
-    .login-logo {
+@keyframes shine {
 
-      position:
-        relative;
+  60%,
+  100% {
+    left:130%;
+  }
 
-      z-index:
-        3;
+}
 
-      width:
-        104px;
+#loginBtn {
 
-      height:
-        104px;
+  width:100%;
+  height:55px;
 
-      object-fit:
-        cover;
+  margin-top:16px;
 
-      border-radius:
-        28px;
+  border-radius:17px;
 
-      border:
-        3px solid
-        white;
+  font-size:16px;
+}
 
-      box-shadow:
-        0 15px 35px
-        rgba(
-          171,
-          96,
-          25,
-          .22
-        );
+.login-message {
 
-      animation:
-        logoFloat
-        3.2s
-        ease-in-out
-        infinite;
+  min-height:23px;
 
-    }
+  padding-top:11px;
 
+  font-size:13px;
 
-    @keyframes logoFloat {
+  color:#B55435;
+}
 
-      0%,
-      100% {
+.login-message.success {
+  color:#B8751E;
+}
 
-        transform:
-          translateY(0);
 
-      }
+/* =============================
+   APP
+============================= */
 
+#appView {
 
-      50% {
+  position:relative;
 
-        transform:
-          translateY(-8px);
+  z-index:2;
 
-      }
+  width:min(92%,520px);
 
-    }
+  margin:auto;
 
+  padding:
+    26px 0 60px;
 
-    @keyframes pulseGlow {
+  animation:
+    appIn .55s
+    ease both;
+}
 
-      0%,
-      100% {
+@keyframes appIn {
 
-        transform:
-          scale(.94);
+  from {
+    opacity:0;
 
-        opacity:
-          .45;
+    transform:
+      translateY(15px);
+  }
 
-      }
+}
 
+.topbar {
 
-      50% {
+  display:flex;
 
-        transform:
-          scale(1.08);
+  align-items:center;
 
-        opacity:
-          .9;
+  justify-content:flex-end;
 
-      }
+  flex-wrap:wrap;
 
-    }
+  gap:7px;
 
+  margin-bottom:12px;
+}
 
-    /* 漂浮539球 */
+.member-chip,
+.top-btn {
 
-    .orbit-ball {
+  padding:
+    7px 11px;
 
-      position:
-        absolute;
+  border-radius:999px;
 
-      display:
-        flex;
+  border:0;
 
-      align-items:
-        center;
+  font-size:11px;
+}
 
-      justify-content:
-        center;
+.member-chip {
 
-      width:
-        34px;
+  background:
+    rgba(255,255,255,.82);
 
-      height:
-        34px;
+  color:#805E43;
+}
 
-      border-radius:
-        50%;
+.top-btn {
 
-      color:
-        white;
+  background:#FFE6B3;
 
-      font-size:
-        12px;
+  color:#A85E1F;
 
-      font-weight:
-        900;
+  font-weight:800;
 
-      background:
-        radial-gradient(
-          circle at 30% 25%,
-          #FFE386,
-          #F6A131 45%,
-          #DF7317
-        );
+  cursor:pointer;
+}
 
-      border:
-        2px solid
-        rgba(
-          255,
-          255,
-          255,
-          .85
-        );
+.header {
 
-      box-shadow:
-        0 6px 13px
-        rgba(
-          204,
-          104,
-          19,
-          .22
-        );
+  text-align:center;
 
-    }
+  margin-bottom:25px;
+}
 
+.app-logo {
 
-    .orbit-a {
+  width:95px;
+  height:95px;
 
-      left:
-        0;
+  object-fit:cover;
 
-      top:
-        26px;
+  border-radius:25px;
 
-      animation:
-        floatBallA
-        3.5s
-        ease-in-out
-        infinite;
+  border:3px solid white;
 
-    }
+  box-shadow:
+    0 12px 30px
+    rgba(172,95,24,.18);
 
+  animation:
+    logoFloat 3.4s
+    infinite;
+}
 
-    .orbit-b {
+h1 {
 
-      right:
-        0;
+  margin:
+    10px 0 0;
 
-      top:
-        15px;
+  font-size:24px;
 
-      animation:
-        floatBallB
-        4s
-        ease-in-out
-        infinite;
+  font-weight:900;
+}
 
-    }
+.highlight {
+  color:#E98421;
+}
 
+.sub {
 
-    .orbit-c {
+  margin-top:8px;
 
-      right:
-        10px;
+  color:#947256;
 
-      bottom:
-        9px;
+  font-size:13px;
+}
 
-      animation:
-        floatBallA
-        3.8s
-        ease-in-out
-        infinite reverse;
+.card {
 
-    }
+  padding:21px;
 
+  margin-bottom:17px;
 
-    @keyframes floatBallA {
+  border-radius:24px;
 
-      50% {
+  border:
+    1px solid
+    rgba(255,201,106,.5);
 
-        transform:
-          translate(
-            7px,
-            -8px
-          )
-          rotate(10deg);
+  background:
+    rgba(255,255,255,.91);
 
-      }
+  box-shadow:
+    0 13px 35px
+    rgba(155,89,23,.10);
+}
 
-    }
+.card label {
 
+  display:block;
 
-    @keyframes floatBallB {
+  margin-bottom:8px;
 
-      50% {
+  font-size:14px;
 
-        transform:
-          translate(
-            -8px,
-            8px
-          )
-          rotate(-12deg);
+  font-weight:900;
+}
 
-      }
+select {
 
-    }
+  width:100%;
 
+  height:52px;
 
-    .login-title {
+  padding:
+    0 14px;
 
-      margin:
-        4px 0 6px;
+  border:
+    1px solid #EFD5A8;
 
-      font-size:
-        25px;
+  border-radius:15px;
 
-      font-weight:
-        900;
+  outline:none;
 
-      color:
-        #4C3627;
+  background:white;
 
-    }
+  font-size:16px;
+}
 
+#missArea {
+  margin-top:17px;
+}
 
-    .login-title span {
+#analyzeBtn {
 
-      color:
-        #EA8722;
+  width:100%;
 
-    }
+  height:55px;
 
+  margin-top:19px;
 
-    .login-sub {
+  border-radius:17px;
 
-      margin-bottom:
-        23px;
+  font-size:17px;
+}
 
-      color:
-        #967457;
+.result-title {
 
-      font-size:
-        13px;
+  margin-bottom:13px;
 
-    }
+  font-size:17px;
 
+  font-weight:900;
+}
 
-    .login-card {
+.result {
 
-      position:
-        relative;
+  padding:16px;
 
-      overflow:
-        hidden;
+  border-radius:18px;
 
-      padding:
-        25px 22px;
+  border:
+    1px solid
+    rgba(244,160,48,.22);
 
-      border-radius:
-        27px;
+  background:
+    linear-gradient(
+      145deg,
+      #FFFEFA,
+      #FFF6DF
+    );
 
-      background:
-        rgba(
-          255,
-          255,
-          255,
-          .91
-        );
+  line-height:1.7;
+}
 
-      border:
-        1px solid
-        rgba(
-          255,
-          203,
-          110,
-          .55
-        );
+.result.empty {
 
-      box-shadow:
-        0 18px 45px
-        rgba(
-          161,
-          99,
-          30,
-          .13
-        );
+  padding:
+    23px 15px;
 
-      backdrop-filter:
-        blur(15px);
+  text-align:center;
 
-      -webkit-backdrop-filter:
-        blur(15px);
+  color:#987960;
 
-    }
+  font-size:13px;
+}
 
+.data-info {
 
-    .login-card::before {
+  margin-bottom:16px;
 
-      content:
-        "";
+  padding:
+    11px 13px;
 
-      position:
-        absolute;
+  border-radius:14px;
 
-      width:
-        170px;
+  background:
+    linear-gradient(
+      135deg,
+      #FFF0C8,
+      #FFF8E7
+    );
 
-      height:
-        170px;
+  font-size:14px;
+}
 
-      right:
-        -90px;
+.data-row {
+  margin-bottom:4px;
+}
 
-      top:
-        -100px;
+.analysis-title {
 
-      border-radius:
-        50%;
+  margin-bottom:12px;
 
-      background:
-        rgba(
-          255,
-          207,
-          92,
-          .20
-        );
+  font-size:17px;
 
-    }
+  font-weight:900;
+}
 
+.analysis-line {
+  margin-top:14px;
+}
 
-    .login-card-title {
+.analysis-label {
 
-      position:
-        relative;
+  margin-bottom:7px;
 
-      margin-bottom:
-        18px;
+  color:#805E46;
 
-      text-align:
-        left;
+  font-size:13px;
 
-      font-size:
-        17px;
+  font-weight:800;
+}
 
-      font-weight:
-        900;
+.number-balls {
 
-      color:
-        #58402F;
+  display:flex;
 
-    }
+  flex-wrap:wrap;
 
+  gap:8px;
+}
 
-    .login-label {
+.number-ball {
 
-      position:
-        relative;
+  width:47px;
+  height:47px;
 
-      display:
-        block;
+  border-radius:50%;
 
-      margin-bottom:
-        8px;
+  display:inline-flex;
 
-      text-align:
-        left;
+  align-items:center;
 
-      color:
-        #75573F;
+  justify-content:center;
 
-      font-size:
-        13px;
+  color:white;
 
-      font-weight:
-        800;
+  font-size:17px;
 
-    }
+  font-weight:900;
 
+  border:2px solid white;
 
-    .login-input-wrap {
+  background:
+    radial-gradient(
+      circle at 30% 25%,
+      #FFDF78,
+      #F7AA35 40%,
+      #E67819 80%
+    );
 
-      position:
-        relative;
+  box-shadow:
+    0 7px 15px
+    rgba(202,96,13,.22);
 
-    }
+  opacity:0;
 
+  transform:
+    translateY(13px)
+    scale(.65);
 
-    #memberAccount {
+  animation:
+    ballPop .45s
+    cubic-bezier(.22,1.35,.5,1)
+    forwards;
+}
 
-      position:
-        relative;
+.number-ball.small {
 
-      width:
-        100%;
+  width:39px;
+  height:39px;
 
-      height:
-        55px;
+  color:#65451F;
 
-      padding:
-        0 47px 0 16px;
+  font-size:14px;
 
-      outline:
-        none;
+  background:
+    radial-gradient(
+      circle at 30% 25%,
+      #FFF0A7,
+      #FFCA58,
+      #EE9E36
+    );
+}
 
-      border:
-        1px solid
-        #EDD3A6;
+@keyframes ballPop {
 
-      border-radius:
-        16px;
+  70% {
 
-      background:
-        #FFFEFA;
+    opacity:1;
 
-      color:
-        #503A2B;
+    transform:
+      translateY(-4px)
+      scale(1.08);
+  }
 
-      font-size:
-        16px;
+  100% {
 
-      transition:
-        .2s;
+    opacity:1;
 
-    }
+    transform:
+      translateY(0)
+      scale(1);
+  }
 
+}
 
-    #memberAccount:focus {
+.text-pill {
 
-      border-color:
-        #F3A348;
+  display:inline-flex;
 
-      box-shadow:
-        0 0 0 4px
-        rgba(
-          243,
-          163,
-          72,
-          .12
-        );
+  padding:
+    7px 12px;
 
-    }
+  border-radius:999px;
 
+  background:#FFF0C8;
 
-    .input-icon {
+  color:#CE6E17;
 
-      position:
-        absolute;
+  font-weight:900;
+}
 
-      right:
-        16px;
+.loading-wrap {
+  text-align:center;
+}
 
-      top:
-        50%;
+.loading-balls {
 
-      transform:
-        translateY(-50%);
+  display:flex;
 
-      font-size:
-        18px;
+  justify-content:center;
 
-    }
+  gap:7px;
+}
 
+.loading-ball {
 
-    #loginBtn {
+  width:15px;
+  height:15px;
 
-      position:
-        relative;
+  border-radius:50%;
 
-      width:
-        100%;
+  background:
+    linear-gradient(
+      135deg,
+      #FFC755,
+      #E98221
+    );
 
-      height:
-        55px;
+  animation:
+    loading .9s
+    infinite;
+}
 
-      margin-top:
-        16px;
+.loading-ball:nth-child(2) {
+  animation-delay:.1s;
+}
 
-      overflow:
-        hidden;
+.loading-ball:nth-child(3) {
+  animation-delay:.2s;
+}
 
-      border:
-        none;
+.loading-ball:nth-child(4) {
+  animation-delay:.3s;
+}
 
-      border-radius:
-        17px;
+.loading-ball:nth-child(5) {
+  animation-delay:.4s;
+}
 
-      color:
-        white;
+@keyframes loading {
 
-      font-size:
-        16px;
+  50% {
+    transform:
+      translateY(-9px);
+  }
 
-      font-weight:
-        900;
+}
 
-      background:
-        linear-gradient(
-          110deg,
-          #E77C1C,
-          #F5A038,
-          #FFC754
-        );
+.loading-text {
 
-      box-shadow:
-        0 11px 25px
-        rgba(
-          220,
-          117,
-          23,
-          .27
-        );
+  margin-top:10px;
 
-      cursor:
-        pointer;
+  color:#967153;
 
-    }
+  font-size:13px;
+}
 
+.error-box {
 
-    #loginBtn::after {
+  color:#B65336;
 
-      content:
-        "";
+  white-space:pre-line;
 
-      position:
-        absolute;
+  font-size:13px;
+}
 
-      width:
-        35%;
+.footer {
 
-      height:
-        200%;
+  margin-top:25px;
 
-      left:
-        -60%;
+  text-align:center;
 
-      top:
-        -50%;
+  color:#A88666;
 
-      transform:
-        rotate(20deg);
+  font-size:11px;
+}
 
-      background:
-        linear-gradient(
-          90deg,
-          transparent,
-          rgba(
-            255,
-            255,
-            255,
-            .7
-          ),
-          transparent
-        );
 
-      animation:
-        shine
-        2.8s
-        ease-in-out
-        infinite;
+/* =============================
+   分析紀錄
+============================= */
 
-    }
+.history-modal {
 
+  position:fixed;
 
-    @keyframes shine {
+  inset:0;
 
-      60%,
-      100% {
+  z-index:50;
 
-        left:
-          130%;
+  display:flex;
 
-      }
+  align-items:flex-end;
 
-    }
+  justify-content:center;
 
+  padding:18px;
 
-    #loginBtn:active {
+  background:
+    rgba(61,42,26,.35);
 
-      transform:
-        scale(.985);
+  opacity:0;
 
-    }
+  visibility:hidden;
 
+  transition:
+    opacity .25s ease,
+    visibility .25s ease;
+}
 
-    #loginBtn:disabled {
+.history-modal.open {
 
-      opacity:
-        .65;
+  opacity:1;
 
-    }
+  visibility:visible;
+}
 
+.history-panel {
 
-    .login-message {
+  width:min(
+    100%,
+    520px
+  );
 
-      min-height:
-        24px;
+  max-height:82vh;
 
-      padding-top:
-        12px;
+  display:flex;
 
-      color:
-        #B65336;
+  flex-direction:column;
 
-      font-size:
-        13px;
+  border-radius:
+    27px 27px 20px 20px;
 
-    }
+  background:
+    linear-gradient(
+      180deg,
+      #FFFDF7,
+      #FFF4D9
+    );
 
+  border:
+    1px solid
+    rgba(255,196,88,.55);
 
-    .login-message.success {
+  box-shadow:
+    0 20px 55px
+    rgba(92,52,16,.24);
 
-      color:
-        #BA761E;
+  transform:
+    translateY(40px);
 
-    }
+  transition:
+    transform .3s
+    cubic-bezier(.2,.9,.3,1);
+}
 
+.history-modal.open
+.history-panel {
 
-    .login-success-animation {
+  transform:
+    translateY(0);
+}
 
-      animation:
-        loginLeave
-        .45s
-        ease
-        forwards;
+.history-head {
 
-    }
+  display:flex;
 
+  align-items:center;
 
-    @keyframes loginLeave {
+  justify-content:space-between;
 
-      to {
+  gap:8px;
 
-        opacity:
-          0;
+  padding:
+    18px 18px 13px;
 
-        transform:
-          translateY(-12px)
-          scale(.97);
+  border-bottom:
+    1px solid
+    #F4D9A9;
+}
 
-      }
+.history-title {
 
-    }
+  font-size:18px;
 
+  font-weight:900;
+}
 
-    /* ====================================
-       APP
-    ==================================== */
+.history-actions {
 
-    #appView {
+  display:flex;
 
-      position:
-        relative;
+  gap:7px;
+}
 
-      z-index:
-        2;
+.history-action {
 
-      width:
-        min(
-          92%,
-          520px
-        );
+  border:0;
 
-      margin:
-        auto;
+  padding:
+    7px 10px;
 
-      padding:
-        28px 0 60px;
+  border-radius:999px;
 
-      animation:
-        appEnter
-        .65s
-        ease
-        both;
+  background:#FFE6B3;
 
-    }
+  color:#9E591F;
 
+  font-size:11px;
 
-    @keyframes appEnter {
+  font-weight:800;
 
-      from {
+  cursor:pointer;
+}
 
-        opacity:
-          0;
+.history-list {
 
-        transform:
-          translateY(15px);
+  overflow-y:auto;
 
-      }
+  padding:
+    14px 16px 24px;
+}
 
+.history-empty {
 
-      to {
+  padding:
+    42px 12px;
 
-        opacity:
-          1;
+  text-align:center;
 
-        transform:
-          translateY(0);
+  color:#98785E;
 
-      }
+  font-size:13px;
+}
 
-    }
+.history-card {
 
+  padding:15px;
 
-    .top-member {
+  margin-bottom:11px;
 
-      display:
-        flex;
+  border-radius:18px;
 
-      justify-content:
-        flex-end;
+  background:white;
 
-      align-items:
-        center;
+  border:
+    1px solid
+    #F3D7A8;
 
-      gap:
-        8px;
+  box-shadow:
+    0 8px 20px
+    rgba(164,96,24,.07);
 
-      margin-bottom:
-        13px;
+  opacity:0;
 
-    }
+  transform:
+    translateY(10px);
 
+  animation:
+    historyIn .35s
+    ease forwards;
+}
 
-    .member-chip {
+@keyframes historyIn {
 
-      padding:
-        7px 11px;
+  to {
 
-      border-radius:
-        999px;
+    opacity:1;
 
-      background:
-        rgba(
-          255,
-          255,
-          255,
-          .78
-        );
+    transform:
+      translateY(0);
+  }
 
-      color:
-        #866146;
+}
 
-      font-size:
-        11px;
+.history-card-title {
 
-      box-shadow:
-        0 6px 16px
-        rgba(
-          170,
-          103,
-          30,
-          .08
-        );
+  margin-bottom:7px;
 
-    }
+  font-size:15px;
 
+  font-weight:900;
 
-    #logoutBtn {
+  color:#543A27;
+}
 
-      border:
-        0;
+.history-meta {
 
-      padding:
-        7px 11px;
+  margin-bottom:9px;
 
-      border-radius:
-        999px;
+  color:#977255;
 
-      background:
-        #FFE6B4;
+  font-size:11px;
 
-      color:
-        #B26721;
+  line-height:1.6;
+}
 
-      font-size:
-        11px;
+.history-result {
 
-      font-weight:
-        800;
+  padding:
+    10px 12px;
 
-      cursor:
-        pointer;
+  border-radius:13px;
 
-    }
+  background:#FFF7E6;
 
+  color:#644B38;
 
-    .header {
+  font-size:13px;
 
-      text-align:
-        center;
+  line-height:1.65;
 
-      margin-bottom:
-        25px;
+  white-space:pre-wrap;
+}
 
-    }
 
+@media(max-width:480px) {
 
-    .app-logo {
+  .card {
+    padding:19px;
+  }
 
-      width:
-        96px;
+  .number-ball {
+    width:44px;
+    height:44px;
+  }
 
-      height:
-        96px;
+  .history-modal {
+    padding:8px;
+  }
 
-      object-fit:
-        cover;
+}
 
-      border-radius:
-        25px;
-
-      border:
-        3px solid
-        white;
-
-      box-shadow:
-        0 12px 30px
-        rgba(
-          178,
-          101,
-          28,
-          .18
-        );
-
-      animation:
-        logoFloat
-        3.4s
-        ease-in-out
-        infinite;
-
-    }
-
-
-    h1 {
-
-      margin:
-        10px 0 0;
-
-      color:
-        #4D3828;
-
-      font-size:
-        24px;
-
-      font-weight:
-        900;
-
-    }
-
-
-    .highlight {
-
-      color:
-        #E98522;
-
-    }
-
-
-    .sub {
-
-      margin-top:
-        8px;
-
-      color:
-        #977557;
-
-      font-size:
-        13px;
-
-    }
-
-
-    .mini-stars {
-
-      margin-top:
-        8px;
-
-      color:
-        #EFAF3C;
-
-      letter-spacing:
-        8px;
-
-    }
-
-
-    .card {
-
-      position:
-        relative;
-
-      width:
-        100%;
-
-      padding:
-        21px;
-
-      margin-bottom:
-        17px;
-
-      overflow:
-        hidden;
-
-      border:
-        1px solid
-        rgba(
-          255,
-          202,
-          111,
-          .50
-        );
-
-      border-radius:
-        24px;
-
-      background:
-        rgba(
-          255,
-          255,
-          255,
-          .91
-        );
-
-      box-shadow:
-        0 13px 35px
-        rgba(
-          158,
-          94,
-          27,
-          .10
-        );
-
-      backdrop-filter:
-        blur(12px);
-
-    }
-
-
-    label {
-
-      display:
-        block;
-
-      margin-bottom:
-        8px;
-
-      color:
-        #5C4431;
-
-      font-size:
-        14px;
-
-      font-weight:
-        900;
-
-    }
-
-
-    select {
-
-      width:
-        100%;
-
-      height:
-        52px;
-
-      padding:
-        0 14px;
-
-      border:
-        1px solid
-        #EED5A9;
-
-      border-radius:
-        15px;
-
-      outline:
-        none;
-
-      background:
-        white;
-
-      color:
-        #594333;
-
-      font-size:
-        16px;
-
-    }
-
-
-    #missArea {
-
-      margin-top:
-        17px;
-
-    }
-
-
-    #analyzeBtn {
-
-      position:
-        relative;
-
-      width:
-        100%;
-
-      height:
-        55px;
-
-      margin-top:
-        19px;
-
-      overflow:
-        hidden;
-
-      border:
-        0;
-
-      border-radius:
-        17px;
-
-      color:
-        white;
-
-      font-size:
-        17px;
-
-      font-weight:
-        900;
-
-      background:
-        linear-gradient(
-          110deg,
-          #E87C1D,
-          #F5A13A,
-          #FFCA58
-        );
-
-      box-shadow:
-        0 10px 24px
-        rgba(
-          220,
-          119,
-          27,
-          .27
-        );
-
-      cursor:
-        pointer;
-
-    }
-
-
-    #analyzeBtn::after {
-
-      content:
-        "";
-
-      position:
-        absolute;
-
-      top:
-        -50%;
-
-      left:
-        -55%;
-
-      width:
-        35%;
-
-      height:
-        200%;
-
-      transform:
-        rotate(20deg);
-
-      background:
-        linear-gradient(
-          90deg,
-          transparent,
-          rgba(
-            255,
-            255,
-            255,
-            .7
-          ),
-          transparent
-        );
-
-      animation:
-        shine
-        3s
-        infinite;
-
-    }
-
-
-    .result-title {
-
-      display:
-        flex;
-
-      gap:
-        8px;
-
-      align-items:
-        center;
-
-      margin-bottom:
-        13px;
-
-      font-size:
-        17px;
-
-      font-weight:
-        900;
-
-    }
-
-
-    .result {
-
-      padding:
-        16px;
-
-      border-radius:
-        18px;
-
-      border:
-        1px solid
-        rgba(
-          245,
-          164,
-          54,
-          .22
-        );
-
-      background:
-        linear-gradient(
-          145deg,
-          #FFFEFA,
-          #FFF6DF
-        );
-
-      color:
-        #624B3A;
-
-      line-height:
-        1.7;
-
-    }
-
-
-    .result.empty {
-
-      padding:
-        23px 15px;
-
-      text-align:
-        center;
-
-      color:
-        #987A61;
-
-      font-size:
-        13px;
-
-    }
-
-
-    .data-info {
-
-      margin-bottom:
-        16px;
-
-      padding:
-        11px 13px;
-
-      border-radius:
-        14px;
-
-      background:
-        linear-gradient(
-          135deg,
-          #FFF0C9,
-          #FFF8E7
-        );
-
-      color:
-        #70543F;
-
-      font-size:
-        14px;
-
-      animation:
-        reveal
-        .4s
-        ease
-        both;
-
-    }
-
-
-    .data-row {
-
-      margin-bottom:
-        4px;
-
-    }
-
-
-    .data-row:last-child {
-
-      margin-bottom:
-        0;
-
-    }
-
-
-    .data-row strong {
-
-      color:
-        #4D392B;
-
-    }
-
-
-    .analysis-box {
-
-      animation:
-        reveal
-        .5s
-        ease
-        both;
-
-    }
-
-
-    @keyframes reveal {
-
-      from {
-
-        opacity:
-          0;
-
-        transform:
-          translateY(8px);
-
-      }
-
-
-      to {
-
-        opacity:
-          1;
-
-        transform:
-          translateY(0);
-
-      }
-
-    }
-
-
-    .analysis-title {
-
-      margin-bottom:
-        13px;
-
-      font-size:
-        17px;
-
-      font-weight:
-        900;
-
-      color:
-        #553B27;
-
-    }
-
-
-    .analysis-line {
-
-      margin-top:
-        14px;
-
-    }
-
-
-    .analysis-label {
-
-      margin-bottom:
-        7px;
-
-      color:
-        #846249;
-
-      font-size:
-        13px;
-
-      font-weight:
-        800;
-
-    }
-
-
-    .number-balls {
-
-      display:
-        flex;
-
-      flex-wrap:
-        wrap;
-
-      gap:
-        8px;
-
-    }
-
-
-    .number-ball {
-
-      display:
-        inline-flex;
-
-      align-items:
-        center;
-
-      justify-content:
-        center;
-
-      width:
-        48px;
-
-      height:
-        48px;
-
-      border-radius:
-        50%;
-
-      border:
-        2px solid
-        rgba(
-          255,
-          255,
-          255,
-          .9
-        );
-
-      color:
-        white;
-
-      font-size:
-        17px;
-
-      font-weight:
-        900;
-
-      background:
-        radial-gradient(
-          circle at 30% 25%,
-          #FFDE78,
-          #F7AA35 40%,
-          #E67819 80%
-        );
-
-      box-shadow:
-        0 7px 15px
-        rgba(
-          207,
-          100,
-          15,
-          .22
-        );
-
-      opacity:
-        0;
-
-      transform:
-        translateY(14px)
-        scale(.6);
-
-      animation:
-        ballPop
-        .48s
-        cubic-bezier(
-          .22,
-          1.35,
-          .5,
-          1
-        )
-        forwards;
-
-    }
-
-
-    .number-ball.small {
-
-      width:
-        40px;
-
-      height:
-        40px;
-
-      color:
-        #67451E;
-
-      font-size:
-        15px;
-
-      background:
-        radial-gradient(
-          circle at 30% 25%,
-          #FFF1AD,
-          #FFCB5D,
-          #EFA23A
-        );
-
-    }
-
-
-    @keyframes ballPop {
-
-      70% {
-
-        opacity:
-          1;
-
-        transform:
-          translateY(-4px)
-          scale(1.08);
-
-      }
-
-
-      100% {
-
-        opacity:
-          1;
-
-        transform:
-          translateY(0)
-          scale(1);
-
-      }
-
-    }
-
-
-    .text-pill {
-
-      display:
-        inline-flex;
-
-      padding:
-        8px 13px;
-
-      border-radius:
-        999px;
-
-      background:
-        #FFF0C8;
-
-      color:
-        #D27119;
-
-      font-weight:
-        900;
-
-    }
-
-
-    .loading-wrap {
-
-      text-align:
-        center;
-
-      padding:
-        8px 0;
-
-    }
-
-
-    .loading-balls {
-
-      display:
-        flex;
-
-      justify-content:
-        center;
-
-      gap:
-        7px;
-
-    }
-
-
-    .loading-ball {
-
-      width:
-        15px;
-
-      height:
-        15px;
-
-      border-radius:
-        50%;
-
-      background:
-        linear-gradient(
-          135deg,
-          #FFC755,
-          #E98221
-        );
-
-      animation:
-        loadingBounce
-        .9s
-        ease-in-out
-        infinite;
-
-    }
-
-
-    .loading-ball:nth-child(2) {
-
-      animation-delay:
-        .1s;
-
-    }
-
-
-    .loading-ball:nth-child(3) {
-
-      animation-delay:
-        .2s;
-
-    }
-
-
-    .loading-ball:nth-child(4) {
-
-      animation-delay:
-        .3s;
-
-    }
-
-
-    .loading-ball:nth-child(5) {
-
-      animation-delay:
-        .4s;
-
-    }
-
-
-    @keyframes loadingBounce {
-
-      50% {
-
-        transform:
-          translateY(-9px);
-
-      }
-
-    }
-
-
-    .loading-text {
-
-      margin-top:
-        10px;
-
-      color:
-        #997353;
-
-      font-size:
-        13px;
-
-    }
-
-
-    .error-box {
-
-      white-space:
-        pre-line;
-
-      color:
-        #B65336;
-
-      font-size:
-        13px;
-
-    }
-
-
-    .footer {
-
-      margin-top:
-        25px;
-
-      text-align:
-        center;
-
-      color:
-        #AA8768;
-
-      font-size:
-        11px;
-
-    }
-
-
-    @media (
-      max-width: 480px
-    ) {
-
-      .card {
-
-        padding:
-          19px;
-
-      }
-
-
-      .number-ball {
-
-        width:
-          45px;
-
-        height:
-          45px;
-
-      }
-
-
-      .number-ball.small {
-
-        width:
-          38px;
-
-        height:
-          38px;
-
-      }
-
-    }
-
-  </style>
+</style>
 
 </head>
 
@@ -2241,681 +1376,1237 @@
 <body>
 
 
-  <div class="background-effects">
+<div class="bg-effects">
 
-    <div class="bg-orb orb1"></div>
+  <div class="orb one"></div>
+  <div class="orb two"></div>
 
-    <div class="bg-orb orb2"></div>
+  <span class="spark s1"></span>
+  <span class="spark s2"></span>
+  <span class="spark s3"></span>
+  <span class="spark s4"></span>
 
-    <span class="spark"></span>
-    <span class="spark"></span>
-    <span class="spark"></span>
-    <span class="spark"></span>
-    <span class="spark"></span>
+</div>
+
+
+<!-- =============================
+     LOGIN
+============================= -->
+
+<section id="loginView">
+
+<div class="login-wrap">
+
+
+  <div class="login-logo-area">
+
+    <div class="login-logo-glow"></div>
+
+    <span class="orbit-ball a">
+      05
+    </span>
+
+    <span class="orbit-ball b">
+      18
+    </span>
+
+    <span class="orbit-ball c">
+      27
+    </span>
+
+    <img
+      src="./icon-192(1).png"
+      onerror="this.onerror=null;this.src='./icon-512(1).png';"
+      class="login-logo"
+    >
 
   </div>
 
 
-  <!-- =====================================
-       LOGIN VIEW
-  ====================================== -->
-
-  <section id="loginView">
-
-    <div
-      id="loginWrap"
-      class="login-wrap"
-    >
+  <div class="login-title">
+    芯瑤💕
+    <span>539</span>
+  </div>
 
 
-      <div class="login-logo-area">
-
-        <div
-          class="login-logo-glow"
-        ></div>
+  <div class="login-sub">
+    趨勢分析會員系統
+  </div>
 
 
-        <span
-          class="orbit-ball orbit-a"
-        >
-          05
-        </span>
+  <div class="login-card">
 
-
-        <span
-          class="orbit-ball orbit-b"
-        >
-          18
-        </span>
-
-
-        <span
-          class="orbit-ball orbit-c"
-        >
-          27
-        </span>
-
-
-        <img
-          src="./icon-192(1).png"
-          onerror="this.onerror=null;this.src='./icon-512(1).png';"
-          class="login-logo"
-        >
-
-      </div>
-
-
-      <div class="login-title">
-
-        芯瑤💕
-        <span>
-          539
-        </span>
-
-      </div>
-
-
-      <div class="login-sub">
-        趨勢分析會員系統
-      </div>
-
-
-      <div class="login-card">
-
-        <div class="login-card-title">
-          ✨ 會員登入
-        </div>
-
-
-        <form id="loginForm">
-
-          <label
-            class="login-label"
-            for="memberAccount"
-          >
-            會員帳號
-          </label>
-
-
-          <div
-            class="login-input-wrap"
-          >
-
-            <input
-              id="memberAccount"
-              type="text"
-              autocomplete="username"
-              placeholder="請輸入會員帳號"
-            >
-
-            <span class="input-icon">
-              👤
-            </span>
-
-          </div>
-
-
-          <button
-            id="loginBtn"
-            type="submit"
-          >
-            ✨ 登入分析系統
-          </button>
-
-
-          <div
-            id="loginMessage"
-            class="login-message"
-          ></div>
-
-        </form>
-
-      </div>
-
-    </div>
-
-  </section>
-
-
-  <!-- =====================================
-       APP VIEW
-  ====================================== -->
-
-  <main
-    id="appView"
-    class="hidden"
-  >
-
-
-    <div class="top-member">
-
-      <div
-        id="memberChip"
-        class="member-chip"
-      >
-        👤 會員
-      </div>
-
-
-      <button id="logoutBtn">
-        登出
-      </button>
-
+    <div class="login-card-title">
+      ✨ 會員登入
     </div>
 
 
-    <section class="header">
+    <form id="loginForm">
 
-      <img
-        src="./icon-192(1).png"
-        onerror="this.onerror=null;this.src='./icon-512(1).png';"
-        class="app-logo"
+      <label
+        class="login-label"
+        for="memberAccount"
       >
-
-
-      <h1>
-
-        芯瑤💕
-        <span class="highlight">
-          539趨勢分析
-        </span>
-
-      </h1>
-
-
-      <div class="sub">
-        依照個人抓牌板路與歷史趨勢進行系統化分析
-      </div>
-
-
-      <div class="mini-stars">
-        ✦ ✧ ✦
-      </div>
-
-    </section>
-
-
-    <section class="card">
-
-      <label for="playType">
-        選擇分析玩法
+        會員帳號
       </label>
 
 
-      <select id="playType">
+      <div class="input-wrap">
 
-        <option value="連碰234星">
-          連碰234星
-        </option>
+        <input
+          id="memberAccount"
+          type="text"
+          autocomplete="username"
+          placeholder="請輸入會員帳號"
+        >
 
-        <option value="全車">
-          全車
-        </option>
-
-        <option value="尾數">
-          尾數
-        </option>
-
-        <option value="多選不中">
-          多選不中
-        </option>
-
-      </select>
-
-
-      <div
-        id="missArea"
-        class="hidden"
-      >
-
-        <label for="missCount">
-          多選不中顆數
-        </label>
-
-
-        <select id="missCount">
-
-          <option value="5顆">5顆</option>
-          <option value="6顆">6顆</option>
-          <option value="7顆">7顆</option>
-          <option value="8顆">8顆</option>
-          <option value="9顆">9顆</option>
-          <option value="10顆">10顆</option>
-
-        </select>
+        <span class="input-icon">
+          👤
+        </span>
 
       </div>
 
 
-      <button id="analyzeBtn">
-        ✨ 開始分析
+      <button
+        id="loginBtn"
+        class="shine-btn"
+        type="submit"
+      >
+        ✨ 登入分析系統
       </button>
 
-    </section>
-
-
-    <section class="card">
-
-      <div class="result-title">
-        🎱 分析結果
-      </div>
-
 
       <div
-        id="result"
-        class="result empty"
-      >
-        選擇玩法後，點擊「開始分析」
-      </div>
+        id="loginMessage"
+        class="login-message"
+      ></div>
 
-    </section>
+    </form>
+
+  </div>
+
+</div>
+
+</section>
 
 
-    <div class="footer">
-      趨勢資料分析僅供參考
+<!-- =============================
+     APP
+============================= -->
+
+<main
+  id="appView"
+  class="hidden"
+>
+
+
+<div class="topbar">
+
+  <div
+    id="memberChip"
+    class="member-chip"
+  >
+    👤 會員
+  </div>
+
+
+  <button
+    id="historyBtn"
+    class="top-btn"
+  >
+    📜 分析紀錄
+  </button>
+
+
+  <button
+    id="logoutBtn"
+    class="top-btn"
+  >
+    登出
+  </button>
+
+</div>
+
+
+<section class="header">
+
+  <img
+    src="./icon-192(1).png"
+    onerror="this.onerror=null;this.src='./icon-512(1).png';"
+    class="app-logo"
+  >
+
+  <h1>
+    芯瑤💕
+    <span class="highlight">
+      539趨勢分析
+    </span>
+  </h1>
+
+  <div class="sub">
+    依照個人抓牌板路與歷史趨勢進行系統化分析
+  </div>
+
+</section>
+
+
+<section class="card">
+
+  <label for="playType">
+    選擇分析玩法
+  </label>
+
+
+  <select id="playType">
+
+    <option value="連碰234星">
+      連碰234星
+    </option>
+
+    <option value="全車">
+      全車
+    </option>
+
+    <option value="尾數">
+      尾數
+    </option>
+
+    <option value="多選不中">
+      多選不中
+    </option>
+
+  </select>
+
+
+  <div
+    id="missArea"
+    class="hidden"
+  >
+
+    <label for="missCount">
+      多選不中顆數
+    </label>
+
+    <select id="missCount">
+
+      <option value="5顆">5顆</option>
+      <option value="6顆">6顆</option>
+      <option value="7顆">7顆</option>
+      <option value="8顆">8顆</option>
+      <option value="9顆">9顆</option>
+      <option value="10顆">10顆</option>
+
+    </select>
+
+  </div>
+
+
+  <button
+    id="analyzeBtn"
+    class="shine-btn"
+  >
+    ✨ 開始分析
+  </button>
+
+</section>
+
+
+<section class="card">
+
+  <div class="result-title">
+    🎱 分析結果
+  </div>
+
+
+  <div
+    id="result"
+    class="result empty"
+  >
+    選擇玩法後，點擊「開始分析」
+  </div>
+
+</section>
+
+
+<div class="footer">
+  趨勢資料分析僅供參考
+</div>
+
+</main>
+
+
+<!-- =============================
+     HISTORY
+============================= -->
+
+<div
+  id="historyModal"
+  class="history-modal"
+>
+
+
+<div class="history-panel">
+
+
+  <div class="history-head">
+
+    <div class="history-title">
+      📜 我的分析紀錄
     </div>
 
-  </main>
+
+    <div class="history-actions">
+
+      <button
+        id="clearHistoryBtn"
+        class="history-action"
+      >
+        清除
+      </button>
+
+      <button
+        id="closeHistoryBtn"
+        class="history-action"
+      >
+        關閉
+      </button>
+
+    </div>
+
+  </div>
 
 
-  <script>
+  <div
+    id="historyList"
+    class="history-list"
+  >
 
-    const WORKER_URL =
-      "https://xinyao-539-api.love06130430.workers.dev/";
+    <div class="history-empty">
+      載入中...
+    </div>
 
-
-    const TOKEN_KEY =
-      "xinyao539_member_token";
-
-
-    const loginView =
-      document.getElementById(
-        "loginView"
-      );
+  </div>
 
 
-    const loginWrap =
-      document.getElementById(
-        "loginWrap"
-      );
+</div>
+
+</div>
 
 
-    const appView =
-      document.getElementById(
-        "appView"
-      );
+<script>
+
+const WORKER_URL =
+  "https://xinyao-539-api.love06130430.workers.dev/";
+
+const TOKEN_KEY =
+  "xinyao539_member_token";
 
 
-    const loginForm =
-      document.getElementById(
-        "loginForm"
-      );
+const loginView =
+  document.getElementById(
+    "loginView"
+  );
+
+const appView =
+  document.getElementById(
+    "appView"
+  );
+
+const loginForm =
+  document.getElementById(
+    "loginForm"
+  );
+
+const memberAccount =
+  document.getElementById(
+    "memberAccount"
+  );
+
+const loginBtn =
+  document.getElementById(
+    "loginBtn"
+  );
+
+const loginMessage =
+  document.getElementById(
+    "loginMessage"
+  );
+
+const memberChip =
+  document.getElementById(
+    "memberChip"
+  );
+
+const logoutBtn =
+  document.getElementById(
+    "logoutBtn"
+  );
+
+const historyBtn =
+  document.getElementById(
+    "historyBtn"
+  );
+
+const historyModal =
+  document.getElementById(
+    "historyModal"
+  );
+
+const historyList =
+  document.getElementById(
+    "historyList"
+  );
+
+const closeHistoryBtn =
+  document.getElementById(
+    "closeHistoryBtn"
+  );
+
+const clearHistoryBtn =
+  document.getElementById(
+    "clearHistoryBtn"
+  );
+
+const playType =
+  document.getElementById(
+    "playType"
+  );
+
+const missArea =
+  document.getElementById(
+    "missArea"
+  );
+
+const missCount =
+  document.getElementById(
+    "missCount"
+  );
+
+const analyzeBtn =
+  document.getElementById(
+    "analyzeBtn"
+  );
+
+const result =
+  document.getElementById(
+    "result"
+  );
 
 
-    const memberAccount =
-      document.getElementById(
-        "memberAccount"
-      );
+function getSavedToken() {
+
+  return localStorage.getItem(
+    TOKEN_KEY
+  ) || "";
+
+}
 
 
-    const loginBtn =
-      document.getElementById(
-        "loginBtn"
-      );
+function saveToken(token) {
+
+  localStorage.setItem(
+    TOKEN_KEY,
+    token
+  );
+
+}
 
 
-    const loginMessage =
-      document.getElementById(
-        "loginMessage"
-      );
+function clearToken() {
+
+  localStorage.removeItem(
+    TOKEN_KEY
+  );
+
+}
 
 
-    const memberChip =
-      document.getElementById(
-        "memberChip"
-      );
+async function callAPI(
+  payload,
+  requireAuth = false
+) {
+
+  const headers = {
+    "Content-Type":
+      "application/json"
+  };
 
 
-    const logoutBtn =
-      document.getElementById(
-        "logoutBtn"
-      );
+  if (requireAuth) {
+
+    const token =
+      getSavedToken();
 
 
-    const playType =
-      document.getElementById(
-        "playType"
-      );
+    if (token) {
 
-
-    const missArea =
-      document.getElementById(
-        "missArea"
-      );
-
-
-    const missCount =
-      document.getElementById(
-        "missCount"
-      );
-
-
-    const analyzeBtn =
-      document.getElementById(
-        "analyzeBtn"
-      );
-
-
-    const result =
-      document.getElementById(
-        "result"
-      );
-
-
-    // =====================================
-    // TOKEN
-    // =====================================
-
-    function getSavedToken() {
-
-      return localStorage.getItem(
-        TOKEN_KEY
-      ) || "";
+      headers.Authorization =
+        "Bearer " +
+        token;
 
     }
 
-
-    function saveToken(
-      token
-    ) {
-
-      localStorage.setItem(
-        TOKEN_KEY,
-        token
-      );
-
-    }
+  }
 
 
-    function clearToken() {
+  const response =
+    await fetch(
+      WORKER_URL,
+      {
 
-      localStorage.removeItem(
-        TOKEN_KEY
-      );
+        method:"POST",
 
-    }
+        headers:headers,
 
-
-    // =====================================
-    // API
-    // =====================================
-
-    async function callAPI(
-      payload,
-      requireAuth = false
-    ) {
-
-      const headers = {
-        "Content-Type":
-          "application/json"
-      };
-
-
-      if (requireAuth) {
-
-        const token =
-          getSavedToken();
-
-
-        if (token) {
-
-          headers.Authorization =
-            "Bearer " +
-            token;
-
-        }
+        body:
+          JSON.stringify(
+            payload
+          )
 
       }
+    );
 
 
-      const response =
-        await fetch(
-          WORKER_URL,
+  let data;
+
+
+  try {
+
+    data =
+      await response.json();
+
+  } catch {
+
+    throw new Error(
+      "伺服器回傳格式錯誤"
+    );
+
+  }
+
+
+  if (!response.ok) {
+
+    const error =
+      new Error(
+        data?.error ||
+        "系統發生錯誤"
+      );
+
+
+    error.status =
+      response.status;
+
+
+    throw error;
+
+  }
+
+
+  return data;
+
+}
+
+
+function showLogin() {
+
+  appView.classList.add(
+    "hidden"
+  );
+
+  loginView.classList.remove(
+    "hidden"
+  );
+
+}
+
+
+function showApp(
+  account,
+  name
+) {
+
+  loginView.classList.add(
+    "hidden"
+  );
+
+  appView.classList.remove(
+    "hidden"
+  );
+
+
+  memberChip.textContent =
+    "👤 " +
+    (
+      name ||
+      account ||
+      "會員"
+    );
+
+}
+
+
+// =============================
+// LOGIN
+// =============================
+
+loginForm.addEventListener(
+  "submit",
+  async event => {
+
+    event.preventDefault();
+
+
+    const account =
+      memberAccount.value
+        .trim()
+        .toLowerCase();
+
+
+    if (!account) {
+
+      loginMessage.textContent =
+        "請輸入會員帳號";
+
+      return;
+
+    }
+
+
+    loginBtn.disabled =
+      true;
+
+    loginBtn.textContent =
+      "✨ 驗證中...";
+
+    loginMessage.textContent =
+      "正在確認會員使用權限...";
+
+
+    try {
+
+      const data =
+        await callAPI(
           {
-            method:
-              "POST",
-
-            headers:
-              headers,
-
-            body:
-              JSON.stringify(
-                payload
-              )
+            action:"login",
+            account:account
           }
         );
 
 
-      let data;
-
-
-      try {
-
-        data =
-          await response.json();
-
-      } catch {
-
-        throw new Error(
-          "伺服器回傳格式錯誤"
-        );
-
-      }
-
-
-      if (!response.ok) {
-
-        const error =
-          new Error(
-            data?.error ||
-            "系統發生錯誤"
-          );
-
-
-        error.status =
-          response.status;
-
-
-        throw error;
-
-      }
-
-
-      return data;
-
-    }
-
-
-    // =====================================
-    // 顯示登入
-    // =====================================
-
-    function showLogin() {
-
-      appView.classList.add(
-        "hidden"
+      saveToken(
+        data.token
       );
 
 
-      loginView.classList.remove(
-        "hidden"
-      );
-
-
-      loginWrap.classList.remove(
-        "login-success-animation"
+      loginMessage.classList.add(
+        "success"
       );
 
 
       loginMessage.textContent =
-        "";
+        "✨ 登入成功";
+
+
+      setTimeout(
+        () => {
+
+          showApp(
+            data.account,
+            data.member_name
+          );
+
+        },
+        350
+      );
+
+
+    } catch(error) {
+
+      loginMessage.classList.remove(
+        "success"
+      );
+
+      loginMessage.textContent =
+        error.message;
+
+    } finally {
+
+      loginBtn.disabled =
+        false;
+
+      loginBtn.textContent =
+        "✨ 登入分析系統";
 
     }
 
+  }
+);
 
-    // =====================================
-    // 顯示 APP
-    // =====================================
 
-    function showApp(
-      account,
-      memberName
-    ) {
+// =============================
+// SESSION
+// =============================
 
-      loginView.classList.add(
-        "hidden"
+async function restoreSession() {
+
+  if (!getSavedToken()) {
+
+    showLogin();
+
+    return;
+
+  }
+
+
+  try {
+
+    const data =
+      await callAPI(
+        {
+          action:"session"
+        },
+        true
       );
 
 
-      appView.classList.remove(
-        "hidden"
+    showApp(
+      data.account,
+      data.member_name
+    );
+
+
+  } catch {
+
+    clearToken();
+
+    showLogin();
+
+  }
+
+}
+
+
+// =============================
+// LOGOUT
+// =============================
+
+logoutBtn.addEventListener(
+  "click",
+  async () => {
+
+    try {
+
+      await callAPI(
+        {
+          action:"logout"
+        },
+        true
       );
 
+    } catch {}
 
-      memberChip.textContent =
-        "👤 " +
-        (
-          memberName ||
-          account ||
-          "會員"
+
+    clearToken();
+
+    historyModal.classList.remove(
+      "open"
+    );
+
+    showLogin();
+
+  }
+);
+
+
+// =============================
+// 多選不中
+// =============================
+
+function updateMissArea() {
+
+  if (
+    playType.value ===
+    "多選不中"
+  ) {
+
+    missArea.classList.remove(
+      "hidden"
+    );
+
+  } else {
+
+    missArea.classList.add(
+      "hidden"
+    );
+
+  }
+
+}
+
+
+playType.addEventListener(
+  "change",
+  updateMissArea
+);
+
+updateMissArea();
+
+
+// =============================
+// ESCAPE
+// =============================
+
+function escapeHtml(text) {
+
+  return String(
+    text ?? ""
+  )
+  .replaceAll("&","&amp;")
+  .replaceAll("<","&lt;")
+  .replaceAll(">","&gt;")
+  .replaceAll('"',"&quot;")
+  .replaceAll("'","&#039;");
+
+}
+
+
+// =============================
+// 下一期日期
+// 星期日跳過
+// =============================
+
+function getNextDrawDate(
+  latestDate
+) {
+
+  if (
+    !latestDate ||
+    !latestDate.includes("/")
+  ) {
+    return "";
+  }
+
+
+  const [
+    month,
+    day
+  ] =
+    latestDate
+      .split("/")
+      .map(Number);
+
+
+  const year =
+    Number(
+      new Intl.DateTimeFormat(
+        "en",
+        {
+          timeZone:
+            "Asia/Taipei",
+          year:"numeric"
+        }
+      )
+      .format(
+        new Date()
+      )
+    );
+
+
+  const date =
+    new Date(
+      Date.UTC(
+        year,
+        month - 1,
+        day
+      )
+    );
+
+
+  do {
+
+    date.setUTCDate(
+      date.getUTCDate() + 1
+    );
+
+  } while (
+    date.getUTCDay() === 0
+  );
+
+
+  return (
+    String(
+      date.getUTCMonth() + 1
+    ).padStart(2,"0")
+    +
+    "/"
+    +
+    String(
+      date.getUTCDate()
+    ).padStart(2,"0")
+  );
+
+}
+
+
+// =============================
+// 號碼球
+// =============================
+
+function extractNumbers(text) {
+
+  return (
+    String(text || "")
+      .match(
+        /\b(?:0[1-9]|[12][0-9]|3[0-9])\b/g
+      )
+    ||
+    []
+  );
+
+}
+
+
+function createBalls(
+  numbers,
+  small = false
+) {
+
+  return numbers
+    .map(
+      (
+        number,
+        index
+      ) => {
+
+        return (
+          '<span class="number-ball' +
+          (
+            small
+              ? ' small'
+              : ''
+          ) +
+          '" style="animation-delay:' +
+          (
+            index * .11
+          ).toFixed(2) +
+          's">' +
+          escapeHtml(number) +
+          '</span>'
         );
 
-    }
+      }
+    )
+    .join("");
+
+}
 
 
-    // =====================================
-    // 登入
-    // =====================================
+function renderAnalysis(
+  analysisText,
+  targetDate
+) {
 
-    loginForm.addEventListener(
-      "submit",
-      async event => {
+  const lines =
+    String(
+      analysisText || ""
+    )
+    .split("\n")
+    .map(
+      line =>
+        line.trim()
+    )
+    .filter(Boolean);
 
-        event.preventDefault();
+
+  let html =
+    '<div class="analysis-box">';
 
 
-        const account =
-          memberAccount.value
-            .trim()
-            .toLowerCase();
+  let titleUsed =
+    false;
 
 
-        if (!account) {
+  lines.forEach(
+    line => {
 
-          loginMessage.textContent =
-            "請輸入會員帳號";
+      if (
+        !titleUsed &&
+        line.includes("【")
+      ) {
+
+        html +=
+          '<div class="analysis-title">' +
+          escapeHtml(
+            targetDate
+          ) +
+          escapeHtml(
+            line
+          ) +
+          '</div>';
+
+
+        titleUsed = true;
+
+        return;
+
+      }
+
+
+      if (
+        line.includes("：")
+      ) {
+
+        const index =
+          line.indexOf("：");
+
+
+        const label =
+          line.substring(
+            0,
+            index
+          );
+
+
+        const content =
+          line.substring(
+            index + 1
+          );
+
+
+        const numbers =
+          extractNumbers(
+            content
+          );
+
+
+        if (
+          numbers.length >= 2
+        ) {
+
+          const small =
+            !label.includes(
+              "主選5顆"
+            )
+            &&
+            !label.includes(
+              "連碰5顆"
+            );
+
+
+          html +=
+            '<div class="analysis-line">' +
+
+            '<div class="analysis-label">' +
+            escapeHtml(label) +
+            '</div>' +
+
+            '<div class="number-balls">' +
+            createBalls(
+              numbers,
+              small
+            ) +
+            '</div>' +
+
+            '</div>';
+
 
           return;
 
         }
 
 
-        loginBtn.disabled =
-          true;
+        html +=
+          '<div class="analysis-line">' +
+
+          '<div class="analysis-label">' +
+          escapeHtml(label) +
+          '</div>' +
+
+          '<span class="text-pill">' +
+          escapeHtml(content) +
+          '</span>' +
+
+          '</div>';
 
 
-        loginBtn.textContent =
-          "✨ 驗證中...";
+        return;
+
+      }
 
 
-        loginMessage.classList.remove(
-          "success"
+      const numbers =
+        extractNumbers(
+          line
         );
 
 
-        loginMessage.textContent =
-          "正在確認會員使用權限...";
+      if (
+        numbers.length >= 2
+      ) {
+
+        html +=
+          '<div class="analysis-line">' +
+
+          '<div class="number-balls">' +
+          createBalls(numbers) +
+          '</div>' +
+
+          '</div>';
 
 
-        try {
-
-          const data =
-            await callAPI(
-              {
-                action:
-                  "login",
-
-                account:
-                  account
-              }
-            );
-
-
-          saveToken(
-            data.token
-          );
-
-
-          loginMessage.classList.add(
-            "success"
-          );
-
-
-          loginMessage.textContent =
-            "✨ 登入成功";
-
-
-          loginWrap.classList.add(
-            "login-success-animation"
-          );
-
-
-          setTimeout(
-            () => {
-
-              showApp(
-                data.account,
-                data.member_name
-              );
-
-            },
-            400
-          );
-
-
-        } catch (
-          error
-        ) {
-
-          loginMessage.textContent =
-            error.message;
-
-        } finally {
-
-          loginBtn.disabled =
-            false;
-
-
-          loginBtn.textContent =
-            "✨ 登入分析系統";
-
-        }
+        return;
 
       }
-    );
 
 
-    // =====================================
-    // 自動恢復登入
-    // =====================================
+      html +=
+        '<div class="analysis-line">' +
+        escapeHtml(line) +
+        '</div>';
 
-    async function restoreSession() {
-
-      const token =
-        getSavedToken();
+    }
+  );
 
 
-      if (!token) {
+  html +=
+    '</div>';
+
+
+  return html;
+
+}
+
+
+// =============================
+// Loading
+// =============================
+
+function showLoading() {
+
+  result.classList.remove(
+    "empty"
+  );
+
+
+  result.innerHTML =
+    '<div class="loading-wrap">' +
+
+      '<div class="loading-balls">' +
+        '<span class="loading-ball"></span>' +
+        '<span class="loading-ball"></span>' +
+        '<span class="loading-ball"></span>' +
+        '<span class="loading-ball"></span>' +
+        '<span class="loading-ball"></span>' +
+      '</div>' +
+
+      '<div class="loading-text">' +
+        '正在分析近期539趨勢...' +
+      '</div>' +
+
+    '</div>';
+
+}
+
+
+// =============================
+// ANALYZE
+// =============================
+
+analyzeBtn.addEventListener(
+  "click",
+  async () => {
+
+    showLoading();
+
+
+    analyzeBtn.disabled =
+      true;
+
+    analyzeBtn.textContent =
+      "✨ 分析中...";
+
+
+    try {
+
+      const data =
+        await callAPI(
+          {
+
+            action:"analyze",
+
+            play_type:
+              playType.value,
+
+            miss_count:
+              playType.value ===
+              "多選不中"
+                ? missCount.value
+                : "5顆"
+
+          },
+          true
+        );
+
+
+      const latestDate =
+        data.latest_date ||
+        "未知";
+
+
+      const latestNumbers =
+        data.latest_numbers ||
+        "未知";
+
+
+      const targetDate =
+        getNextDrawDate(
+          latestDate
+        );
+
+
+      result.classList.remove(
+        "empty"
+      );
+
+
+      result.innerHTML =
+        '<div class="data-info">' +
+
+          '<div class="data-row">' +
+            '📅 資料基準：<strong>' +
+            escapeHtml(
+              latestDate
+            ) +
+            '</strong>' +
+          '</div>' +
+
+          '<div class="data-row">' +
+            '🎱 最新開獎：<strong>' +
+            escapeHtml(
+              latestNumbers
+            ) +
+            '</strong>' +
+          '</div>' +
+
+          '<div class="data-row">' +
+            '🎯 分析目標：<strong>下一期</strong>' +
+          '</div>' +
+
+        '</div>' +
+
+        renderAnalysis(
+          data.result,
+          targetDate
+        );
+
+
+    } catch(error) {
+
+      if (
+        error.status === 401
+      ) {
+
+        clearToken();
 
         showLogin();
 
@@ -2924,737 +2615,295 @@
       }
 
 
-      loginMessage.textContent =
-        "正在恢復登入狀態...";
-
-
-      try {
-
-        const data =
-          await callAPI(
-            {
-              action:
-                "session"
-            },
-            true
-          );
-
-
-        showApp(
-          data.account,
-          data.member_name
-        );
-
-
-      } catch {
-
-        clearToken();
-
-        showLogin();
-
-      }
-
-    }
-
-
-    // =====================================
-    // 登出
-    // =====================================
-
-    logoutBtn.addEventListener(
-      "click",
-      async () => {
-
-        try {
-
-          await callAPI(
-            {
-              action:
-                "logout"
-            },
-            true
-          );
-
-        } catch {
-          // ignore
-        }
-
-
-        clearToken();
-
-
-        memberAccount.value =
-          "";
-
-
-        showLogin();
-
-      }
-    );
-
-
-    // =====================================
-    // 多選不中
-    // =====================================
-
-    function updateMissArea() {
-
-      if (
-        playType.value ===
-        "多選不中"
-      ) {
-
-        missArea.classList.remove(
-          "hidden"
-        );
-
-      } else {
-
-        missArea.classList.add(
-          "hidden"
-        );
-
-      }
-
-    }
-
-
-    playType.addEventListener(
-      "change",
-      updateMissArea
-    );
-
-
-    updateMissArea();
-
-
-    // =====================================
-    // HTML escape
-    // =====================================
-
-    function escapeHtml(
-      text
-    ) {
-
-      return String(
-        text ?? ""
-      )
-
-      .replaceAll(
-        "&",
-        "&amp;"
-      )
-
-      .replaceAll(
-        "<",
-        "&lt;"
-      )
-
-      .replaceAll(
-        ">",
-        "&gt;"
-      )
-
-      .replaceAll(
-        '"',
-        "&quot;"
-      )
-
-      .replaceAll(
-        "'",
-        "&#039;"
-      );
-
-    }
-
-
-    // =====================================
-    // 下一開獎日
-    // 星期日跳過
-    // =====================================
-
-    function getNextDrawDate(
-      latestDate
-    ) {
-
-      if (
-        !latestDate ||
-        !latestDate.includes("/")
-      ) {
-
-        return "";
-
-      }
-
-
-      const [
-        month,
-        day
-      ] =
-        latestDate
-          .split("/")
-          .map(Number);
-
-
-      const year =
-        Number(
-
-          new Intl.DateTimeFormat(
-            "en",
-            {
-              timeZone:
-                "Asia/Taipei",
-
-              year:
-                "numeric"
-            }
-          )
-
-          .format(
-            new Date()
-          )
-
-        );
-
-
-      const date =
-        new Date(
-          Date.UTC(
-            year,
-            month - 1,
-            day
-          )
-        );
-
-
-      do {
-
-        date.setUTCDate(
-          date.getUTCDate() + 1
-        );
-
-      } while (
-        date.getUTCDay() === 0
-      );
-
-
-      return (
-
-        String(
-          date.getUTCMonth() + 1
-        )
-          .padStart(
-            2,
-            "0"
-          )
-
-        +
-
-        "/"
-
-        +
-
-        String(
-          date.getUTCDate()
-        )
-          .padStart(
-            2,
-            "0"
-          )
-
-      );
-
-    }
-
-
-    // =====================================
-    // 號碼
-    // =====================================
-
-    function extractNumbers(
-      text
-    ) {
-
-      return (
-        String(
-          text || ""
-        )
-        .match(
-          /\b(?:0[1-9]|[12][0-9]|3[0-9])\b/g
-        )
-        ||
-        []
-      );
-
-    }
-
-
-    // =====================================
-    // 球
-    // =====================================
-
-    function createBalls(
-      numbers,
-      small = false
-    ) {
-
-      return numbers
-        .map(
-          (
-            number,
-            index
-          ) => {
-
-            const delay =
-              (
-                index *
-                .11
-              )
-              .toFixed(2);
-
-
-            return (
-
-              '<span ' +
-
-              'class="number-ball' +
-
-              (
-                small
-                  ?
-                  ' small'
-                  :
-                  ''
-              )
-
-              +
-
-              '" style="animation-delay:' +
-
-              delay +
-
-              's">' +
-
-              escapeHtml(
-                number
-              ) +
-
-              '</span>'
-
-            );
-
-          }
-        )
-        .join("");
-
-    }
-
-
-    // =====================================
-    // 結果渲染
-    // =====================================
-
-    function renderAnalysis(
-      analysisText,
-      targetDate
-    ) {
-
-      const lines =
-        String(
-          analysisText || ""
-        )
-          .split("\n")
-          .map(
-            line =>
-              line.trim()
-          )
-          .filter(Boolean);
-
-
-      let html =
-        '<div class="analysis-box">';
-
-
-      let titleUsed =
-        false;
-
-
-      lines.forEach(
-        line => {
-
-          if (
-            !titleUsed &&
-            line.includes("【")
-          ) {
-
-            html +=
-              '<div class="analysis-title">' +
-
-              escapeHtml(
-                targetDate
-              ) +
-
-              escapeHtml(
-                line
-              ) +
-
-              '</div>';
-
-
-            titleUsed =
-              true;
-
-            return;
-
-          }
-
-
-          if (
-            line.includes("：")
-          ) {
-
-            const index =
-              line.indexOf("：");
-
-
-            const label =
-              line.substring(
-                0,
-                index
-              );
-
-
-            const content =
-              line.substring(
-                index + 1
-              );
-
-
-            const numbers =
-              extractNumbers(
-                content
-              );
-
-
-            if (
-              numbers.length >= 2
-            ) {
-
-              const small =
-                !label.includes(
-                  "主選5顆"
-                )
-                &&
-                !label.includes(
-                  "連碰5顆"
-                );
-
-
-              html +=
-                '<div class="analysis-line">' +
-
-                '<div class="analysis-label">' +
-
-                escapeHtml(
-                  label
-                ) +
-
-                '</div>' +
-
-                '<div class="number-balls">' +
-
-                createBalls(
-                  numbers,
-                  small
-                ) +
-
-                '</div>' +
-
-                '</div>';
-
-
-              return;
-
-            }
-
-
-            html +=
-              '<div class="analysis-line">' +
-
-              '<div class="analysis-label">' +
-
-              escapeHtml(
-                label
-              ) +
-
-              '</div>' +
-
-              '<span class="text-pill">' +
-
-              escapeHtml(
-                content
-              ) +
-
-              '</span>' +
-
-              '</div>';
-
-
-            return;
-
-          }
-
-
-          const numbers =
-            extractNumbers(
-              line
-            );
-
-
-          if (
-            numbers.length >= 2
-          ) {
-
-            html +=
-              '<div class="analysis-line">' +
-
-              '<div class="number-balls">' +
-
-              createBalls(
-                numbers
-              ) +
-
-              '</div>' +
-
-              '</div>';
-
-
-            return;
-
-          }
-
-
-          html +=
-            '<div class="analysis-line">' +
-
-            escapeHtml(
-              line
-            ) +
-
-            '</div>';
-
-        }
-      );
-
-
-      html +=
-        '</div>';
-
-
-      return html;
-
-    }
-
-
-    // =====================================
-    // Loading
-    // =====================================
-
-    function showLoading() {
-
       result.classList.remove(
         "empty"
       );
 
 
       result.innerHTML =
-
-        '<div class="loading-wrap">' +
-
-        '<div class="loading-balls">' +
-
-        '<span class="loading-ball"></span>' +
-        '<span class="loading-ball"></span>' +
-        '<span class="loading-ball"></span>' +
-        '<span class="loading-ball"></span>' +
-        '<span class="loading-ball"></span>' +
-
-        '</div>' +
-
-        '<div class="loading-text">' +
-
-        '正在分析近期539趨勢...' +
-
-        '</div>' +
-
+        '<div class="error-box">' +
+        escapeHtml(
+          error.message
+        ) +
         '</div>';
+
+    } finally {
+
+      analyzeBtn.disabled =
+        false;
+
+      analyzeBtn.textContent =
+        "✨ 開始分析";
+
+    }
+
+  }
+);
+
+
+// =============================
+// HISTORY
+// =============================
+
+function renderHistory(
+  history
+) {
+
+  if (
+    !Array.isArray(history) ||
+    history.length === 0
+  ) {
+
+    historyList.innerHTML =
+      '<div class="history-empty">' +
+        '目前還沒有分析紀錄 🍊' +
+      '</div>';
+
+    return;
+
+  }
+
+
+  historyList.innerHTML =
+    history
+      .map(
+        (
+          item,
+          index
+        ) => {
+
+          const targetDate =
+            getNextDrawDate(
+              item.latest_date
+            );
+
+
+          const missText =
+            item.play_type ===
+            "多選不中"
+              ? " " +
+                (
+                  item.miss_count ||
+                  ""
+                )
+              : "";
+
+
+          return (
+            '<div ' +
+            'class="history-card" ' +
+            'style="animation-delay:' +
+            (
+              index * .04
+            ).toFixed(2) +
+            's">' +
+
+              '<div class="history-card-title">' +
+
+                escapeHtml(
+                  targetDate
+                ) +
+
+                '｜' +
+
+                escapeHtml(
+                  item.play_type
+                ) +
+
+                escapeHtml(
+                  missText
+                ) +
+
+              '</div>' +
+
+
+              '<div class="history-meta">' +
+
+                '📅 資料基準：' +
+                escapeHtml(
+                  item.latest_date ||
+                  ""
+                ) +
+
+                '<br>' +
+
+                '🎱 最新開獎：' +
+                escapeHtml(
+                  item.latest_numbers ||
+                  ""
+                ) +
+
+              '</div>' +
+
+
+              '<div class="history-result">' +
+
+                escapeHtml(
+                  item.result ||
+                  ""
+                ) +
+
+              '</div>' +
+
+            '</div>'
+          );
+
+        }
+      )
+      .join("");
+
+}
+
+
+async function loadHistory() {
+
+  historyList.innerHTML =
+    '<div class="history-empty">' +
+      '正在載入分析紀錄...' +
+    '</div>';
+
+
+  try {
+
+    const data =
+      await callAPI(
+        {
+          action:"history"
+        },
+        true
+      );
+
+
+    renderHistory(
+      data.history
+    );
+
+
+  } catch(error) {
+
+    if (
+      error.status === 401
+    ) {
+
+      historyModal.classList.remove(
+        "open"
+      );
+
+      clearToken();
+
+      showLogin();
+
+      return;
 
     }
 
 
-    // =====================================
-    // ANALYZE
-    // =====================================
+    historyList.innerHTML =
+      '<div class="history-empty">' +
+      escapeHtml(
+        error.message
+      ) +
+      '</div>';
 
-    analyzeBtn.addEventListener(
-      "click",
-      async () => {
+  }
 
-        showLoading();
-
-
-        analyzeBtn.disabled =
-          true;
+}
 
 
-        analyzeBtn.textContent =
-          "✨ 分析中...";
+historyBtn.addEventListener(
+  "click",
+  async () => {
 
-
-        try {
-
-          const data =
-            await callAPI(
-              {
-
-                action:
-                  "analyze",
-
-                play_type:
-                  playType.value,
-
-                miss_count:
-                  playType.value ===
-                  "多選不中"
-                    ?
-                    missCount.value
-                    :
-                    "5顆"
-
-              },
-              true
-            );
-
-
-          const latestDate =
-            data.latest_date ||
-            "未知";
-
-
-          const latestNumbers =
-            data.latest_numbers ||
-            "未知";
-
-
-          const targetDate =
-            getNextDrawDate(
-              latestDate
-            );
-
-
-          result.classList.remove(
-            "empty"
-          );
-
-
-          result.innerHTML =
-
-            '<div class="data-info">' +
-
-            '<div class="data-row">' +
-
-            '📅 資料基準：<strong>' +
-
-            escapeHtml(
-              latestDate
-            ) +
-
-            '</strong></div>' +
-
-            '<div class="data-row">' +
-
-            '🎱 最新開獎：<strong>' +
-
-            escapeHtml(
-              latestNumbers
-            ) +
-
-            '</strong></div>' +
-
-            '<div class="data-row">' +
-
-            '🎯 分析目標：<strong>' +
-
-            '下一期' +
-
-            '</strong></div>' +
-
-            '</div>' +
-
-            renderAnalysis(
-              data.result,
-              targetDate
-            );
-
-
-        } catch (
-          error
-        ) {
-
-
-          if (
-            error.status === 401
-          ) {
-
-            clearToken();
-
-            showLogin();
-
-            return;
-
-          }
-
-
-          result.classList.remove(
-            "empty"
-          );
-
-
-          result.innerHTML =
-
-            '<div class="error-box">' +
-
-            '分析發生錯誤\n\n' +
-
-            escapeHtml(
-              error.message
-            ) +
-
-            '</div>';
-
-        } finally {
-
-          analyzeBtn.disabled =
-            false;
-
-
-          analyzeBtn.textContent =
-            "✨ 開始分析";
-
-        }
-
-      }
+    historyModal.classList.add(
+      "open"
     );
 
 
-    // =====================================
-    // START
-    // =====================================
+    await loadHistory();
 
-    restoreSession();
+  }
+);
 
-  </script>
+
+closeHistoryBtn.addEventListener(
+  "click",
+  () => {
+
+    historyModal.classList.remove(
+      "open"
+    );
+
+  }
+);
+
+
+historyModal.addEventListener(
+  "click",
+  event => {
+
+    if (
+      event.target ===
+      historyModal
+    ) {
+
+      historyModal.classList.remove(
+        "open"
+      );
+
+    }
+
+  }
+);
+
+
+clearHistoryBtn.addEventListener(
+  "click",
+  async () => {
+
+    const ok =
+      confirm(
+        "確定要清除全部分析紀錄嗎？"
+      );
+
+
+    if (!ok) {
+      return;
+    }
+
+
+    try {
+
+      await callAPI(
+        {
+          action:
+            "clear_history"
+        },
+        true
+      );
+
+
+      renderHistory([]);
+
+
+    } catch(error) {
+
+      alert(
+        error.message
+      );
+
+    }
+
+  }
+);
+
+
+// =============================
+// START
+// =============================
+
+restoreSession();
+
+</script>
 
 </body>
-
 </html>
