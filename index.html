@@ -755,46 +755,39 @@
     }
 
     /* =========================
-       登入後右側浮動 LINE 按鈕
+       登入後右下角迷你 LINE 按鈕
     ========================= */
     .floating-line-btn{
       position:fixed;
       right:14px;
-      top:50%;
-      transform:translateY(-50%);
+      bottom:22px;
       z-index:35;
 
-      width:54px;
-      min-height:82px;
-      padding:9px 7px;
+      width:48px;
+      height:48px;
 
       display:flex;
-      flex-direction:column;
       align-items:center;
       justify-content:center;
-      gap:5px;
 
-      border-radius:18px 0 0 18px;
+      border-radius:50%;
       text-decoration:none;
 
       color:#ffffff;
       background:
         linear-gradient(
-          180deg,
-          #1ED760,
+          145deg,
+          #22D66B,
           #06C755
         );
 
       box-shadow:
-        0 10px 26px
-        rgba(6,199,85,.26);
+        0 9px 22px
+        rgba(6,199,85,.22);
 
       border:
-        1px solid
-        rgba(255,255,255,.55);
-
-      animation:
-        floatingLinePulse 2.6s ease-in-out infinite;
+        2px solid
+        rgba(255,255,255,.86);
 
       transition:
         transform .16s ease,
@@ -804,74 +797,55 @@
 
     .floating-line-btn:hover{
       transform:
-        translateY(-50%)
-        translateX(-2px);
+        translateY(-2px)
+        scale(1.03);
+
       box-shadow:
-        0 13px 30px
-        rgba(6,199,85,.32);
+        0 12px 26px
+        rgba(6,199,85,.28);
     }
 
     .floating-line-btn:active{
       transform:
-        translateY(-50%)
-        scale(.97);
+        scale(.96);
     }
 
     .floating-line-icon{
-      width:31px;
-      height:31px;
+      width:32px;
+      height:32px;
       display:flex;
       align-items:center;
       justify-content:center;
+
       border-radius:50%;
+
       background:#ffffff;
       color:#06C755;
+
       font-size:16px;
       font-weight:950;
+
       box-shadow:
-        0 4px 10px
+        0 3px 8px
         rgba(0,0,0,.08);
     }
 
     .floating-line-text{
-      writing-mode:vertical-rl;
-      text-orientation:mixed;
-      letter-spacing:1px;
-      font-size:10px;
-      line-height:1;
-      font-weight:950;
-    }
-
-    @keyframes floatingLinePulse{
-      0%,100%{
-        box-shadow:
-          0 10px 26px
-          rgba(6,199,85,.22);
-      }
-
-      50%{
-        box-shadow:
-          0 12px 34px
-          rgba(6,199,85,.38);
-      }
+      display:none;
     }
 
     @media(max-width:480px){
       .floating-line-btn{
-        right:0;
-        width:48px;
-        min-height:76px;
-        border-radius:16px 0 0 16px;
+        right:10px;
+        bottom:16px;
+        width:44px;
+        height:44px;
       }
 
       .floating-line-icon{
         width:29px;
         height:29px;
         font-size:15px;
-      }
-
-      .floating-line-text{
-        font-size:9px;
       }
     }
 
@@ -2055,7 +2029,7 @@
       href="https://lin.ee/OT3Ngd6"
       target="_blank"
       rel="noopener noreferrer"
-      aria-label="聯絡 LINE 官方"
+      aria-label="聯絡 LINE 官方" title="LINE官方"
     >
       <span class="floating-line-icon">💬</span>
       <span class="floating-line-text">LINE官方</span>
