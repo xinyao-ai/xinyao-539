@@ -1158,7 +1158,7 @@
     }
 
 
-    /* 第三方每日擋牌通知 */
+    /* 第三方WG擋牌通知 */
     .block-notice-head{
       display:flex;
       align-items:flex-start;
@@ -1800,7 +1800,7 @@
           type="button"
         >
           <span class="data-tool-icon">🛑</span>
-          每日擋牌通知
+          WG擋牌通知
         </button>
       </div>
 
@@ -2979,7 +2979,7 @@
 
       dataCenterContent.innerHTML =
         '<div class="block-notice-loading">' +
-          '正在取得最新第三方擋牌通知…' +
+          '正在取得最新 WG 擋牌通知…' +
         '</div>';
 
       try{
@@ -3002,7 +3002,7 @@
         }else{
           dataCenterContent.innerHTML =
             '<div class="data-center-placeholder">' +
-              '目前沒有可顯示的擋牌通知' +
+              '目前沒有可顯示的 WG 擋牌通知' +
             '</div>';
         }
 
@@ -3015,7 +3015,7 @@
 
         dataCenterContent.innerHTML =
           '<div class="data-center-placeholder">' +
-            '目前無法取得第三方擋牌通知<br>' +
+            '目前無法取得 WG 擋牌通知<br>' +
             '<span style="font-size:10px">請稍後再試一次</span>' +
           '</div>';
 
@@ -3127,12 +3127,9 @@
         return;
       }
 
-      const systems =
-        notice.systems ||
-        {};
-
       const wg =
-        systems.wg ||
+        notice.wg ||
+        notice?.systems?.wg ||
         {};
 
       const sourceLink =
@@ -3150,7 +3147,7 @@
       dataCenterContent.innerHTML =
         '<div class="block-notice-head">' +
           '<div class="block-notice-title">' +
-            '🛑 最新擋牌通知' +
+            '🛑 WG 今日擋牌通知' +
           '</div>' +
           '<div class="block-notice-date">' +
             escapeHtml(
@@ -3165,40 +3162,13 @@
           '<span>資料來源：' +
             escapeHtml(
               notice.source ||
-              '第三方公告'
+              '539樂透堂｜WG彩票'
             ) +
           '</span>' +
           '<button id="refreshBlockNoticeBtn" ' +
             'class="block-refresh-btn" type="button">' +
             '🔄 更新' +
           '</button>' +
-        '</div>' +
-
-        '<div class="block-system-grid">' +
-          '<div class="block-system-card">' +
-            '<div class="block-system-name">SG88系統</div>' +
-            '<div class="block-system-status">' +
-              escapeHtml(
-                systems?.sg88?.status ||
-                '未提供'
-              ) +
-            '</div>' +
-          '</div>' +
-
-          '<div class="block-system-card">' +
-            '<div class="block-system-name">101系統</div>' +
-            '<div class="block-system-status">' +
-              escapeHtml(
-                systems?.system101?.status ||
-                '未提供'
-              ) +
-            '</div>' +
-          '</div>' +
-        '</div>' +
-
-        '<div class="dc-panel-title">' +
-          '<span>WG彩票擋牌</span>' +
-          '<span style="font-size:10px;color:#9A765B">二星／三星／四星</span>' +
         '</div>' +
 
         '<div class="wg-notice">' +
@@ -3220,7 +3190,7 @@
           '⚠️ ' +
           escapeHtml(
             notice.disclaimer ||
-            '此為第三方擋牌公告，非台灣彩券官方資料。'
+            '第三方 WG 擋牌公告，非台灣彩券官方資料。'
           ) +
           (
             sourceLink
@@ -3244,7 +3214,6 @@
         );
       }
     }
-
 
     function renderBlockNumbers(){
       if(blockNoticeData){
