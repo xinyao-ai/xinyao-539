@@ -1157,6 +1157,190 @@
       white-space:nowrap;
     }
 
+
+    /* 第三方每日擋牌通知 */
+    .block-notice-head{
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:10px;
+      margin-bottom:13px;
+    }
+
+    .block-notice-title{
+      font-size:15px;
+      font-weight:950;
+      color:#553B29;
+    }
+
+    .block-notice-date{
+      flex:0 0 auto;
+      padding:6px 10px;
+      border-radius:999px;
+      background:#FFE9B7;
+      color:#B56B22;
+      font-size:10px;
+      font-weight:900;
+    }
+
+    .block-notice-source{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:8px;
+      flex-wrap:wrap;
+      margin-bottom:12px;
+      padding:9px 11px;
+      border-radius:13px;
+      background:#FFF7E8;
+      color:#89684C;
+      font-size:10px;
+      line-height:1.5;
+    }
+
+    .block-refresh-btn{
+      border:0;
+      padding:6px 9px;
+      border-radius:999px;
+      background:#FFE5AE;
+      color:#A85E1F;
+      font-size:10px;
+      font-weight:900;
+      cursor:pointer;
+    }
+
+    .block-system-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:9px;
+      margin-bottom:12px;
+    }
+
+    .block-system-card{
+      padding:11px 12px;
+      border-radius:15px;
+      background:#FFFDFC;
+      border:1px solid #F0D4A4;
+    }
+
+    .block-system-name{
+      margin-bottom:5px;
+      color:#73523A;
+      font-size:11px;
+      font-weight:950;
+    }
+
+    .block-system-status{
+      color:#C26A1C;
+      font-size:12px;
+      font-weight:900;
+      line-height:1.5;
+    }
+
+    .wg-notice{
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+    }
+
+    .wg-section{
+      padding:13px;
+      border-radius:17px;
+      background:linear-gradient(145deg,#FFFEFA,#FFF5DC);
+      border:1px solid #F0D09B;
+    }
+
+    .wg-section-head{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:8px;
+      margin-bottom:9px;
+    }
+
+    .wg-section-title{
+      color:#5D402C;
+      font-size:13px;
+      font-weight:950;
+    }
+
+    .wg-rule-badge{
+      padding:5px 8px;
+      border-radius:999px;
+      background:#FFE5AA;
+      color:#A95E1E;
+      font-size:9px;
+      font-weight:900;
+      white-space:nowrap;
+    }
+
+    .wg-number-list{
+      display:flex;
+      flex-wrap:wrap;
+      gap:7px;
+    }
+
+    .wg-number{
+      min-width:36px;
+      height:36px;
+      padding:0 7px;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      border-radius:50%;
+      color:#fff;
+      font-size:12px;
+      font-weight:950;
+      border:2px solid #fff;
+      background:radial-gradient(circle at 30% 25%,#FFDE78,#F7AA35 42%,#E67819 82%);
+      box-shadow:0 5px 12px rgba(202,96,13,.18);
+      animation:ballPop .4s cubic-bezier(.22,1.35,.5,1) both;
+    }
+
+    .wg-other{
+      min-width:auto;
+      padding:0 11px;
+      border-radius:999px;
+      background:#FFE2A4;
+      color:#9F5A1F;
+      border:1px solid #F2C36C;
+      box-shadow:none;
+    }
+
+    .block-third-party-note{
+      margin-top:12px;
+      padding:9px 11px;
+      border-radius:13px;
+      background:#FFF2E6;
+      color:#9E6540;
+      font-size:10px;
+      line-height:1.6;
+    }
+
+    .block-source-link{
+      color:#B8661F;
+      font-weight:900;
+      text-decoration:none;
+    }
+
+    .block-notice-loading{
+      padding:34px 12px;
+      text-align:center;
+      color:#947158;
+      font-size:12px;
+    }
+
+    @media(max-width:480px){
+      .block-system-grid{
+        grid-template-columns:1fr;
+      }
+
+      .wg-section-head{
+        align-items:flex-start;
+        flex-direction:column;
+      }
+    }
+
     /* 每日擋牌 */
     .block-hero{
       padding:14px;
@@ -1616,7 +1800,7 @@
           type="button"
         >
           <span class="data-tool-icon">🛑</span>
-          每日擋牌號
+          每日擋牌通知
         </button>
       </div>
 
@@ -1757,6 +1941,8 @@
       );
 
     let dashboardData = null;
+    let blockNoticeData = null;
+    let blockNoticeLoading = false;
     let activeDataTool = "repeat";
 
 
@@ -2784,66 +2970,289 @@
     }
 
 
-    function renderBlockNumbers(){
-      const numbers = Array.isArray(
-        dashboardData?.block_numbers
-      )
-        ? dashboardData.block_numbers
-        : [];
-
-      const detail = Array.isArray(
-        dashboardData?.block_detail
-      )
-        ? dashboardData.block_detail
-        : [];
-
-      if(numbers.length === 0){
-        dataCenterContent.innerHTML =
-          '<div class="data-center-placeholder">目前沒有每日擋牌資料</div>';
+    async function loadBlockNoticeFromWorker(){
+      if(blockNoticeLoading){
         return;
       }
 
-      const balls = numbers.map(
-        (number,index)=> (
-          '<div class="block-ball" style="animation-delay:' +
-            (index*.09).toFixed(2) +
-          's">' +
-            escapeHtml(number) +
-          '</div>'
-        )
-      ).join("");
-
-      const detailHtml = detail.map(item=> (
-        '<div class="block-detail">' +
-          '<strong>' +
-            escapeHtml(item.number) +
-          '</strong><br>' +
-          '母盤分 ' +
-            escapeHtml(item.score) +
-          '｜近10期 ' +
-            escapeHtml(item.freq10) +
-          '次<br>' +
-          '目前未開 ' +
-            escapeHtml(item.miss) +
-          '期' +
-        '</div>'
-      )).join("");
+      blockNoticeLoading = true;
 
       dataCenterContent.innerHTML =
-        '<div class="dc-panel-title">' +
-          '<span>🛑 今日擋牌參考</span>' +
-          '<span style="font-size:10px;color:#9A765B">5顆</span>' +
-        '</div>' +
-        '<div class="block-hero">' +
-          '<div class="block-label">依目前母盤綜合評分較低的5顆整理</div>' +
-          '<div class="block-balls">' +
-            balls +
+        '<div class="block-notice-loading">' +
+          '正在取得最新第三方擋牌通知…' +
+        '</div>';
+
+      try{
+        const data =
+          await callAPI(
+            {
+              action:"block_notice"
+            },
+            true
+          );
+
+        if(
+          data.available &&
+          data.notice
+        ){
+          blockNoticeData =
+            data.notice;
+
+          renderBlockNoticeContent();
+        }else{
+          dataCenterContent.innerHTML =
+            '<div class="data-center-placeholder">' +
+              '目前沒有可顯示的擋牌通知' +
+            '</div>';
+        }
+
+      }catch(error){
+        if(error.status === 401){
+          clearToken();
+          showLogin();
+          return;
+        }
+
+        dataCenterContent.innerHTML =
+          '<div class="data-center-placeholder">' +
+            '目前無法取得第三方擋牌通知<br>' +
+            '<span style="font-size:10px">請稍後再試一次</span>' +
+          '</div>';
+
+      }finally{
+        blockNoticeLoading = false;
+      }
+    }
+
+
+    function renderWGNoticeSection(
+      title,
+      section
+    ){
+      if(!section){
+        return (
+          '<div class="wg-section">' +
+            '<div class="wg-section-title">' +
+              escapeHtml(title) +
+            '</div>' +
+            '<div class="dc-subnote">目前沒有此項公告資料</div>' +
+          '</div>'
+        );
+      }
+
+      const numbers =
+        Array.isArray(
+          section.numbers
+        )
+          ? section.numbers
+          : [];
+
+      const chips =
+        numbers.map(
+          (number,index)=>(
+            '<span class="wg-number" ' +
+            'style="animation-delay:' +
+              (index*.045).toFixed(2) +
+            's">' +
+              escapeHtml(number) +
+            '</span>'
+          )
+        ).join("");
+
+      const otherChip =
+        section.has_other
+          ? '<span class="wg-number wg-other">其他</span>'
+          : '';
+
+      let ruleText = '';
+
+      if(
+        section.threshold !== null &&
+        section.threshold !== undefined
+      ){
+        ruleText +=
+          '未滿' +
+          escapeHtml(section.threshold) +
+          '碰（含）';
+      }
+
+      if(
+        section.payout !== null &&
+        section.payout !== undefined
+      ){
+        ruleText +=
+          (
+            ruleText
+              ? '｜'
+              : ''
+          ) +
+          '賠率下修' +
+          escapeHtml(section.payout);
+      }
+
+      if(!ruleText){
+        ruleText =
+          section.rule_text ||
+          '依公告內容';
+      }
+
+      return (
+        '<div class="wg-section">' +
+          '<div class="wg-section-head">' +
+            '<div class="wg-section-title">' +
+              escapeHtml(title) +
+            '</div>' +
+            '<div class="wg-rule-badge">' +
+              escapeHtml(ruleText) +
+            '</div>' +
+          '</div>' +
+          '<div class="wg-number-list">' +
+            (
+              chips ||
+              '<span class="missing-range-empty">無號碼</span>'
+            ) +
+            otherChip +
+          '</div>' +
+        '</div>'
+      );
+    }
+
+
+    function renderBlockNoticeContent(){
+      const notice =
+        blockNoticeData;
+
+      if(!notice){
+        loadBlockNoticeFromWorker();
+        return;
+      }
+
+      const systems =
+        notice.systems ||
+        {};
+
+      const wg =
+        systems.wg ||
+        {};
+
+      const sourceLink =
+        notice.source_url
+          ? (
+              '<a class="block-source-link" ' +
+              'href="' +
+              escapeHtml(notice.source_url) +
+              '" target="_blank" rel="noopener noreferrer">' +
+                '查看原始公告' +
+              '</a>'
+            )
+          : '';
+
+      dataCenterContent.innerHTML =
+        '<div class="block-notice-head">' +
+          '<div class="block-notice-title">' +
+            '🛑 最新擋牌通知' +
+          '</div>' +
+          '<div class="block-notice-date">' +
+            escapeHtml(
+              notice.display_date ||
+              notice.date ||
+              '最新'
+            ) +
           '</div>' +
         '</div>' +
-        '<div class="block-detail-list">' +
-          detailHtml +
+
+        '<div class="block-notice-source">' +
+          '<span>資料來源：' +
+            escapeHtml(
+              notice.source ||
+              '第三方公告'
+            ) +
+          '</span>' +
+          '<button id="refreshBlockNoticeBtn" ' +
+            'class="block-refresh-btn" type="button">' +
+            '🔄 更新' +
+          '</button>' +
         '</div>' +
-        '<div class="dc-subnote">擋牌號屬於趨勢避開參考，不代表該號碼一定不會開出。</div>';
+
+        '<div class="block-system-grid">' +
+          '<div class="block-system-card">' +
+            '<div class="block-system-name">SG88系統</div>' +
+            '<div class="block-system-status">' +
+              escapeHtml(
+                systems?.sg88?.status ||
+                '未提供'
+              ) +
+            '</div>' +
+          '</div>' +
+
+          '<div class="block-system-card">' +
+            '<div class="block-system-name">101系統</div>' +
+            '<div class="block-system-status">' +
+              escapeHtml(
+                systems?.system101?.status ||
+                '未提供'
+              ) +
+            '</div>' +
+          '</div>' +
+        '</div>' +
+
+        '<div class="dc-panel-title">' +
+          '<span>WG彩票擋牌</span>' +
+          '<span style="font-size:10px;color:#9A765B">二星／三星／四星</span>' +
+        '</div>' +
+
+        '<div class="wg-notice">' +
+          renderWGNoticeSection(
+            '二星擋牌',
+            wg.two_star
+          ) +
+          renderWGNoticeSection(
+            '三星擋牌',
+            wg.three_star
+          ) +
+          renderWGNoticeSection(
+            '四星擋牌',
+            wg.four_star
+          ) +
+        '</div>' +
+
+        '<div class="block-third-party-note">' +
+          '⚠️ ' +
+          escapeHtml(
+            notice.disclaimer ||
+            '此為第三方擋牌公告，非台灣彩券官方資料。'
+          ) +
+          (
+            sourceLink
+              ? '<br>' + sourceLink
+              : ''
+          ) +
+        '</div>';
+
+      const refreshBtn =
+        document.getElementById(
+          "refreshBlockNoticeBtn"
+        );
+
+      if(refreshBtn){
+        refreshBtn.addEventListener(
+          "click",
+          async ()=>{
+            blockNoticeData = null;
+            await loadBlockNoticeFromWorker();
+          }
+        );
+      }
+    }
+
+
+    function renderBlockNumbers(){
+      if(blockNoticeData){
+        renderBlockNoticeContent();
+        return;
+      }
+
+      loadBlockNoticeFromWorker();
     }
 
 
