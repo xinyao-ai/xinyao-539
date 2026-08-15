@@ -1307,6 +1307,14 @@
       box-shadow:none;
     }
 
+    .wg-other-note{
+      margin-top:9px;
+      color:#A26A35;
+      font-size:10px;
+      font-weight:800;
+      line-height:1.5;
+    }
+
     .block-third-party-note{
       margin-top:12px;
       padding:9px 11px;
@@ -1315,12 +1323,6 @@
       color:#9E6540;
       font-size:10px;
       line-height:1.6;
-    }
-
-    .block-source-link{
-      color:#B8661F;
-      font-weight:900;
-      text-decoration:none;
     }
 
     .block-notice-loading{
@@ -3059,9 +3061,9 @@
           )
         ).join("");
 
-      const otherChip =
+      const otherNote =
         section.has_other
-          ? '<span class="wg-number wg-other">其他</span>'
+          ? '<div class="wg-other-note">＋ 其他組合依公告規則</div>'
           : '';
 
       let ruleText = '';
@@ -3111,8 +3113,8 @@
               chips ||
               '<span class="missing-range-empty">無號碼</span>'
             ) +
-            otherChip +
           '</div>' +
+          otherNote +
         '</div>'
       );
     }
@@ -3132,18 +3134,6 @@
         notice?.systems?.wg ||
         {};
 
-      const sourceLink =
-        notice.source_url
-          ? (
-              '<a class="block-source-link" ' +
-              'href="' +
-              escapeHtml(notice.source_url) +
-              '" target="_blank" rel="noopener noreferrer">' +
-                '查看原始公告' +
-              '</a>'
-            )
-          : '';
-
       dataCenterContent.innerHTML =
         '<div class="block-notice-head">' +
           '<div class="block-notice-title">' +
@@ -3159,12 +3149,7 @@
         '</div>' +
 
         '<div class="block-notice-source">' +
-          '<span>資料來源：' +
-            escapeHtml(
-              notice.source ||
-              '539樂透堂｜WG彩票'
-            ) +
-          '</span>' +
+          '<span>資料來源：WG彩票</span>' +
           '<button id="refreshBlockNoticeBtn" ' +
             'class="block-refresh-btn" type="button">' +
             '🔄 更新' +
@@ -3191,11 +3176,6 @@
           escapeHtml(
             notice.disclaimer ||
             '第三方 WG 擋牌公告，非台灣彩券官方資料。'
-          ) +
-          (
-            sourceLink
-              ? '<br>' + sourceLink
-              : ''
           ) +
         '</div>';
 
