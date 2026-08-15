@@ -2730,41 +2730,47 @@
         );
       });
 
-      const rows = groups.map(
-        (numbers,miss)=>{
-          const chips = numbers.length
-            ? numbers.map(
-                (number,index)=>(
-                  '<span class="missing-range-number" ' +
-                  'style="animation-delay:' +
-                  (index * .035).toFixed(3) +
-                  's">' +
-                    escapeHtml(number) +
-                  '</span>'
-                )
-              ).join("")
-            : '<span class="missing-range-empty">－</span>';
+      // 只顯示有號碼的期數，並由 27期 → 0期 排列
+      const rows = [];
 
-          const label =
-            miss === 27
-              ? '27期'
-              : miss + '期';
+      for(let miss = 27; miss >= 0; miss--){
+        const numbers = groups[miss];
 
-          return (
-            '<div class="missing-range-row">' +
-              '<div class="missing-range-label">' +
-                label +
-              '</div>' +
-              '<div class="missing-range-numbers">' +
-                chips +
-              '</div>' +
-              '<div class="missing-range-count">' +
-                numbers.length + '顆' +
-              '</div>' +
-            '</div>'
-          );
+        // 0顆的期數直接隱藏
+        if(!numbers || numbers.length === 0){
+          continue;
         }
-      ).join("");
+
+        const chips = numbers.map(
+          (number,index)=>(
+            '<span class="missing-range-number" ' +
+            'style="animation-delay:' +
+            (index * .035).toFixed(3) +
+            's">' +
+              escapeHtml(number) +
+            '</span>'
+          )
+        ).join("");
+
+        const label =
+          miss === 27
+            ? '27期+'
+            : miss + '期';
+
+        rows.push(
+          '<div class="missing-range-row">' +
+            '<div class="missing-range-label">' +
+              label +
+            '</div>' +
+            '<div class="missing-range-numbers">' +
+              chips +
+            '</div>' +
+            '<div class="missing-range-count">' +
+              numbers.length + '顆' +
+            '</div>' +
+          '</div>'
+        );
+      }
 
       dataCenterContent.innerHTML =
         '<div class="dc-panel-title">' +
@@ -2772,10 +2778,10 @@
           '<span style="font-size:10px;color:#9A765B">01～39</span>' +
         '</div>' +
         '<div class="missing-range-list">' +
-          rows +
+          rows.join("") +
         '</div>' +
         '<div class="dc-subnote">' +
-          '0期代表最新一期有開；1期代表最近1期未開。超過27期的號碼統一歸在27期。' +
+          '由未開期數最高往下排列，只顯示目前有號碼的期數；0期代表最新一期有開，超過27期統一歸在27期+。' +
         '</div>';
     }
 
