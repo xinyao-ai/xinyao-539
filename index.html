@@ -338,6 +338,164 @@
     .login-message.success{color:#B8751E}
 
     /* =========================
+       登入頁小公告
+    ========================= */
+    .login-notice{
+      margin-top:14px;
+      padding:16px;
+      border-radius:20px;
+      background:
+        linear-gradient(
+          145deg,
+          rgba(255,250,239,.96),
+          rgba(255,240,203,.96)
+        );
+      border:1px solid rgba(241,170,77,.45);
+      box-shadow:
+        0 10px 28px
+        rgba(164,91,22,.08);
+      text-align:left;
+      animation:
+        noticeIn .55s .18s ease both;
+    }
+
+    @keyframes noticeIn{
+      from{
+        opacity:0;
+        transform:translateY(10px);
+      }
+      to{
+        opacity:1;
+        transform:translateY(0);
+      }
+    }
+
+    .login-notice-title{
+      margin-bottom:10px;
+      color:#5C402D;
+      font-size:14px;
+      font-weight:950;
+    }
+
+    .login-notice-line{
+      margin:6px 0;
+      color:#775943;
+      font-size:12px;
+      font-weight:750;
+      line-height:1.65;
+    }
+
+    .login-notice-line strong{
+      color:#D97720;
+      font-weight:950;
+    }
+
+    .register-btn{
+      width:100%;
+      min-height:48px;
+      margin-top:13px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      border-radius:15px;
+      text-decoration:none;
+      color:#fff;
+      font-size:14px;
+      font-weight:950;
+      background:
+        linear-gradient(
+          110deg,
+          #E87918,
+          #F5A03A,
+          #FFC655
+        );
+      box-shadow:
+        0 9px 22px
+        rgba(212,108,18,.22);
+      transition:
+        transform .16s ease,
+        box-shadow .16s ease;
+    }
+
+    .register-btn:active{
+      transform:scale(.985);
+    }
+
+    .register-note{
+      margin-top:8px;
+      text-align:center;
+      color:#D64B3A;
+      font-size:11px;
+      font-weight:950;
+      line-height:1.5;
+    }
+
+    .login-help-row{
+      margin:6px 0;
+      display:flex;
+      align-items:center;
+      gap:9px;
+      flex-wrap:nowrap;
+    }
+
+    .login-help-text{
+      min-width:0;
+      color:#775943;
+      font-size:12px;
+      font-weight:750;
+      line-height:1.65;
+      white-space:nowrap;
+    }
+
+    .line-contact-btn{
+      flex:0 0 auto;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-height:31px;
+      padding:5px 10px;
+      border-radius:10px;
+      text-decoration:none;
+      color:#ffffff;
+      font-size:11px;
+      font-weight:950;
+      line-height:1;
+      white-space:nowrap;
+      background:
+        linear-gradient(
+          110deg,
+          #06C755,
+          #1ED760
+        );
+      box-shadow:
+        0 6px 14px
+        rgba(6,199,85,.18);
+      transition:
+        transform .16s ease,
+        box-shadow .16s ease;
+    }
+
+    .line-contact-btn:active{
+      transform:scale(.985);
+    }
+
+    @media(max-width:390px){
+      .login-help-row{
+        gap:6px;
+      }
+
+      .login-help-text{
+        font-size:11px;
+      }
+
+      .line-contact-btn{
+        min-height:29px;
+        padding:5px 8px;
+        font-size:10px;
+      }
+    }
+
+    /* =========================
        登入成功動畫
     ========================= */
     .login-success-overlay{
@@ -1614,6 +1772,48 @@
             class="login-message"
           ></div>
         </form>
+      </div>
+
+      <div class="login-notice">
+        <div class="login-notice-title">
+          📣 登入須知
+        </div>
+
+        <div class="login-notice-line">
+          需完成<strong>皇鼎平台註冊</strong>才可登入分析系統
+        </div>
+
+        <div class="login-notice-line">
+          🔔 務必輸入您的【皇鼎會員帳號】
+        </div>
+
+        <div class="login-help-row">
+          <div class="login-help-text">
+            ⚠️ 若無法登入，至 LINE 官方聯繫我即可
+          </div>
+
+          <a
+            class="line-contact-btn"
+            href="https://lin.ee/OT3Ngd6"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            💬 官方LINE
+          </a>
+        </div>
+
+        <a
+          class="register-btn"
+          href="https://hd5577.com/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          ✨ 立即註冊
+        </a>
+
+        <div class="register-note">
+          🔴【代理帳號】留空即可
+        </div>
       </div>
 
     </div>
