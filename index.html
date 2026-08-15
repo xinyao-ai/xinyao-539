@@ -976,6 +976,65 @@
       font-size:13px;
     }
 
+    .bet-now-wrap{
+      margin-top:18px;
+      padding-top:16px;
+      border-top:1px dashed rgba(231,150,55,.34);
+    }
+
+    .bet-now-btn{
+      width:100%;
+      min-height:52px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+      border-radius:16px;
+      text-decoration:none;
+      color:#ffffff;
+      font-size:15px;
+      font-weight:950;
+      letter-spacing:.3px;
+      background:
+        linear-gradient(
+          110deg,
+          #E97818,
+          #F5A13B,
+          #FFC452
+        );
+      box-shadow:
+        0 10px 24px
+        rgba(215,109,17,.22);
+      transition:
+        transform .16s ease,
+        box-shadow .16s ease,
+        opacity .16s ease;
+      overflow:hidden;
+      position:relative;
+    }
+
+    .bet-now-btn::after{
+      content:"";
+      position:absolute;
+      top:-50%;
+      left:-60%;
+      width:34%;
+      height:200%;
+      transform:rotate(20deg);
+      background:
+        linear-gradient(
+          90deg,
+          transparent,
+          rgba(255,255,255,.72),
+          transparent
+        );
+      animation:shine 3s infinite;
+    }
+
+    .bet-now-btn:active{
+      transform:scale(.985);
+    }
+
     .footer{
       margin-top:25px;
       text-align:center;
@@ -3526,7 +3585,18 @@
             renderAnalysis(
               data.result,
               targetDate
-            );
+            ) +
+
+            '<div class="bet-now-wrap">' +
+              '<a ' +
+                'class="bet-now-btn" ' +
+                'href="https://www.hd5577.com/" ' +
+                'target="_blank" ' +
+                'rel="noopener noreferrer"' +
+              '>' +
+                '🎯 立即投注' +
+              '</a>' +
+            '</div>';
 
           if(data.dashboard){
             setDashboardData(
