@@ -825,6 +825,375 @@
       font-size:11px;
     }
 
+
+
+    /* =========================
+       539數據中心
+    ========================= */
+    .data-center-card{
+      position:relative;
+      overflow:hidden;
+    }
+
+    .data-center-card::before{
+      content:"";
+      position:absolute;
+      width:180px;
+      height:180px;
+      right:-110px;
+      top:-105px;
+      border-radius:50%;
+      background:rgba(255,196,73,.12);
+      pointer-events:none;
+    }
+
+    .data-center-head{
+      position:relative;
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:10px;
+      margin-bottom:14px;
+    }
+
+    .data-center-title{
+      font-size:18px;
+      font-weight:950;
+      color:#503825;
+    }
+
+    .data-center-status{
+      padding:5px 9px;
+      border-radius:999px;
+      background:#FFF0C9;
+      color:#AD681F;
+      font-size:10px;
+      font-weight:800;
+      white-space:nowrap;
+    }
+
+    .data-tool-grid{
+      position:relative;
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:9px;
+      margin-bottom:14px;
+    }
+
+    .data-tool-btn{
+      min-height:63px;
+      padding:10px 10px;
+      border:1px solid #F2D5A2;
+      border-radius:16px;
+      background:linear-gradient(145deg,#FFFDF8,#FFF3D9);
+      color:#6C4C34;
+      font-size:12px;
+      font-weight:900;
+      line-height:1.4;
+      cursor:pointer;
+      box-shadow:0 6px 16px rgba(161,91,20,.06);
+      transition:transform .18s ease,border-color .18s ease,background .18s ease,box-shadow .18s ease;
+    }
+
+    .data-tool-btn:active{
+      transform:scale(.98);
+    }
+
+    .data-tool-btn.active{
+      color:#fff;
+      border-color:transparent;
+      background:linear-gradient(115deg,#E87C1D,#F5A13A,#FFC957);
+      box-shadow:0 9px 20px rgba(214,111,19,.20);
+    }
+
+    .data-tool-icon{
+      display:block;
+      margin-bottom:3px;
+      font-size:18px;
+    }
+
+    .data-center-content{
+      position:relative;
+      min-height:175px;
+      padding:15px;
+      border:1px solid rgba(244,160,48,.22);
+      border-radius:18px;
+      background:linear-gradient(145deg,#FFFEFA,#FFF7E4);
+      animation:reveal .35s ease both;
+    }
+
+    .data-center-placeholder{
+      min-height:145px;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+      gap:7px;
+      text-align:center;
+      color:#9A785E;
+      font-size:12px;
+      line-height:1.65;
+    }
+
+    .data-center-placeholder .big-icon{
+      font-size:28px;
+    }
+
+    .dc-panel-title{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:8px;
+      margin-bottom:13px;
+      color:#563B28;
+      font-size:15px;
+      font-weight:950;
+    }
+
+    .dc-subnote{
+      margin-top:11px;
+      color:#9A775C;
+      font-size:10px;
+      line-height:1.55;
+    }
+
+    /* 連莊走勢 */
+    .repeat-chart{
+      height:155px;
+      display:flex;
+      align-items:flex-end;
+      gap:5px;
+      padding:22px 3px 3px;
+      overflow-x:auto;
+      border-bottom:1px solid #EFCF9C;
+    }
+
+    .repeat-col{
+      flex:1 0 28px;
+      min-width:28px;
+      text-align:center;
+    }
+
+    .repeat-count{
+      margin-bottom:4px;
+      color:#B96D22;
+      font-size:9px;
+      font-weight:900;
+    }
+
+    .repeat-bar-track{
+      height:105px;
+      display:flex;
+      align-items:flex-end;
+      justify-content:center;
+    }
+
+    .repeat-bar-fill{
+      width:18px;
+      min-height:7px;
+      border-radius:8px 8px 3px 3px;
+      background:linear-gradient(180deg,#FFD36A,#F39A31,#DE721B);
+      box-shadow:0 5px 10px rgba(205,100,18,.14);
+      transform-origin:bottom;
+      animation:barGrow .48s ease both;
+    }
+
+    @keyframes barGrow{
+      from{transform:scaleY(.05);opacity:.3}
+      to{transform:scaleY(1);opacity:1}
+    }
+
+    .repeat-date{
+      margin-top:5px;
+      color:#96745A;
+      font-size:8px;
+      white-space:nowrap;
+    }
+
+    .repeat-summary{
+      display:flex;
+      flex-wrap:wrap;
+      gap:6px;
+      margin-top:12px;
+    }
+
+    .repeat-chip{
+      padding:6px 8px;
+      border-radius:999px;
+      background:#FFF0CA;
+      color:#9C6227;
+      font-size:10px;
+      font-weight:800;
+    }
+
+    /* 分佈圖 */
+    .distribution-grid{
+      display:grid;
+      grid-template-columns:repeat(7,1fr);
+      gap:6px;
+    }
+
+    .distribution-cell{
+      aspect-ratio:1/1;
+      min-height:42px;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+      border:1px solid rgba(231,139,42,.20);
+      border-radius:12px;
+      color:#5C412E;
+      box-shadow:inset 0 1px 0 rgba(255,255,255,.50);
+    }
+
+    .distribution-number{
+      font-size:12px;
+      font-weight:950;
+    }
+
+    .distribution-count{
+      margin-top:1px;
+      font-size:8px;
+      opacity:.72;
+    }
+
+    .distribution-legend{
+      display:flex;
+      justify-content:flex-end;
+      align-items:center;
+      gap:5px;
+      margin-top:10px;
+      color:#9B7658;
+      font-size:9px;
+    }
+
+    .legend-box{
+      width:38px;
+      height:8px;
+      border-radius:999px;
+      background:linear-gradient(90deg,rgba(244,154,50,.12),rgba(244,154,50,.85));
+    }
+
+    /* 未開統計 */
+    .missing-list{
+      display:flex;
+      flex-direction:column;
+      gap:8px;
+    }
+
+    .missing-row{
+      display:grid;
+      grid-template-columns:34px 42px 1fr 58px;
+      align-items:center;
+      gap:8px;
+    }
+
+    .missing-rank{
+      color:#B67A42;
+      font-size:10px;
+      font-weight:900;
+    }
+
+    .missing-number{
+      width:36px;
+      height:36px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      border-radius:50%;
+      background:linear-gradient(145deg,#FFD972,#F6A239);
+      color:#fff;
+      font-size:12px;
+      font-weight:950;
+      border:2px solid #fff;
+      box-shadow:0 4px 10px rgba(198,92,12,.16);
+    }
+
+    .missing-track{
+      height:8px;
+      overflow:hidden;
+      border-radius:999px;
+      background:#F6E8CF;
+    }
+
+    .missing-fill{
+      height:100%;
+      border-radius:999px;
+      background:linear-gradient(90deg,#FFCE5E,#EE8B29);
+      animation:widthGrow .5s ease both;
+    }
+
+    @keyframes widthGrow{
+      from{width:0!important}
+    }
+
+    .missing-value{
+      text-align:right;
+      color:#6E503A;
+      font-size:10px;
+      font-weight:900;
+    }
+
+    /* 每日擋牌 */
+    .block-hero{
+      padding:14px;
+      border-radius:16px;
+      background:linear-gradient(135deg,#FFF0CB,#FFF9E9);
+      text-align:center;
+    }
+
+    .block-label{
+      margin-bottom:11px;
+      color:#8C633F;
+      font-size:11px;
+      font-weight:850;
+    }
+
+    .block-balls{
+      display:flex;
+      flex-wrap:wrap;
+      justify-content:center;
+      gap:9px;
+    }
+
+    .block-ball{
+      width:48px;
+      height:48px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      border-radius:50%;
+      color:#fff;
+      font-size:16px;
+      font-weight:950;
+      border:2px solid #fff;
+      background:radial-gradient(circle at 30% 25%,#FFC86A,#EB8528 50%,#CC5D19 100%);
+      box-shadow:0 7px 15px rgba(191,79,12,.20);
+      animation:ballPop .45s cubic-bezier(.22,1.35,.5,1) both;
+    }
+
+    .block-detail-list{
+      margin-top:12px;
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:7px;
+    }
+
+    .block-detail{
+      padding:9px 10px;
+      border-radius:12px;
+      background:#FFFDF9;
+      border:1px solid #F2D9B0;
+      color:#79583F;
+      font-size:9px;
+      line-height:1.55;
+    }
+
+    .block-detail strong{
+      color:#D6741C;
+      font-size:11px;
+    }
+
     /* =========================
        分析紀錄
     ========================= */
@@ -1171,6 +1540,76 @@
       </div>
     </section>
 
+
+
+    <!-- =========================
+         539數據中心
+    ========================= -->
+    <section class="card data-center-card">
+      <div class="data-center-head">
+        <div class="data-center-title">
+          📊 539數據中心
+        </div>
+
+        <div
+          id="dataCenterStatus"
+          class="data-center-status"
+        >
+          等待資料
+        </div>
+      </div>
+
+      <div class="data-tool-grid">
+        <button
+          class="data-tool-btn active"
+          data-tool="repeat"
+          type="button"
+        >
+          <span class="data-tool-icon">📈</span>
+          連莊統計走勢圖
+        </button>
+
+        <button
+          class="data-tool-btn"
+          data-tool="distribution"
+          type="button"
+        >
+          <span class="data-tool-icon">🎯</span>
+          開獎號碼分佈圖
+        </button>
+
+        <button
+          class="data-tool-btn"
+          data-tool="missing"
+          type="button"
+        >
+          <span class="data-tool-icon">⏳</span>
+          未開號碼統計
+        </button>
+
+        <button
+          class="data-tool-btn"
+          data-tool="block"
+          type="button"
+        >
+          <span class="data-tool-icon">🛑</span>
+          每日擋牌號
+        </button>
+      </div>
+
+      <div
+        id="dataCenterContent"
+        class="data-center-content"
+      >
+        <div class="data-center-placeholder">
+          <div class="big-icon">📊</div>
+          <div>
+            正在讀取最新539統計資料…
+          </div>
+        </div>
+      </div>
+    </section>
+
     <div class="footer">
       趨勢資料分析僅供參考
     </div>
@@ -1282,6 +1721,21 @@
 
     const closeHistoryBtn =
       document.getElementById("closeHistoryBtn");
+
+    const dataCenterStatus =
+      document.getElementById("dataCenterStatus");
+
+    const dataCenterContent =
+      document.getElementById("dataCenterContent");
+
+    const dataToolButtons =
+      Array.from(
+        document.querySelectorAll(".data-tool-btn")
+      );
+
+    let dashboardData = null;
+    let activeDataTool = "repeat";
+
 
 
     /* =========================
@@ -1425,6 +1879,8 @@
           "app-entering"
         );
       }
+
+      loadDashboardFromWorker();
     }
 
 
@@ -1903,6 +2359,456 @@
     }
 
 
+
+
+    /* =========================
+       539數據中心
+    ========================= */
+
+    function parseDashboardData(raw){
+      if(!raw){
+        return null;
+      }
+
+      if(
+        typeof raw === "object" &&
+        raw !== null
+      ){
+        return raw;
+      }
+
+      try{
+        const parsed = JSON.parse(raw);
+
+        return (
+          parsed &&
+          typeof parsed === "object"
+        )
+          ? parsed
+          : null;
+      }catch{
+        return null;
+      }
+    }
+
+
+    function setDashboardData(raw){
+      const parsed =
+        parseDashboardData(raw);
+
+      if(!parsed){
+        return false;
+      }
+
+      dashboardData = parsed;
+
+      const date =
+        parsed.latest_date || "最新";
+
+      dataCenterStatus.textContent =
+        "資料基準 " + date;
+
+      renderDataCenter();
+
+      return true;
+    }
+
+
+    async function loadDashboardFromWorker(){
+      if(!getSavedToken()){
+        return;
+      }
+
+      try{
+        const data = await callAPI(
+          {
+            action:"dashboard"
+          },
+          true
+        );
+
+        if(
+          data.available &&
+          data.dashboard
+        ){
+          setDashboardData(
+            data.dashboard
+          );
+        }else if(!dashboardData){
+          dataCenterStatus.textContent =
+            "尚未建立資料";
+
+          dataCenterContent.innerHTML =
+            '<div class="data-center-placeholder">' +
+              '<div class="big-icon">📊</div>' +
+              '<div>先執行一次「開始分析」<br>系統就會建立最新539數據中心。</div>' +
+            '</div>';
+        }
+
+      }catch(error){
+        if(error.status === 401){
+          return;
+        }
+
+        if(!dashboardData){
+          dataCenterStatus.textContent =
+            "讀取失敗";
+
+          dataCenterContent.innerHTML =
+            '<div class="data-center-placeholder">' +
+              '<div class="big-icon">⚠️</div>' +
+              '<div>目前無法讀取數據中心<br>完成一次分析後會再自動更新。</div>' +
+            '</div>';
+        }
+      }
+    }
+
+
+    function renderDataCenter(){
+      if(!dashboardData){
+        return;
+      }
+
+      if(activeDataTool === "repeat"){
+        renderRepeatTrend();
+        return;
+      }
+
+      if(activeDataTool === "distribution"){
+        renderDistribution();
+        return;
+      }
+
+      if(activeDataTool === "missing"){
+        renderMissingStats();
+        return;
+      }
+
+      if(activeDataTool === "block"){
+        renderBlockNumbers();
+      }
+    }
+
+
+    function renderRepeatTrend(){
+      const raw = Array.isArray(
+        dashboardData?.repeat_trend
+      )
+        ? dashboardData.repeat_trend
+        : [];
+
+      if(raw.length === 0){
+        dataCenterContent.innerHTML =
+          '<div class="data-center-placeholder">目前沒有足夠的連莊統計資料</div>';
+        return;
+      }
+
+      // 圖表由舊到新排列，右側為最新
+      const items =
+        raw.slice(0,12).reverse();
+
+      const maxCount = Math.max(
+        1,
+        ...items.map(item => Number(item.count || 0))
+      );
+
+      const chart = items.map(
+        (item,index)=>{
+          const count = Number(
+            item.count || 0
+          );
+
+          const height =
+            count === 0
+              ? 7
+              : Math.max(
+                  18,
+                  Math.round(
+                    (count / maxCount) * 100
+                  )
+                );
+
+          const repeatNums =
+            Array.isArray(item.numbers)
+              ? item.numbers.join("、")
+              : "";
+
+          return (
+            '<div class="repeat-col" title="' +
+              escapeHtml(
+                repeatNums
+                  ? item.date + ' 連莊：' + repeatNums
+                  : item.date + ' 無連莊號'
+              ) +
+            '">' +
+              '<div class="repeat-count">' +
+                count +
+              '</div>' +
+              '<div class="repeat-bar-track">' +
+                '<div class="repeat-bar-fill" style="height:' +
+                  height +
+                'px;animation-delay:' +
+                  (index*.035).toFixed(2) +
+                's"></div>' +
+              '</div>' +
+              '<div class="repeat-date">' +
+                escapeHtml(item.date || "") +
+              '</div>' +
+            '</div>'
+          );
+        }
+      ).join("");
+
+      const newestWithRepeat = raw
+        .filter(item => Number(item.count || 0) > 0)
+        .slice(0,5)
+        .map(item => (
+          '<span class="repeat-chip">' +
+            escapeHtml(item.date || "") +
+            '｜' +
+            escapeHtml(
+              (item.numbers || []).join("、")
+            ) +
+          '</span>'
+        ))
+        .join("");
+
+      dataCenterContent.innerHTML =
+        '<div class="dc-panel-title">' +
+          '<span>📈 最近連莊顆數走勢</span>' +
+          '<span style="font-size:10px;color:#9A765B">最近12次</span>' +
+        '</div>' +
+        '<div class="repeat-chart">' +
+          chart +
+        '</div>' +
+        '<div class="repeat-summary">' +
+          (
+            newestWithRepeat ||
+            '<span class="repeat-chip">近期沒有連莊號</span>'
+          ) +
+        '</div>' +
+        '<div class="dc-subnote">每一柱代表該期與前一期重複開出的號碼顆數。</div>';
+    }
+
+
+    function renderDistribution(){
+      const items = Array.isArray(
+        dashboardData?.distribution
+      )
+        ? dashboardData.distribution
+        : [];
+
+      if(items.length === 0){
+        dataCenterContent.innerHTML =
+          '<div class="data-center-placeholder">目前沒有號碼分佈資料</div>';
+        return;
+      }
+
+      const maxCount = Math.max(
+        1,
+        ...items.map(item => Number(item.count || 0))
+      );
+
+      const cells = items.map(item=>{
+        const count = Number(
+          item.count || 0
+        );
+
+        const ratio = count / maxCount;
+        const alpha = (
+          .10 + ratio * .70
+        ).toFixed(2);
+
+        const textColor =
+          ratio > .60
+            ? "#FFFFFF"
+            : "#5C412E";
+
+        return (
+          '<div class="distribution-cell" ' +
+            'style="background:rgba(244,154,50,' +
+              alpha +
+            ');color:' +
+              textColor +
+            '" ' +
+            'title="近30期出現 ' +
+              count +
+            ' 次">' +
+              '<div class="distribution-number">' +
+                escapeHtml(item.number) +
+              '</div>' +
+              '<div class="distribution-count">' +
+                count + '次' +
+              '</div>' +
+          '</div>'
+        );
+      }).join("");
+
+      dataCenterContent.innerHTML =
+        '<div class="dc-panel-title">' +
+          '<span>🎯 近30期開獎號碼分佈</span>' +
+          '<span style="font-size:10px;color:#9A765B">01～39</span>' +
+        '</div>' +
+        '<div class="distribution-grid">' +
+          cells +
+        '</div>' +
+        '<div class="distribution-legend">' +
+          '<span>少</span>' +
+          '<span class="legend-box"></span>' +
+          '<span>多</span>' +
+        '</div>' +
+        '<div class="dc-subnote">顏色越深，代表該號碼在最近30期出現次數越多。</div>';
+    }
+
+
+    function renderMissingStats(){
+      const items = Array.isArray(
+        dashboardData?.missing
+      )
+        ? dashboardData.missing.slice(0,12)
+        : [];
+
+      if(items.length === 0){
+        dataCenterContent.innerHTML =
+          '<div class="data-center-placeholder">目前沒有未開號碼資料</div>';
+        return;
+      }
+
+      const maxMiss = Math.max(
+        1,
+        ...items.map(item => Number(item.miss || 0))
+      );
+
+      const rows = items.map(
+        (item,index)=>{
+          const miss = Number(
+            item.miss || 0
+          );
+
+          const width = Math.max(
+            4,
+            Math.round(
+              (miss / maxMiss) * 100
+            )
+          );
+
+          return (
+            '<div class="missing-row">' +
+              '<div class="missing-rank">#' +
+                String(index+1).padStart(2,"0") +
+              '</div>' +
+              '<div class="missing-number">' +
+                escapeHtml(item.number) +
+              '</div>' +
+              '<div class="missing-track">' +
+                '<div class="missing-fill" style="width:' +
+                  width +
+                '%"></div>' +
+              '</div>' +
+              '<div class="missing-value">' +
+                miss + '期未開' +
+              '</div>' +
+            '</div>'
+          );
+        }
+      ).join("");
+
+      dataCenterContent.innerHTML =
+        '<div class="dc-panel-title">' +
+          '<span>⏳ 最久未開號碼</span>' +
+          '<span style="font-size:10px;color:#9A765B">前12名</span>' +
+        '</div>' +
+        '<div class="missing-list">' +
+          rows +
+        '</div>' +
+        '<div class="dc-subnote">0期代表最新一期有開；數字越高代表連續未開期數越長。</div>';
+    }
+
+
+    function renderBlockNumbers(){
+      const numbers = Array.isArray(
+        dashboardData?.block_numbers
+      )
+        ? dashboardData.block_numbers
+        : [];
+
+      const detail = Array.isArray(
+        dashboardData?.block_detail
+      )
+        ? dashboardData.block_detail
+        : [];
+
+      if(numbers.length === 0){
+        dataCenterContent.innerHTML =
+          '<div class="data-center-placeholder">目前沒有每日擋牌資料</div>';
+        return;
+      }
+
+      const balls = numbers.map(
+        (number,index)=> (
+          '<div class="block-ball" style="animation-delay:' +
+            (index*.09).toFixed(2) +
+          's">' +
+            escapeHtml(number) +
+          '</div>'
+        )
+      ).join("");
+
+      const detailHtml = detail.map(item=> (
+        '<div class="block-detail">' +
+          '<strong>' +
+            escapeHtml(item.number) +
+          '</strong><br>' +
+          '母盤分 ' +
+            escapeHtml(item.score) +
+          '｜近10期 ' +
+            escapeHtml(item.freq10) +
+          '次<br>' +
+          '目前未開 ' +
+            escapeHtml(item.miss) +
+          '期' +
+        '</div>'
+      )).join("");
+
+      dataCenterContent.innerHTML =
+        '<div class="dc-panel-title">' +
+          '<span>🛑 今日擋牌參考</span>' +
+          '<span style="font-size:10px;color:#9A765B">5顆</span>' +
+        '</div>' +
+        '<div class="block-hero">' +
+          '<div class="block-label">依目前母盤綜合評分較低的5顆整理</div>' +
+          '<div class="block-balls">' +
+            balls +
+          '</div>' +
+        '</div>' +
+        '<div class="block-detail-list">' +
+          detailHtml +
+        '</div>' +
+        '<div class="dc-subnote">擋牌號屬於趨勢避開參考，不代表該號碼一定不會開出。</div>';
+    }
+
+
+    dataToolButtons.forEach(button=>{
+      button.addEventListener(
+        "click",
+        ()=>{
+          activeDataTool =
+            button.dataset.tool ||
+            "repeat";
+
+          dataToolButtons.forEach(btn=>{
+            btn.classList.toggle(
+              "active",
+              btn === button
+            );
+          });
+
+          renderDataCenter();
+        }
+      );
+    });
+
+
     /* =========================
        Loading
     ========================= */
@@ -2004,6 +2910,12 @@
               data.result,
               targetDate
             );
+
+          if(data.dashboard){
+            setDashboardData(
+              data.dashboard
+            );
+          }
 
         }catch(error){
 
