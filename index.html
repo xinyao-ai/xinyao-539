@@ -1142,6 +1142,291 @@
 
 
     /* =========================
+       上一期開獎驗證
+    ========================= */
+
+    function buildReviewPredictionBalls(
+      numbers,
+      hits
+    ){
+      const hitSet =
+        new Set(
+          Array.isArray(hits)
+            ? hits
+            : []
+        );
+
+      return (
+        Array.isArray(numbers)
+          ? numbers
+          : []
+      )
+        .map(number=>{
+          const isHit =
+            hitSet.has(
+              number
+            );
+
+          return (
+            '<span class="review-ball' +
+              (
+                isHit
+                  ? ' hit'
+                  : ''
+              ) +
+            '">' +
+              escapeHtml(number) +
+            '</span>'
+          );
+        })
+        .join("");
+    }
+
+
+    function buildReviewDrawBalls(
+      numbers
+    ){
+      return (
+        Array.isArray(numbers)
+          ? numbers
+          : []
+      )
+        .map(number=>(
+          '<span class="review-draw-ball">' +
+            escapeHtml(number) +
+          '</span>'
+        ))
+        .join("");
+    }
+
+
+    function buildReviewBox(
+      review,
+      type
+    ){
+      const draw =
+        drawReviewData?.draw;
+
+      if(!draw){
+        return "";
+      }
+
+      const title =
+        type === "system"
+          ? "🔎 系統分析｜上一期開獎驗證"
+          : "🔎 芯瑤個人分析｜上一期開獎驗證";
+
+      if(
+        !review ||
+        !review.available
+      ){
+        return (
+          '<div class="draw-review-box">' +
+            '<div class="draw-review-head">' +
+              '<div class="draw-review-title">' +
+                title +
+              '</div>' +
+              '<div class="draw-review-status">' +
+                escapeHtml(
+                  draw.display_date ||
+                  ""
+                ) +
+              '</div>' +
+            '</div>' +
+            '<div class="draw-review-empty">' +
+              '此期沒有可驗證的分享紀錄。' +
+            '</div>' +
+            '<div class="draw-review-label">🎱 本期開獎號碼</div>' +
+            '<div class="draw-review-balls">' +
+              buildReviewDrawBalls(
+                draw.numbers
+              ) +
+            '</div>' +
+          '</div>'
+        );
+      }
+
+      const predictions =
+        type === "personal"
+          ? (
+              review.main_numbers ||
+              review.prediction_numbers ||
+              []
+            )
+          : (
+              review.prediction_numbers ||
+              []
+            );
+
+      const hits =
+        review.hits ||
+        [];
+
+      const hitCount =
+        Number(
+          review.hit_count ||
+          0
+        );
+
+      return (
+        '<div class="draw-review-box">' +
+          '<div class="draw-review-head">' +
+            '<div class="draw-review-title">' +
+              title +
+            '</div>' +
+            '<div class="draw-review-status' +
+              (
+                hitCount > 0
+                  ? ' hit'
+                  : ''
+              ) +
+            '">' +
+              (
+                hitCount > 0
+                  ? '⭕ 命中 ' + hitCount + ' 顆'
+                  : '本期未命中'
+              ) +
+            '</div>' +
+          '</div>' +
+
+          '<div class="draw-review-label">分享號碼</div>' +
+          '<div class="draw-review-balls">' +
+            buildReviewPredictionBalls(
+              predictions,
+              hits
+            ) +
+          '</div>' +
+
+          '<div class="draw-review-hit-text' +
+            (
+              hitCount > 0
+                ? ''
+                : ' none'
+            ) +
+          '">' +
+            (
+              hitCount > 0
+                ? '✅ 命中號碼：' +
+                  hits.join("、")
+                : '本期分享號碼沒有與開獎號碼重複。'
+            ) +
+          '</div>' +
+
+          '<div class="draw-review-label">' +
+            '🎱 ' +
+            escapeHtml(
+              draw.display_date ||
+              ""
+            ) +
+            ' 開獎號碼' +
+          '</div>' +
+
+          '<div class="draw-review-balls">' +
+            buildReviewDrawBalls(
+              draw.numbers
+            ) +
+          '</div>' +
+        '</div>'
+      );
+    }
+
+
+    function renderDrawReview(){
+      if(
+        !drawReviewData ||
+        !drawReviewData.draw
+      ){
+        systemDrawReview.classList.add(
+          "hidden"
+        );
+
+        personalDrawReview.classList.add(
+          "hidden"
+        );
+
+        return;
+      }
+
+      systemDrawReview.classList.remove(
+        "hidden"
+      );
+
+      personalDrawReview.classList.remove(
+        "hidden"
+      );
+
+      systemDrawReview.innerHTML =
+        buildReviewBox(
+          drawReviewData.system,
+          "system"
+        );
+
+      personalDrawReview.innerHTML =
+        buildReviewBox(
+          drawReviewData.personal,
+          "personal"
+        );
+    }
+
+
+    async function loadDrawReview(){
+      if(!getSavedToken()){
+        return;
+      }
+
+      systemDrawReview.classList.remove(
+        "hidden"
+      );
+
+      personalDrawReview.classList.remove(
+        "hidden"
+      );
+
+      systemDrawReview.innerHTML =
+        '<div class="draw-review-loading">' +
+          '正在檢查上一期開獎結果…' +
+        '</div>';
+
+      personalDrawReview.innerHTML =
+        '<div class="draw-review-loading">' +
+          '正在檢查上一期開獎結果…' +
+        '</div>';
+
+      try{
+        const data =
+          await callAPI(
+            {
+              action:
+                "draw_review"
+            },
+            true
+          );
+
+        drawReviewData =
+          data;
+
+        renderDrawReview();
+
+      }catch(error){
+        if(
+          error.status === 401
+        ){
+          return;
+        }
+
+        systemDrawReview.classList.add(
+          "hidden"
+        );
+
+        personalDrawReview.classList.add(
+          "hidden"
+        );
+      }
+    }
+
+
+
+    /* =========================
        芯瑤今日個人分析
     ========================= */
     .personal-analysis-card{
@@ -2507,6 +2792,179 @@
     }
 
 
+
+    /* =================================================
+       上一期開獎驗證
+    ================================================= */
+    .draw-review-box{
+      margin-top:16px;
+      padding:15px;
+      border-radius:18px;
+      border:1px solid #F2CEA0;
+      background:
+        linear-gradient(
+          145deg,
+          #FFFDFA,
+          #FFF4DF
+        );
+      box-shadow:
+        0 8px 20px
+        rgba(212,120,30,.06);
+    }
+
+    .draw-review-head{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-bottom:11px;
+    }
+
+    .draw-review-title{
+      color:#61412E;
+      font-size:12px;
+      font-weight:950;
+    }
+
+    .draw-review-status{
+      padding:5px 9px;
+      border-radius:999px;
+      background:#FFE8B7;
+      color:#A75D1D;
+      font-size:10px;
+      font-weight:950;
+      white-space:nowrap;
+    }
+
+    .draw-review-status.hit{
+      background:#FFE3E3;
+      color:#C92F36;
+      border:1px solid #FFB7BA;
+    }
+
+    .draw-review-label{
+      margin:9px 0 7px;
+      color:#8A6247;
+      font-size:10px;
+      font-weight:900;
+    }
+
+    .draw-review-balls{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+      align-items:center;
+    }
+
+    .review-ball{
+      position:relative;
+      min-width:38px;
+      height:38px;
+      padding:0 7px;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      border-radius:50%;
+      color:#fff;
+      font-size:12px;
+      font-weight:950;
+      background:
+        linear-gradient(
+          145deg,
+          #FFD46C,
+          #F28A18
+        );
+      border:2px solid #fff;
+      box-shadow:
+        0 5px 12px
+        rgba(218,114,18,.16);
+    }
+
+    .review-ball.hit{
+      border:3px solid #E8343E !important;
+      box-shadow:
+        0 0 0 4px rgba(232,52,62,.16),
+        0 6px 14px rgba(196,39,49,.18) !important;
+      color:#fff;
+      background:
+        linear-gradient(
+          145deg,
+          #FF9B55,
+          #F06B24
+        );
+    }
+
+    .review-ball.hit::after{
+      content:"";
+      position:absolute;
+      inset:-7px;
+      border:2px solid rgba(225,39,49,.46);
+      border-radius:50%;
+      pointer-events:none;
+    }
+
+    .review-draw-ball{
+      min-width:34px;
+      height:34px;
+      padding:0 6px;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      border-radius:50%;
+      background:#FFF0C6;
+      border:1px solid #F1C579;
+      color:#8C561F;
+      font-size:11px;
+      font-weight:950;
+    }
+
+    .draw-review-hit-text{
+      margin-top:9px;
+      color:#B94336;
+      font-size:10px;
+      line-height:1.6;
+      font-weight:900;
+    }
+
+    .draw-review-hit-text.none{
+      color:#9A775B;
+    }
+
+    .draw-review-empty{
+      padding:10px 4px;
+      color:#A1836A;
+      font-size:10px;
+      line-height:1.6;
+    }
+
+    .draw-review-loading{
+      margin-top:14px;
+      padding:12px;
+      border-radius:14px;
+      background:#FFF8EA;
+      color:#A17A5A;
+      text-align:center;
+      font-size:10px;
+    }
+
+    @media(max-width:480px){
+      .draw-review-box{
+        padding:13px;
+      }
+
+      .review-ball{
+        min-width:36px;
+        height:36px;
+      }
+
+      .review-draw-ball{
+        min-width:32px;
+        height:32px;
+      }
+    }
+
+
 </style>
 </head>
 
@@ -2769,6 +3227,11 @@
       >
         選擇玩法後，點擊「開始分析」
       </div>
+
+      <div
+        id="systemDrawReview"
+        class="hidden"
+      ></div>
     </section>
 
     <!-- =========================
@@ -2814,6 +3277,11 @@
           正在讀取芯瑤今日個人分析…
         </div>
       </div>
+
+      <div
+        id="personalDrawReview"
+        class="hidden"
+      ></div>
     </section>
 
 
@@ -3151,6 +3619,12 @@
     const personalSaveBtn =
       document.getElementById("personalSaveBtn");
 
+    const systemDrawReview =
+      document.getElementById("systemDrawReview");
+
+    const personalDrawReview =
+      document.getElementById("personalDrawReview");
+
     let dashboardData = null;
     let blockNoticeData = null;
     let blockNoticeLoading = false;
@@ -3159,6 +3633,8 @@
     let personalAnalysisData = null;
     let personalCanEdit = false;
     let currentIsAdmin = false;
+
+    let drawReviewData = null;
 
 
 
@@ -3311,6 +3787,7 @@
 
       loadDashboardFromWorker();
       loadPersonalAnalysis();
+      loadDrawReview();
     }
 
 
@@ -3551,6 +4028,17 @@
 
         currentIsAdmin =
           false;
+
+        drawReviewData =
+          null;
+
+        systemDrawReview.classList.add(
+          "hidden"
+        );
+
+        personalDrawReview.classList.add(
+          "hidden"
+        );
 
         memberAccount.value="";
 
@@ -3856,6 +4344,7 @@
       }
 
       personalDateBadge.textContent =
+        data.target_display_date ||
         data.display_date ||
         data.date ||
         "今日";
@@ -4177,6 +4666,8 @@
             "✓ 今日個人分析發布成功";
 
           renderPersonalAnalysis();
+
+          loadDrawReview();
 
           window.setTimeout(
             ()=>{
@@ -4984,6 +5475,8 @@
               data.dashboard
             );
           }
+
+          loadDrawReview();
 
         }catch(error){
 
