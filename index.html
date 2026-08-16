@@ -2199,7 +2199,315 @@
         scroll-behavior:auto!important;
       }
     }
-  </style>
+  
+    /* =================================================
+       芯瑤今日個人分析｜高辨識度加強版
+       只改外觀，不影響原本 Cloudflare / JS 功能
+    ================================================= */
+    .personal-analysis-card{
+      position:relative;
+      overflow:visible;
+      margin-top:24px;
+      padding:27px 22px 22px;
+      border:3px solid #FFA444 !important;
+      border-radius:28px !important;
+      background:
+        linear-gradient(
+          145deg,
+          #FFFDF8 0%,
+          #FFF5DD 58%,
+          #FFF0D5 100%
+        ) !important;
+      box-shadow:
+        0 18px 44px rgba(235,131,24,.20),
+        0 0 0 7px rgba(255,179,71,.10) !important;
+    }
+
+    .personal-analysis-card::before{
+      content:"";
+      position:absolute;
+      width:210px;
+      height:210px;
+      right:-105px;
+      top:-105px;
+      border-radius:50%;
+      background:
+        radial-gradient(
+          circle,
+          rgba(255,185,73,.28) 0%,
+          rgba(255,185,73,0) 70%
+        );
+      pointer-events:none;
+    }
+
+    .personal-analysis-card::after{
+      content:"";
+      position:absolute;
+      left:24px;
+      right:24px;
+      top:76px;
+      height:1px;
+      background:
+        linear-gradient(
+          90deg,
+          transparent,
+          rgba(239,132,28,.32),
+          transparent
+        );
+      pointer-events:none;
+    }
+
+    .personal-ribbon{
+      position:absolute;
+      top:-15px;
+      left:20px;
+      z-index:4;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-height:34px;
+      padding:7px 15px;
+      border-radius:999px;
+      color:#fff;
+      font-size:11px;
+      font-weight:950;
+      letter-spacing:.3px;
+      background:
+        linear-gradient(
+          100deg,
+          #FF5B93,
+          #FF7B72,
+          #F39B30
+        );
+      border:2px solid #FFF8EF;
+      box-shadow:
+        0 8px 18px rgba(240,93,102,.24);
+      animation:
+        personalRibbonGlow 2.8s ease-in-out infinite;
+    }
+
+    @keyframes personalRibbonGlow{
+      0%,100%{
+        box-shadow:
+          0 8px 18px rgba(240,93,102,.20);
+      }
+      50%{
+        box-shadow:
+          0 9px 25px rgba(240,93,102,.34);
+      }
+    }
+
+    .personal-head{
+      position:relative;
+      z-index:2;
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:12px;
+      margin:3px 0 20px;
+    }
+
+    .personal-title{
+      color:#5B3825 !important;
+      font-size:21px !important;
+      font-weight:1000 !important;
+      line-height:1.35;
+      letter-spacing:.2px;
+      text-shadow:
+        0 1px 0 rgba(255,255,255,.8);
+    }
+
+    .personal-subtitle{
+      margin-top:6px;
+      color:#C06F2D;
+      font-size:11px;
+      font-weight:850;
+      line-height:1.5;
+    }
+
+    .personal-head-actions{
+      display:flex;
+      align-items:center;
+      justify-content:flex-end;
+      gap:7px;
+      flex-wrap:wrap;
+    }
+
+    .personal-date-badge{
+      padding:7px 11px !important;
+      border-radius:999px;
+      background:#FFF0C3 !important;
+      color:#B3651E !important;
+      border:1px solid #FFD17C;
+      font-size:10px !important;
+      font-weight:950 !important;
+      white-space:nowrap;
+      box-shadow:
+        0 4px 10px rgba(224,130,30,.10);
+    }
+
+    .personal-edit-btn{
+      border:0;
+      min-height:34px;
+      padding:7px 12px !important;
+      border-radius:999px;
+      background:
+        linear-gradient(
+          105deg,
+          #F07C19,
+          #F69B29,
+          #FFB945
+        ) !important;
+      color:#fff;
+      font-size:10px !important;
+      font-weight:950 !important;
+      cursor:pointer;
+      box-shadow:
+        0 7px 16px rgba(220,106,14,.22) !important;
+      transition:
+        transform .16s ease,
+        box-shadow .16s ease;
+    }
+
+    .personal-edit-btn:hover{
+      transform:translateY(-1px);
+      box-shadow:
+        0 9px 20px rgba(220,106,14,.28) !important;
+    }
+
+    .personal-content{
+      position:relative;
+      z-index:2;
+      padding:18px !important;
+      border-radius:21px !important;
+      border:2px solid #FFD091 !important;
+      background:
+        linear-gradient(
+          145deg,
+          rgba(255,254,249,.98),
+          rgba(255,244,218,.98)
+        ) !important;
+      min-height:100px;
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.9),
+        0 10px 24px rgba(230,141,42,.07);
+    }
+
+    .personal-row{
+      margin-bottom:17px !important;
+    }
+
+    .personal-row-label{
+      margin-bottom:9px !important;
+      color:#72472D !important;
+      font-size:13px !important;
+      font-weight:1000 !important;
+    }
+
+    .personal-content .number-ball{
+      border:2px solid #fff !important;
+      box-shadow:
+        0 7px 16px rgba(225,121,18,.22) !important;
+    }
+
+    .personal-tail-pill{
+      display:inline-flex;
+      align-items:center;
+      min-height:37px;
+      padding:8px 14px !important;
+      border-radius:999px;
+      color:#A4591B !important;
+      background:
+        linear-gradient(
+          145deg,
+          #FFE7AD,
+          #FFD685
+        ) !important;
+      border:1px solid #FFC665;
+      font-size:13px !important;
+      font-weight:1000 !important;
+      box-shadow:
+        0 5px 12px rgba(225,128,24,.12);
+    }
+
+    .personal-note{
+      margin-top:16px !important;
+      padding:13px 14px !important;
+      border-radius:16px !important;
+      background:
+        linear-gradient(
+          145deg,
+          #FFF0CD,
+          #FFE7BA
+        ) !important;
+      border-left:5px solid #F2932D;
+      color:#68432D !important;
+      font-size:12px !important;
+      line-height:1.7 !important;
+      font-weight:800 !important;
+      box-shadow:
+        inset 0 0 0 1px rgba(237,153,54,.12);
+    }
+
+    .personal-note strong{
+      color:#E47019 !important;
+      font-size:12px;
+      font-weight:1000 !important;
+    }
+
+    .personal-empty{
+      padding:26px 12px !important;
+      text-align:center;
+      color:#956C4E !important;
+      font-size:12px !important;
+      line-height:1.8 !important;
+    }
+
+    @media(max-width:480px){
+      .personal-analysis-card{
+        margin-top:23px;
+        padding:25px 16px 17px;
+        border-width:2px !important;
+        border-radius:24px !important;
+      }
+
+      .personal-ribbon{
+        top:-14px;
+        left:14px;
+        min-height:31px;
+        padding:6px 12px;
+        font-size:10px;
+      }
+
+      .personal-head{
+        margin-top:2px;
+        gap:9px;
+      }
+
+      .personal-title{
+        font-size:18px !important;
+      }
+
+      .personal-subtitle{
+        font-size:10px;
+      }
+
+      .personal-content{
+        padding:15px !important;
+        border-radius:18px !important;
+      }
+
+      .personal-date-badge{
+        padding:6px 9px !important;
+      }
+
+      .personal-edit-btn{
+        padding:7px 10px !important;
+      }
+    }
+
+
+</style>
 </head>
 
 <body>
@@ -2467,9 +2775,20 @@
          芯瑤今日個人分析
     ========================= -->
     <section class="card personal-analysis-card">
+
+      <div class="personal-ribbon">
+        💖 芯瑤親選・每日更新
+      </div>
+
       <div class="personal-head">
-        <div class="personal-title">
-          💕 芯瑤今日個人分析
+        <div>
+          <div class="personal-title">
+            💕 芯瑤今日個人分析
+          </div>
+
+          <div class="personal-subtitle">
+            芯瑤本人每日整理的個人看好號碼
+          </div>
         </div>
 
         <div class="personal-head-actions">
