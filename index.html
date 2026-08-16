@@ -2981,6 +2981,108 @@
     }
 
 
+
+    /* =================================================
+       芯瑤個人分析標頭：固定單行排列
+       標題｜分析目標｜編輯按鈕
+    ================================================= */
+    .personal-head{
+      display:flex !important;
+      align-items:center !important;
+      justify-content:space-between !important;
+      gap:8px !important;
+      flex-wrap:nowrap !important;
+      margin:3px 0 18px !important;
+    }
+
+    .personal-head > div:first-child{
+      flex:1 1 auto;
+      min-width:0;
+    }
+
+    .personal-title{
+      white-space:nowrap !important;
+      overflow:visible !important;
+      text-overflow:clip !important;
+      font-size:19px !important;
+      line-height:1.2 !important;
+    }
+
+    .personal-head-actions{
+      flex:0 0 auto !important;
+      display:flex !important;
+      align-items:center !important;
+      justify-content:flex-end !important;
+      gap:6px !important;
+      flex-wrap:nowrap !important;
+      white-space:nowrap !important;
+    }
+
+    .personal-date-badge{
+      flex:0 0 auto !important;
+      min-height:31px !important;
+      padding:6px 9px !important;
+      font-size:9px !important;
+      white-space:nowrap !important;
+    }
+
+    .personal-edit-btn{
+      flex:0 0 auto !important;
+      min-height:32px !important;
+      padding:6px 10px !important;
+      font-size:9px !important;
+      white-space:nowrap !important;
+    }
+
+    @media(max-width:480px){
+      .personal-analysis-card{
+        padding-left:14px !important;
+        padding-right:14px !important;
+      }
+
+      .personal-head{
+        gap:5px !important;
+      }
+
+      .personal-title{
+        font-size:15px !important;
+        letter-spacing:-.2px !important;
+      }
+
+      .personal-head-actions{
+        gap:4px !important;
+      }
+
+      .personal-date-badge{
+        min-height:28px !important;
+        padding:5px 7px !important;
+        font-size:8px !important;
+      }
+
+      .personal-edit-btn{
+        min-height:29px !important;
+        padding:5px 7px !important;
+        font-size:8px !important;
+      }
+    }
+
+    @media(max-width:380px){
+      .personal-title{
+        font-size:14px !important;
+      }
+
+      .personal-date-badge{
+        padding:5px 6px !important;
+        font-size:7.5px !important;
+      }
+
+      .personal-edit-btn{
+        padding:5px 6px !important;
+        font-size:7.5px !important;
+      }
+    }
+
+
 </style>
 </head>
 
