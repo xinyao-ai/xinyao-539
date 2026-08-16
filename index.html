@@ -1142,6 +1142,657 @@
 
 
     /* =========================
+       芯瑤今日個人分析
+    ========================= */
+    .personal-analysis-card{
+      position:relative;
+      overflow:hidden;
+    }
+
+    .personal-analysis-card::before{
+      content:"";
+      position:absolute;
+      width:150px;
+      height:150px;
+      right:-80px;
+      top:-95px;
+      border-radius:50%;
+      background:
+        radial-gradient(
+          circle,
+          rgba(255,196,81,.20),
+          rgba(255,196,81,0)
+        );
+      pointer-events:none;
+    }
+
+    .personal-head{
+      position:relative;
+      z-index:1;
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:12px;
+      margin-bottom:14px;
+    }
+
+    .personal-title{
+      color:#523A29;
+      font-size:17px;
+      font-weight:950;
+      line-height:1.4;
+    }
+
+    .personal-head-actions{
+      display:flex;
+      align-items:center;
+      justify-content:flex-end;
+      gap:7px;
+      flex-wrap:wrap;
+    }
+
+    .personal-date-badge{
+      padding:6px 10px;
+      border-radius:999px;
+      background:#FFF0C7;
+      color:#B66C22;
+      font-size:10px;
+      font-weight:900;
+      white-space:nowrap;
+    }
+
+    .personal-edit-btn{
+      border:0;
+      padding:7px 10px;
+      border-radius:999px;
+      background:
+        linear-gradient(
+          110deg,
+          #E97A1A,
+          #F6AD3F
+        );
+      color:#fff;
+      font-size:10px;
+      font-weight:950;
+      cursor:pointer;
+      box-shadow:
+        0 6px 14px
+        rgba(211,105,17,.18);
+    }
+
+    .personal-content{
+      position:relative;
+      z-index:1;
+      padding:16px;
+      border-radius:18px;
+      border:1px solid rgba(244,160,48,.25);
+      background:
+        linear-gradient(
+          145deg,
+          #FFFEFA,
+          #FFF6DF
+        );
+      min-height:90px;
+    }
+
+    .personal-empty{
+      padding:20px 10px;
+      text-align:center;
+      color:#9A775B;
+      font-size:12px;
+      line-height:1.7;
+    }
+
+    .personal-row{
+      margin-bottom:15px;
+    }
+
+    .personal-row:last-child{
+      margin-bottom:0;
+    }
+
+    .personal-row-label{
+      margin-bottom:8px;
+      color:#805C41;
+      font-size:12px;
+      font-weight:900;
+    }
+
+    .personal-tail-pill{
+      display:inline-flex;
+      align-items:center;
+      min-height:35px;
+      padding:7px 13px;
+      border-radius:999px;
+      color:#A85F20;
+      background:#FFE8B7;
+      font-size:13px;
+      font-weight:950;
+    }
+
+    .personal-note{
+      margin-top:15px;
+      padding:11px 13px;
+      border-radius:14px;
+      background:#FFF0D1;
+      color:#72543F;
+      font-size:12px;
+      line-height:1.65;
+      font-weight:750;
+    }
+
+    .personal-note strong{
+      color:#E57A1E;
+      font-weight:950;
+    }
+
+    /* =========================
+       個人分析編輯視窗
+    ========================= */
+    .personal-modal{
+      position:fixed;
+      inset:0;
+      z-index:80;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:18px;
+      background:rgba(67,43,24,.38);
+      opacity:0;
+      visibility:hidden;
+      transition:
+        opacity .22s ease,
+        visibility .22s ease;
+    }
+
+    .personal-modal.open{
+      opacity:1;
+      visibility:visible;
+    }
+
+    .personal-modal-panel{
+      width:min(100%,470px);
+      max-height:88vh;
+      overflow-y:auto;
+      padding:20px;
+      border-radius:25px;
+      background:
+        linear-gradient(
+          180deg,
+          #FFFDF8,
+          #FFF3D8
+        );
+      border:1px solid rgba(243,177,77,.55);
+      box-shadow:
+        0 24px 60px
+        rgba(90,52,18,.25);
+      transform:
+        translateY(18px)
+        scale(.97);
+      transition:
+        transform .25s
+        cubic-bezier(.2,.9,.3,1);
+    }
+
+    .personal-modal.open
+    .personal-modal-panel{
+      transform:
+        translateY(0)
+        scale(1);
+    }
+
+    .personal-modal-head{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      margin-bottom:6px;
+    }
+
+    .personal-modal-title{
+      color:#553B29;
+      font-size:18px;
+      font-weight:950;
+    }
+
+    .personal-modal-close{
+      border:0;
+      width:34px;
+      height:34px;
+      border-radius:50%;
+      background:#FFE7B5;
+      color:#9E5E25;
+      font-size:16px;
+      font-weight:950;
+      cursor:pointer;
+    }
+
+    .personal-modal-tip{
+      margin-bottom:16px;
+      color:#9A7659;
+      font-size:10px;
+      line-height:1.6;
+    }
+
+    .personal-field{
+      margin-bottom:14px;
+    }
+
+    .personal-field label{
+      display:block;
+      margin-bottom:7px;
+      color:#725139;
+      font-size:12px;
+      font-weight:900;
+    }
+
+    .personal-field input,
+    .personal-field textarea,
+    .personal-field select{
+      width:100%;
+      border:1px solid #EDD1A3;
+      border-radius:14px;
+      outline:none;
+      background:#FFFEFA;
+      color:#563D2C;
+      font-size:14px;
+      transition:
+        border-color .18s ease,
+        box-shadow .18s ease;
+    }
+
+    .personal-field input,
+    .personal-field select{
+      height:48px;
+      padding:0 13px;
+    }
+
+    .personal-field textarea{
+      min-height:88px;
+      resize:vertical;
+      padding:12px 13px;
+      line-height:1.6;
+    }
+
+    .personal-field input:focus,
+    .personal-field textarea:focus,
+    .personal-field select:focus{
+      border-color:#F2A247;
+      box-shadow:
+        0 0 0 4px
+        rgba(242,162,71,.11);
+    }
+
+    .personal-field-hint{
+      margin-top:5px;
+      color:#AD8B6C;
+      font-size:9px;
+      line-height:1.5;
+    }
+
+    .personal-save-message{
+      min-height:20px;
+      margin:4px 0 8px;
+      color:#C55A38;
+      font-size:11px;
+      line-height:1.5;
+    }
+
+    .personal-save-message.success{
+      color:#B16C20;
+    }
+
+    .personal-save-btn{
+      width:100%;
+      min-height:50px;
+      border:0;
+      border-radius:15px;
+      color:#fff;
+      font-size:14px;
+      font-weight:950;
+      cursor:pointer;
+      background:
+        linear-gradient(
+          110deg,
+          #E97918,
+          #F5A038,
+          #FFC553
+        );
+      box-shadow:
+        0 9px 22px
+        rgba(211,105,17,.22);
+    }
+
+    .personal-save-btn:disabled{
+      opacity:.65;
+      cursor:not-allowed;
+    }
+
+    @media(max-width:480px){
+      .personal-head{
+        align-items:flex-start;
+      }
+
+      .personal-title{
+        font-size:16px;
+      }
+
+      .personal-modal{
+        padding:10px;
+      }
+
+      .personal-modal-panel{
+        padding:17px;
+        border-radius:22px;
+      }
+    }
+
+
+    /* =========================
+       芯瑤今日個人分析
+    ========================= */
+
+    function renderPersonalAnalysis(){
+      const data =
+        personalAnalysisData;
+
+      personalEditBtn.classList.toggle(
+        "hidden",
+        !personalCanEdit
+      );
+
+      if(!data){
+        personalDateBadge.textContent =
+          "尚未發布";
+
+        personalContent.innerHTML =
+          '<div class="personal-empty">' +
+            (
+              personalCanEdit
+                ? '今天尚未發布個人分析。<br>點右上角「✏️ 編輯今日分析」即可設定今天的號碼。'
+                : '芯瑤今日個人分析尚未發布。'
+            ) +
+          '</div>';
+
+        return;
+      }
+
+      personalDateBadge.textContent =
+        data.display_date ||
+        data.date ||
+        "今日";
+
+      const mainNumbers =
+        Array.isArray(
+          data.main_numbers
+        )
+          ? data.main_numbers
+          : [];
+
+      const fullcarNumbers =
+        Array.isArray(
+          data.fullcar_numbers
+        )
+          ? data.fullcar_numbers
+          : [];
+
+      personalContent.innerHTML =
+        '<div class="personal-row">' +
+          '<div class="personal-row-label">主選5顆</div>' +
+          '<div class="number-balls">' +
+            createBalls(
+              mainNumbers,
+              false
+            ) +
+          '</div>' +
+        '</div>' +
+
+        '<div class="personal-row">' +
+          '<div class="personal-row-label">全車3顆</div>' +
+          '<div class="number-balls">' +
+            createBalls(
+              fullcarNumbers,
+              true
+            ) +
+          '</div>' +
+        '</div>' +
+
+        '<div class="personal-row">' +
+          '<div class="personal-row-label">主尾</div>' +
+          '<span class="personal-tail-pill">' +
+            escapeHtml(
+              data.main_tail ||
+              "-"
+            ) +
+          '</span>' +
+        '</div>' +
+
+        '<div class="personal-note">' +
+          '📝 <strong>芯瑤備註</strong><br>' +
+          escapeHtml(
+            data.note ||
+            '今天個人看好這組，僅供參考無絕對。'
+          ) +
+        '</div>';
+    }
+
+
+    async function loadPersonalAnalysis(){
+      if(!getSavedToken()){
+        return;
+      }
+
+      personalContent.innerHTML =
+        '<div class="personal-empty">' +
+          '正在讀取芯瑤今日個人分析…' +
+        '</div>';
+
+      try{
+        const data =
+          await callAPI(
+            {
+              action:
+                "personal_analysis"
+            },
+            true
+          );
+
+        personalCanEdit =
+          Boolean(
+            data.can_edit
+          );
+
+        personalAnalysisData =
+          data.available
+            ? data.personal
+            : null;
+
+        renderPersonalAnalysis();
+
+      }catch(error){
+        if(
+          error.status === 401
+        ){
+          return;
+        }
+
+        personalContent.innerHTML =
+          '<div class="personal-empty">' +
+            '目前無法讀取芯瑤個人分析，請稍後再試。' +
+          '</div>';
+      }
+    }
+
+
+    function openPersonalModal(){
+      if(!personalCanEdit){
+        return;
+      }
+
+      const data =
+        personalAnalysisData;
+
+      personalMainNumbers.value =
+        Array.isArray(
+          data?.main_numbers
+        )
+          ? data.main_numbers.join("、")
+          : "";
+
+      personalFullcarNumbers.value =
+        Array.isArray(
+          data?.fullcar_numbers
+        )
+          ? data.fullcar_numbers.join("、")
+          : "";
+
+      const tail =
+        String(
+          data?.main_tail ||
+          "0尾"
+        )
+          .replace(
+            /尾/g,
+            ""
+          );
+
+      personalMainTail.value =
+        /^[0-9]$/.test(tail)
+          ? tail
+          : "0";
+
+      personalNote.value =
+        data?.note ||
+        "今天個人看好這組，僅供參考無絕對。";
+
+      personalSaveMessage.classList.remove(
+        "success"
+      );
+
+      personalSaveMessage.textContent =
+        "";
+
+      personalModal.classList.add(
+        "open"
+      );
+    }
+
+
+    function closePersonalModal(){
+      personalModal.classList.remove(
+        "open"
+      );
+    }
+
+
+    personalEditBtn.addEventListener(
+      "click",
+      openPersonalModal
+    );
+
+
+    personalModalClose.addEventListener(
+      "click",
+      closePersonalModal
+    );
+
+
+    personalModal.addEventListener(
+      "click",
+      event=>{
+        if(
+          event.target ===
+          personalModal
+        ){
+          closePersonalModal();
+        }
+      }
+    );
+
+
+    personalSaveBtn.addEventListener(
+      "click",
+      async ()=>{
+        personalSaveBtn.disabled =
+          true;
+
+        personalSaveBtn.textContent =
+          "✨ 發布中...";
+
+        personalSaveMessage.classList.remove(
+          "success"
+        );
+
+        personalSaveMessage.textContent =
+          "正在儲存今日個人分析...";
+
+        try{
+          const data =
+            await callAPI(
+              {
+                action:
+                  "save_personal_analysis",
+
+                main_numbers:
+                  personalMainNumbers.value,
+
+                fullcar_numbers:
+                  personalFullcarNumbers.value,
+
+                main_tail:
+                  personalMainTail.value,
+
+                note:
+                  personalNote.value
+              },
+              true
+            );
+
+          personalAnalysisData =
+            data.personal;
+
+          personalSaveMessage.classList.add(
+            "success"
+          );
+
+          personalSaveMessage.textContent =
+            "✓ 今日個人分析發布成功";
+
+          renderPersonalAnalysis();
+
+          window.setTimeout(
+            ()=>{
+              closePersonalModal();
+            },
+            520
+          );
+
+        }catch(error){
+          if(
+            error.status === 401
+          ){
+            clearToken();
+            showLogin();
+            return;
+          }
+
+          personalSaveMessage.textContent =
+            error.message ||
+            "發布失敗，請稍後再試";
+
+        }finally{
+          personalSaveBtn.disabled =
+            false;
+
+          personalSaveBtn.textContent =
+            "✨ 發布今日分析";
+        }
+      }
+    );
+
+
+
+    /* =========================
        539數據中心
     ========================= */
     .data-center-card{
@@ -2116,6 +2767,43 @@
       </div>
     </section>
 
+    <!-- =========================
+         芯瑤今日個人分析
+    ========================= -->
+    <section class="card personal-analysis-card">
+      <div class="personal-head">
+        <div class="personal-title">
+          💕 芯瑤今日個人分析
+        </div>
+
+        <div class="personal-head-actions">
+          <span
+            id="personalDateBadge"
+            class="personal-date-badge"
+          >
+            尚未發布
+          </span>
+
+          <button
+            id="personalEditBtn"
+            class="personal-edit-btn hidden"
+            type="button"
+          >
+            ✏️ 編輯今日分析
+          </button>
+        </div>
+      </div>
+
+      <div
+        id="personalContent"
+        class="personal-content"
+      >
+        <div class="personal-empty">
+          正在讀取芯瑤今日個人分析…
+        </div>
+      </div>
+    </section>
+
 
 
     <!-- =========================
@@ -2190,6 +2878,115 @@
       趨勢資料分析僅供參考
     </div>
   </main>
+
+  <!-- =========================
+       芯瑤今日個人分析｜管理員編輯
+  ========================= -->
+  <div
+    id="personalModal"
+    class="personal-modal"
+  >
+    <div class="personal-modal-panel">
+
+      <div class="personal-modal-head">
+        <div class="personal-modal-title">
+          💕 編輯今日個人分析
+        </div>
+
+        <button
+          id="personalModalClose"
+          class="personal-modal-close"
+          type="button"
+          aria-label="關閉"
+        >
+          ×
+        </button>
+      </div>
+
+      <div class="personal-modal-tip">
+        儲存後所有會員重新整理即可看到最新內容；日期會自動使用台灣當日日期。
+      </div>
+
+      <div class="personal-field">
+        <label for="personalMainNumbers">
+          主選5顆
+        </label>
+
+        <input
+          id="personalMainNumbers"
+          type="text"
+          inputmode="numeric"
+          placeholder="例如：07、11、18、26、33"
+        >
+
+        <div class="personal-field-hint">
+          輸入5顆 01～39 號碼，以頓號、逗號或空格分隔。
+        </div>
+      </div>
+
+      <div class="personal-field">
+        <label for="personalFullcarNumbers">
+          全車3顆
+        </label>
+
+        <input
+          id="personalFullcarNumbers"
+          type="text"
+          inputmode="numeric"
+          placeholder="例如：07、18、33"
+        >
+
+        <div class="personal-field-hint">
+          這3顆必須包含在上面的主選5顆內。
+        </div>
+      </div>
+
+      <div class="personal-field">
+        <label for="personalMainTail">
+          主尾
+        </label>
+
+        <select id="personalMainTail">
+          <option value="0">0尾</option>
+          <option value="1">1尾</option>
+          <option value="2">2尾</option>
+          <option value="3">3尾</option>
+          <option value="4">4尾</option>
+          <option value="5">5尾</option>
+          <option value="6">6尾</option>
+          <option value="7">7尾</option>
+          <option value="8">8尾</option>
+          <option value="9">9尾</option>
+        </select>
+      </div>
+
+      <div class="personal-field">
+        <label for="personalNote">
+          芯瑤備註
+        </label>
+
+        <textarea
+          id="personalNote"
+          maxlength="120"
+        >今天個人看好這組，僅供參考無絕對。</textarea>
+      </div>
+
+      <div
+        id="personalSaveMessage"
+        class="personal-save-message"
+      ></div>
+
+      <button
+        id="personalSaveBtn"
+        class="personal-save-btn"
+        type="button"
+      >
+        ✨ 發布今日分析
+      </button>
+
+    </div>
+  </div>
+
 
   <!-- =========================
        HISTORY
@@ -2309,10 +3106,46 @@
         document.querySelectorAll(".data-tool-btn")
       );
 
+    const personalDateBadge =
+      document.getElementById("personalDateBadge");
+
+    const personalContent =
+      document.getElementById("personalContent");
+
+    const personalEditBtn =
+      document.getElementById("personalEditBtn");
+
+    const personalModal =
+      document.getElementById("personalModal");
+
+    const personalModalClose =
+      document.getElementById("personalModalClose");
+
+    const personalMainNumbers =
+      document.getElementById("personalMainNumbers");
+
+    const personalFullcarNumbers =
+      document.getElementById("personalFullcarNumbers");
+
+    const personalMainTail =
+      document.getElementById("personalMainTail");
+
+    const personalNote =
+      document.getElementById("personalNote");
+
+    const personalSaveMessage =
+      document.getElementById("personalSaveMessage");
+
+    const personalSaveBtn =
+      document.getElementById("personalSaveBtn");
+
     let dashboardData = null;
     let blockNoticeData = null;
     let blockNoticeLoading = false;
     let activeDataTool = "repeat";
+
+    let personalAnalysisData = null;
+    let personalCanEdit = false;
 
 
 
@@ -2459,6 +3292,7 @@
       }
 
       loadDashboardFromWorker();
+      loadPersonalAnalysis();
     }
 
 
@@ -2664,6 +3498,16 @@
         historyModal.classList.remove(
           "open"
         );
+
+        personalModal.classList.remove(
+          "open"
+        );
+
+        personalAnalysisData =
+          null;
+
+        personalCanEdit =
+          false;
 
         memberAccount.value="";
 
