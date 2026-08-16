@@ -1489,385 +1489,6 @@
 
 
     /* =========================
-       芯瑤今日個人分析
-    ========================= */
-
-    function renderPersonalAnalysis(){
-      const data =
-        personalAnalysisData;
-
-      personalEditBtn.classList.toggle(
-        "hidden",
-        !personalCanEdit
-      );
-
-      if(!data){
-        personalDateBadge.textContent =
-          "尚未發布";
-
-        personalContent.innerHTML =
-          '<div class="personal-empty">' +
-            (
-              personalCanEdit
-                ? '今天尚未發布個人分析。<br>點右上角「✏️ 編輯今日分析」即可設定今天的號碼。'
-                : '芯瑤今日個人分析尚未發布。'
-            ) +
-          '</div>';
-
-        return;
-      }
-
-      personalDateBadge.textContent =
-        data.display_date ||
-        data.date ||
-        "今日";
-
-      const mainNumbers =
-        Array.isArray(
-          data.main_numbers
-        )
-          ? data.main_numbers
-          : [];
-
-      const fullcarNumbers =
-        Array.isArray(
-          data.fullcar_numbers
-        )
-          ? data.fullcar_numbers
-          : [];
-
-      personalContent.innerHTML =
-        '<div class="personal-row">' +
-          '<div class="personal-row-label">主選5顆</div>' +
-          '<div class="number-balls">' +
-            createBalls(
-              mainNumbers,
-              false
-            ) +
-          '</div>' +
-        '</div>' +
-
-        '<div class="personal-row">' +
-          '<div class="personal-row-label">全車3顆</div>' +
-          '<div class="number-balls">' +
-            createBalls(
-              fullcarNumbers,
-              true
-            ) +
-          '</div>' +
-        '</div>' +
-
-        '<div class="personal-row">' +
-          '<div class="personal-row-label">主尾</div>' +
-          '<span class="personal-tail-pill">' +
-            escapeHtml(
-              data.main_tail ||
-              "-"
-            ) +
-          '</span>' +
-        '</div>' +
-
-        '<div class="personal-note">' +
-          '📝 <strong>芯瑤備註</strong><br>' +
-          escapeHtml(
-            data.note ||
-            '今天個人看好這組，僅供參考無絕對。'
-          ) +
-        '</div>';
-    }
-
-
-    async function loadPersonalAnalysis(){
-      if(!getSavedToken()){
-        return;
-      }
-
-      // 管理員按鈕直接依登入/session結果顯示，
-      // 不再等 personal_analysis API 回傳。
-      personalCanEdit =
-        Boolean(
-          currentIsAdmin ||
-          personalCanEdit
-        );
-
-      personalEditBtn.classList.toggle(
-        "hidden",
-        !personalCanEdit
-      );
-
-      personalContent.innerHTML =
-        '<div class="personal-empty">' +
-          (
-            personalCanEdit
-              ? '今天尚未發布個人分析。<br>可點右上角「✏️ 編輯今日分析」設定今天的號碼。'
-              : '正在讀取芯瑤今日個人分析…'
-          ) +
-        '</div>';
-
-      try{
-        const timeout =
-          new Promise(
-            (
-              _resolve,
-              reject
-            )=>{
-              window.setTimeout(
-                ()=>{
-                  const error =
-                    new Error(
-                      "個人分析讀取逾時"
-                    );
-
-                  error.status =
-                    408;
-
-                  reject(
-                    error
-                  );
-                },
-                8000
-              );
-            }
-          );
-
-        const data =
-          await Promise.race([
-            callAPI(
-              {
-                action:
-                  "personal_analysis"
-              },
-              true
-            ),
-            timeout
-          ]);
-
-        personalCanEdit =
-          Boolean(
-            currentIsAdmin ||
-            data.can_edit
-          );
-
-        personalAnalysisData =
-          data.available
-            ? data.personal
-            : null;
-
-        renderPersonalAnalysis();
-
-      }catch(error){
-        // 就算讀取資料失敗，管理員仍然可以看到編輯按鈕，
-        // 讓你可以直接發布今天的內容。
-        personalCanEdit =
-          Boolean(
-            currentIsAdmin
-          );
-
-        personalEditBtn.classList.toggle(
-          "hidden",
-          !personalCanEdit
-        );
-
-        if(
-          personalCanEdit
-        ){
-          personalAnalysisData =
-            null;
-
-          personalDateBadge.textContent =
-            "尚未發布";
-
-          personalContent.innerHTML =
-            '<div class="personal-empty">' +
-              '今天尚未發布個人分析。<br>' +
-              '請點右上角「✏️ 編輯今日分析」進行設定。' +
-            '</div>';
-
-          return;
-        }
-
-        if(
-          error.status === 401
-        ){
-          return;
-        }
-
-        personalContent.innerHTML =
-          '<div class="personal-empty">' +
-            '目前無法讀取芯瑤個人分析，請稍後再試。' +
-          '</div>';
-      }
-    }
-
-    function openPersonalModal(){
-      if(!personalCanEdit){
-        return;
-      }
-
-      const data =
-        personalAnalysisData;
-
-      personalMainNumbers.value =
-        Array.isArray(
-          data?.main_numbers
-        )
-          ? data.main_numbers.join("、")
-          : "";
-
-      personalFullcarNumbers.value =
-        Array.isArray(
-          data?.fullcar_numbers
-        )
-          ? data.fullcar_numbers.join("、")
-          : "";
-
-      const tail =
-        String(
-          data?.main_tail ||
-          "0尾"
-        )
-          .replace(
-            /尾/g,
-            ""
-          );
-
-      personalMainTail.value =
-        /^[0-9]$/.test(tail)
-          ? tail
-          : "0";
-
-      personalNote.value =
-        data?.note ||
-        "今天個人看好這組，僅供參考無絕對。";
-
-      personalSaveMessage.classList.remove(
-        "success"
-      );
-
-      personalSaveMessage.textContent =
-        "";
-
-      personalModal.classList.add(
-        "open"
-      );
-    }
-
-
-    function closePersonalModal(){
-      personalModal.classList.remove(
-        "open"
-      );
-    }
-
-
-    personalEditBtn.addEventListener(
-      "click",
-      openPersonalModal
-    );
-
-
-    personalModalClose.addEventListener(
-      "click",
-      closePersonalModal
-    );
-
-
-    personalModal.addEventListener(
-      "click",
-      event=>{
-        if(
-          event.target ===
-          personalModal
-        ){
-          closePersonalModal();
-        }
-      }
-    );
-
-
-    personalSaveBtn.addEventListener(
-      "click",
-      async ()=>{
-        personalSaveBtn.disabled =
-          true;
-
-        personalSaveBtn.textContent =
-          "✨ 發布中...";
-
-        personalSaveMessage.classList.remove(
-          "success"
-        );
-
-        personalSaveMessage.textContent =
-          "正在儲存今日個人分析...";
-
-        try{
-          const data =
-            await callAPI(
-              {
-                action:
-                  "save_personal_analysis",
-
-                main_numbers:
-                  personalMainNumbers.value,
-
-                fullcar_numbers:
-                  personalFullcarNumbers.value,
-
-                main_tail:
-                  personalMainTail.value,
-
-                note:
-                  personalNote.value
-              },
-              true
-            );
-
-          personalAnalysisData =
-            data.personal;
-
-          personalSaveMessage.classList.add(
-            "success"
-          );
-
-          personalSaveMessage.textContent =
-            "✓ 今日個人分析發布成功";
-
-          renderPersonalAnalysis();
-
-          window.setTimeout(
-            ()=>{
-              closePersonalModal();
-            },
-            520
-          );
-
-        }catch(error){
-          if(
-            error.status === 401
-          ){
-            clearToken();
-            showLogin();
-            return;
-          }
-
-          personalSaveMessage.textContent =
-            error.message ||
-            "發布失敗，請稍後再試";
-
-        }finally{
-          personalSaveBtn.disabled =
-            false;
-
-          personalSaveBtn.textContent =
-            "✨ 發布今日分析";
-        }
-      }
-    );
-
-
-
-    /* =========================
        539數據中心
     ========================= */
     .data-center-card{
@@ -3885,6 +3506,392 @@
 
       return html;
     }
+
+
+
+
+    /* =========================
+       芯瑤今日個人分析
+    ========================= */
+
+    function renderPersonalAnalysis(){
+      const data =
+        personalAnalysisData;
+
+      personalEditBtn.classList.toggle(
+        "hidden",
+        !personalCanEdit
+      );
+
+      if(!data){
+        personalDateBadge.textContent =
+          "尚未發布";
+
+        personalContent.innerHTML =
+          '<div class="personal-empty">' +
+            (
+              personalCanEdit
+                ? '今天尚未發布個人分析。<br>點右上角「✏️ 編輯今日分析」即可設定今天的號碼。'
+                : '芯瑤今日個人分析尚未發布。'
+            ) +
+          '</div>';
+
+        return;
+      }
+
+      personalDateBadge.textContent =
+        data.display_date ||
+        data.date ||
+        "今日";
+
+      const mainNumbers =
+        Array.isArray(
+          data.main_numbers
+        )
+          ? data.main_numbers
+          : [];
+
+      const fullcarNumbers =
+        Array.isArray(
+          data.fullcar_numbers
+        )
+          ? data.fullcar_numbers
+          : [];
+
+      personalContent.innerHTML =
+        '<div class="personal-row">' +
+          '<div class="personal-row-label">主選5顆</div>' +
+          '<div class="number-balls">' +
+            createBalls(
+              mainNumbers,
+              false
+            ) +
+          '</div>' +
+        '</div>' +
+
+        '<div class="personal-row">' +
+          '<div class="personal-row-label">全車3顆</div>' +
+          '<div class="number-balls">' +
+            createBalls(
+              fullcarNumbers,
+              true
+            ) +
+          '</div>' +
+        '</div>' +
+
+        '<div class="personal-row">' +
+          '<div class="personal-row-label">主尾</div>' +
+          '<span class="personal-tail-pill">' +
+            escapeHtml(
+              data.main_tail ||
+              "-"
+            ) +
+          '</span>' +
+        '</div>' +
+
+        '<div class="personal-note">' +
+          '📝 <strong>芯瑤備註</strong><br>' +
+          escapeHtml(
+            data.note ||
+            '今天個人看好這組，僅供參考無絕對。'
+          ) +
+        '</div>';
+    }
+
+
+    async function loadPersonalAnalysis(){
+      if(!getSavedToken()){
+        return;
+      }
+
+      // 管理員按鈕直接依登入/session結果顯示，
+      // 不再等 personal_analysis API 回傳。
+      personalCanEdit =
+        Boolean(
+          currentIsAdmin ||
+          personalCanEdit
+        );
+
+      personalEditBtn.classList.toggle(
+        "hidden",
+        !personalCanEdit
+      );
+
+      personalContent.innerHTML =
+        '<div class="personal-empty">' +
+          (
+            personalCanEdit
+              ? '今天尚未發布個人分析。<br>可點右上角「✏️ 編輯今日分析」設定今天的號碼。'
+              : '正在讀取芯瑤今日個人分析…'
+          ) +
+        '</div>';
+
+      try{
+        const timeout =
+          new Promise(
+            (
+              _resolve,
+              reject
+            )=>{
+              window.setTimeout(
+                ()=>{
+                  const error =
+                    new Error(
+                      "個人分析讀取逾時"
+                    );
+
+                  error.status =
+                    408;
+
+                  reject(
+                    error
+                  );
+                },
+                8000
+              );
+            }
+          );
+
+        const data =
+          await Promise.race([
+            callAPI(
+              {
+                action:
+                  "personal_analysis"
+              },
+              true
+            ),
+            timeout
+          ]);
+
+        personalCanEdit =
+          Boolean(
+            currentIsAdmin ||
+            data.can_edit
+          );
+
+        personalAnalysisData =
+          data.available
+            ? data.personal
+            : null;
+
+        renderPersonalAnalysis();
+
+      }catch(error){
+        // 就算讀取資料失敗，管理員仍然可以看到編輯按鈕，
+        // 讓你可以直接發布今天的內容。
+        personalCanEdit =
+          Boolean(
+            currentIsAdmin
+          );
+
+        personalEditBtn.classList.toggle(
+          "hidden",
+          !personalCanEdit
+        );
+
+        if(
+          personalCanEdit
+        ){
+          personalAnalysisData =
+            null;
+
+          personalDateBadge.textContent =
+            "尚未發布";
+
+          personalContent.innerHTML =
+            '<div class="personal-empty">' +
+              '今天尚未發布個人分析。<br>' +
+              '請點右上角「✏️ 編輯今日分析」進行設定。' +
+            '</div>';
+
+          return;
+        }
+
+        if(
+          error.status === 401
+        ){
+          return;
+        }
+
+        personalContent.innerHTML =
+          '<div class="personal-empty">' +
+            '目前無法讀取芯瑤個人分析，請稍後再試。' +
+          '</div>';
+      }
+    }
+
+    function openPersonalModal(){
+      if(
+        !personalCanEdit &&
+        !currentIsAdmin
+      ){
+        return;
+      }
+
+      personalCanEdit = true;
+
+      const data =
+        personalAnalysisData;
+
+      personalMainNumbers.value =
+        Array.isArray(
+          data?.main_numbers
+        )
+          ? data.main_numbers.join("、")
+          : "";
+
+      personalFullcarNumbers.value =
+        Array.isArray(
+          data?.fullcar_numbers
+        )
+          ? data.fullcar_numbers.join("、")
+          : "";
+
+      const tail =
+        String(
+          data?.main_tail ||
+          "0尾"
+        )
+          .replace(
+            /尾/g,
+            ""
+          );
+
+      personalMainTail.value =
+        /^[0-9]$/.test(tail)
+          ? tail
+          : "0";
+
+      personalNote.value =
+        data?.note ||
+        "今天個人看好這組，僅供參考無絕對。";
+
+      personalSaveMessage.classList.remove(
+        "success"
+      );
+
+      personalSaveMessage.textContent =
+        "";
+
+      personalModal.classList.add(
+        "open"
+      );
+    }
+
+
+    function closePersonalModal(){
+      personalModal.classList.remove(
+        "open"
+      );
+    }
+
+
+    personalEditBtn.addEventListener(
+      "click",
+      openPersonalModal
+    );
+
+
+    personalModalClose.addEventListener(
+      "click",
+      closePersonalModal
+    );
+
+
+    personalModal.addEventListener(
+      "click",
+      event=>{
+        if(
+          event.target ===
+          personalModal
+        ){
+          closePersonalModal();
+        }
+      }
+    );
+
+
+    personalSaveBtn.addEventListener(
+      "click",
+      async ()=>{
+        personalSaveBtn.disabled =
+          true;
+
+        personalSaveBtn.textContent =
+          "✨ 發布中...";
+
+        personalSaveMessage.classList.remove(
+          "success"
+        );
+
+        personalSaveMessage.textContent =
+          "正在儲存今日個人分析...";
+
+        try{
+          const data =
+            await callAPI(
+              {
+                action:
+                  "save_personal_analysis",
+
+                main_numbers:
+                  personalMainNumbers.value,
+
+                fullcar_numbers:
+                  personalFullcarNumbers.value,
+
+                main_tail:
+                  personalMainTail.value,
+
+                note:
+                  personalNote.value
+              },
+              true
+            );
+
+          personalAnalysisData =
+            data.personal;
+
+          personalSaveMessage.classList.add(
+            "success"
+          );
+
+          personalSaveMessage.textContent =
+            "✓ 今日個人分析發布成功";
+
+          renderPersonalAnalysis();
+
+          window.setTimeout(
+            ()=>{
+              closePersonalModal();
+            },
+            520
+          );
+
+        }catch(error){
+          if(
+            error.status === 401
+          ){
+            clearToken();
+            showLogin();
+            return;
+          }
+
+          personalSaveMessage.textContent =
+            error.message ||
+            "發布失敗，請稍後再試";
+
+        }finally{
+          personalSaveBtn.disabled =
+            false;
+
+          personalSaveBtn.textContent =
+            "✨ 發布今日分析";
+        }
+      }
+    );
+
 
 
 
