@@ -1582,23 +1582,69 @@
         return;
       }
 
+      // 管理員按鈕直接依登入/session結果顯示，
+      // 不再等 personal_analysis API 回傳。
+      personalCanEdit =
+        Boolean(
+          currentIsAdmin ||
+          personalCanEdit
+        );
+
+      personalEditBtn.classList.toggle(
+        "hidden",
+        !personalCanEdit
+      );
+
       personalContent.innerHTML =
         '<div class="personal-empty">' +
-          '正在讀取芯瑤今日個人分析…' +
+          (
+            personalCanEdit
+              ? '今天尚未發布個人分析。<br>可點右上角「✏️ 編輯今日分析」設定今天的號碼。'
+              : '正在讀取芯瑤今日個人分析…'
+          ) +
         '</div>';
 
       try{
-        const data =
-          await callAPI(
-            {
-              action:
-                "personal_analysis"
-            },
-            true
+        const timeout =
+          new Promise(
+            (
+              _resolve,
+              reject
+            )=>{
+              window.setTimeout(
+                ()=>{
+                  const error =
+                    new Error(
+                      "個人分析讀取逾時"
+                    );
+
+                  error.status =
+                    408;
+
+                  reject(
+                    error
+                  );
+                },
+                8000
+              );
+            }
           );
+
+        const data =
+          await Promise.race([
+            callAPI(
+              {
+                action:
+                  "personal_analysis"
+              },
+              true
+            ),
+            timeout
+          ]);
 
         personalCanEdit =
           Boolean(
+            currentIsAdmin ||
             data.can_edit
           );
 
@@ -1610,6 +1656,36 @@
         renderPersonalAnalysis();
 
       }catch(error){
+        // 就算讀取資料失敗，管理員仍然可以看到編輯按鈕，
+        // 讓你可以直接發布今天的內容。
+        personalCanEdit =
+          Boolean(
+            currentIsAdmin
+          );
+
+        personalEditBtn.classList.toggle(
+          "hidden",
+          !personalCanEdit
+        );
+
+        if(
+          personalCanEdit
+        ){
+          personalAnalysisData =
+            null;
+
+          personalDateBadge.textContent =
+            "尚未發布";
+
+          personalContent.innerHTML =
+            '<div class="personal-empty">' +
+              '今天尚未發布個人分析。<br>' +
+              '請點右上角「✏️ 編輯今日分析」進行設定。' +
+            '</div>';
+
+          return;
+        }
+
         if(
           error.status === 401
         ){
@@ -1622,7 +1698,6 @@
           '</div>';
       }
     }
-
 
     function openPersonalModal(){
       if(!personalCanEdit){
@@ -3146,6 +3221,7 @@
 
     let personalAnalysisData = null;
     let personalCanEdit = false;
+    let currentIsAdmin = false;
 
 
 
@@ -3291,6 +3367,11 @@
         );
       }
 
+      personalEditBtn.classList.toggle(
+        "hidden",
+        !currentIsAdmin
+      );
+
       loadDashboardFromWorker();
       loadPersonalAnalysis();
     }
@@ -3421,6 +3502,14 @@
             data.token
           );
 
+          currentIsAdmin =
+            Boolean(
+              data.is_admin
+            );
+
+          personalCanEdit =
+            currentIsAdmin;
+
           await playLoginSuccess(
             data.account,
             data.member_name
@@ -3463,6 +3552,14 @@
             true
           );
 
+        currentIsAdmin =
+          Boolean(
+            data.is_admin
+          );
+
+        personalCanEdit =
+          currentIsAdmin;
+
         showApp(
           data.account,
           data.member_name,
@@ -3470,6 +3567,12 @@
         );
 
       }catch{
+        currentIsAdmin =
+          false;
+
+        personalCanEdit =
+          false;
+
         clearToken();
         showLogin();
       }
@@ -3507,6 +3610,9 @@
           null;
 
         personalCanEdit =
+          false;
+
+        currentIsAdmin =
           false;
 
         memberAccount.value="";
