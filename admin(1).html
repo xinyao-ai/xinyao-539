@@ -1,0 +1,1078 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="robots" content="noindex,nofollow">
+  <title>芯瑤💕539管理中心</title>
+  <meta name="theme-color" content="#FFF1CE">
+
+  <style>
+    :root{
+      --orange:#F49A32;
+      --orange-dark:#DF761A;
+      --gold:#FFC84F;
+      --cream:#FFF7E2;
+      --brown:#533B2A;
+      --soft:#8D6A4E;
+      --danger:#C6533F;
+      --green:#429B62;
+      --shadow:0 14px 38px rgba(155,89,23,.11);
+    }
+
+    *{box-sizing:border-box}
+    html,body{
+      margin:0;min-height:100%;
+      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans TC",sans-serif;
+      color:var(--brown);
+      background:
+        radial-gradient(circle at 12% 7%,rgba(255,213,97,.45),transparent 26%),
+        radial-gradient(circle at 92% 34%,rgba(244,154,50,.20),transparent 28%),
+        linear-gradient(180deg,#FFF9EA,#FFEDC9 52%,#FFF8E8);
+    }
+
+    button,input,select,textarea{font:inherit}
+    button{cursor:pointer}
+    .hidden{display:none!important}
+    .shell{width:min(94%,980px);margin:auto;padding:24px 0 70px}
+
+    .top{
+      position:sticky;top:0;z-index:20;
+      margin:0 -3.2% 18px;padding:12px 3.2%;
+      display:flex;align-items:center;justify-content:space-between;gap:10px;
+      background:rgba(255,248,232,.88);
+      backdrop-filter:blur(15px);
+      border-bottom:1px solid rgba(233,157,56,.20);
+    }
+
+    .brand{display:flex;align-items:center;gap:10px;min-width:0}
+    .brand-icon{
+      width:42px;height:42px;display:grid;place-items:center;
+      border-radius:14px;color:white;font-size:20px;
+      background:linear-gradient(145deg,#FFCA58,#EA831F);
+    }
+    .brand-title{font-weight:950;font-size:16px;white-space:nowrap}
+    .brand-sub{margin-top:2px;color:var(--soft);font-size:10px}
+    .top-actions{display:flex;gap:7px}
+    .mini-btn{
+      min-height:36px;padding:0 11px;border:0;border-radius:12px;
+      color:#92551E;background:#FFE4AD;font-size:11px;font-weight:900;
+    }
+
+    .hero{
+      margin-bottom:16px;padding:23px 21px;border-radius:26px;
+      background:linear-gradient(135deg,#FFF9E9,#FFE7AE);
+      border:1px solid rgba(238,166,62,.36);
+      box-shadow:var(--shadow);
+    }
+    .eyebrow{color:#D67C22;font-size:11px;font-weight:950;letter-spacing:1px}
+    .hero h1{margin:7px 0 5px;font-size:27px}
+    .hero p{margin:0;color:#8C6A4E;font-size:12px;line-height:1.7}
+
+    .nav{
+      position:sticky;top:66px;z-index:15;
+      margin-bottom:17px;display:flex;gap:8px;overflow-x:auto;
+      padding:5px 0 9px;scrollbar-width:none;
+    }
+    .nav::-webkit-scrollbar{display:none}
+    .nav-btn{
+      flex:0 0 auto;min-height:39px;padding:0 13px;
+      border:1px solid #F0D29D;border-radius:999px;
+      color:#8A5C32;background:rgba(255,255,255,.80);
+      font-size:11px;font-weight:900;
+    }
+    .nav-btn.active{
+      color:white;border-color:transparent;
+      background:linear-gradient(110deg,#E97A1A,#F6A139,#FFC958);
+    }
+
+    .section{display:none}
+    .section.active{display:block}
+
+    .card{
+      margin-bottom:15px;padding:20px;border-radius:24px;
+      background:rgba(255,255,255,.92);
+      border:1px solid rgba(239,202,143,.65);
+      box-shadow:var(--shadow);
+    }
+
+    .card-head{
+      display:flex;align-items:center;justify-content:space-between;
+      gap:10px;margin-bottom:15px;
+    }
+    .card-title{font-size:17px;font-weight:950}
+    .card-note{color:var(--soft);font-size:10px;line-height:1.55}
+
+    .stats{
+      display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;
+    }
+    .stat{
+      min-height:110px;padding:16px;border-radius:20px;
+      background:linear-gradient(145deg,#FFFEFA,#FFF4D9);
+      border:1px solid #F1D39E;
+    }
+    .stat-label{color:#9A7554;font-size:11px;font-weight:800}
+    .stat-value{margin-top:8px;color:#E37E1D;font-size:31px;font-weight:1000}
+    .stat-foot{margin-top:9px;color:#A4896E;font-size:9px}
+
+    .summary-row{
+      margin-top:11px;display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;
+    }
+    .summary-pill{
+      padding:12px;border-radius:16px;text-align:center;
+      background:#FFF5DF;border:1px solid #F0D7A6;
+      color:#805A39;font-size:11px;font-weight:850;
+    }
+
+    .field{margin-bottom:13px}
+    .field label{
+      display:block;margin-bottom:6px;color:#79593F;
+      font-size:11px;font-weight:900;
+    }
+    .input,.select,.textarea{
+      width:100%;border:1px solid #EED3A5;border-radius:14px;
+      outline:none;color:#563D2C;background:#FFFEFB;
+    }
+    .input,.select{height:47px;padding:0 13px}
+    .textarea{min-height:140px;padding:12px 13px;resize:vertical;line-height:1.65}
+
+    .toolbar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:13px}
+    .search{flex:1 1 210px}
+    .primary,.soft-btn,.danger-btn{
+      min-height:44px;border:0;border-radius:14px;padding:0 15px;
+      font-size:12px;font-weight:950;
+    }
+    .primary{
+      color:white;background:linear-gradient(110deg,#E97818,#F5A13B,#FFC452);
+    }
+    .soft-btn{color:#995C25;background:#FFE8BA}
+    .danger-btn{color:white;background:linear-gradient(110deg,#C95C43,#E4795E)}
+
+    .members{display:grid;gap:10px}
+    .member{
+      padding:15px;border-radius:18px;
+      background:linear-gradient(145deg,#FFFEFA,#FFF7E6);
+      border:1px solid #F0D7A9;
+    }
+    .member-top{display:flex;justify-content:space-between;gap:10px}
+    .member-name{font-size:14px;font-weight:950}
+    .member-account{margin-top:2px;color:#A07B5C;font-size:10px}
+
+    .badge{
+      display:inline-flex;align-items:center;min-height:26px;padding:0 9px;
+      border-radius:999px;font-size:9px;font-weight:950;
+    }
+    .badge.active{color:#287745;background:#E3F4E8}
+    .badge.suspended{color:#A54F3C;background:#FBE4DE}
+    .badge.expired{color:#966C24;background:#FFF0CA}
+
+    .member-meta{
+      margin-top:10px;display:grid;
+      grid-template-columns:repeat(3,minmax(0,1fr));gap:7px;
+    }
+    .meta{
+      padding:8px;border-radius:11px;background:#FFF0D0;
+      color:#826347;font-size:9px;line-height:1.45;
+    }
+
+    .member-actions{margin-top:10px;display:flex;gap:7px;flex-wrap:wrap}
+    .member-actions button{
+      min-height:34px;border:0;border-radius:11px;padding:0 10px;
+      font-size:10px;font-weight:900;
+    }
+    .detail-btn{color:#935B28;background:#FFE3AB}
+    .suspend-btn{color:#A14937;background:#FBE1DB}
+    .resume-btn{color:#287745;background:#DFF2E5}
+
+    .grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+    .grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+    .number-input{text-align:center;font-weight:900}
+
+    .system-grid{
+      display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;
+    }
+    .system-item{
+      padding:14px;border-radius:16px;background:#FFF5DF;
+      border:1px solid #F0D6A3;
+    }
+    .system-key{color:#9A795A;font-size:9px;font-weight:850}
+    .system-val{margin-top:5px;color:#6D4D33;font-size:12px;font-weight:950;word-break:break-word}
+
+    .logs{display:grid;gap:9px}
+    .log{
+      padding:13px;border-radius:15px;background:#FFF7E6;
+      border:1px solid #EFD9AF;
+    }
+    .log-top{display:flex;justify-content:space-between;gap:10px;font-size:10px}
+    .log-action{color:#D7771E;font-weight:950}
+    .log-time{color:#A2876E}
+    .log-detail{margin-top:5px;color:#765A42;font-size:10px;line-height:1.55}
+
+    .empty{padding:35px 10px;text-align:center;color:#9E7D62;font-size:12px}
+
+    .modal{
+      position:fixed;inset:0;z-index:80;display:flex;align-items:center;
+      justify-content:center;padding:16px;background:rgba(72,46,26,.42);
+      opacity:0;visibility:hidden;transition:.2s;
+    }
+    .modal.open{opacity:1;visibility:visible}
+    .modal-panel{
+      width:min(100%,520px);max-height:88vh;overflow:auto;padding:20px;
+      border-radius:26px;background:linear-gradient(180deg,#FFFEFA,#FFF2D6);
+      border:1px solid #EEC47D;
+    }
+    .modal-head{
+      display:flex;align-items:center;justify-content:space-between;
+      gap:10px;margin-bottom:15px;
+    }
+    .close{
+      width:35px;height:35px;border:0;border-radius:50%;
+      color:#9B602A;background:#FFE3AE;font-weight:950;
+    }
+
+    .login-shell{min-height:100vh;display:grid;place-items:center;padding:22px}
+    .login-card{
+      width:min(100%,420px);padding:25px;border-radius:28px;text-align:center;
+      background:rgba(255,255,255,.93);border:1px solid #EFCE92;
+      box-shadow:0 20px 55px rgba(126,72,17,.15);
+    }
+    .login-icon{
+      width:82px;height:82px;margin:0 auto 13px;display:grid;place-items:center;
+      border-radius:25px;color:white;font-size:35px;
+      background:linear-gradient(145deg,#FFCD60,#E97918);
+    }
+    .login-title{font-size:22px;font-weight:1000}
+    .login-sub{margin:6px 0 18px;color:#9A795F;font-size:11px;line-height:1.6}
+    .message{min-height:20px;margin-top:9px;color:var(--danger);font-size:10px;line-height:1.5}
+
+    .toast{
+      position:fixed;left:50%;bottom:22px;z-index:100;
+      transform:translate(-50%,15px);padding:11px 15px;border-radius:999px;
+      color:white;background:#65452E;font-size:11px;font-weight:850;
+      opacity:0;pointer-events:none;transition:.22s;
+    }
+    .toast.show{opacity:1;transform:translate(-50%,0)}
+
+    @media(max-width:760px){
+      .shell{width:min(94%,560px)}
+      .stats{grid-template-columns:repeat(2,minmax(0,1fr))}
+      .summary-row,.grid2,.grid3,.system-grid{grid-template-columns:1fr}
+      .member-meta{grid-template-columns:1fr}
+      .hero h1{font-size:24px}
+    }
+  </style>
+</head>
+<body>
+
+<div id="loginView" class="login-shell">
+  <div class="login-card">
+    <div class="login-icon">🛠</div>
+    <div class="login-title">芯瑤💕539管理中心</div>
+    <div class="login-sub">獨立管理後台，不影響原本 539 程式。</div>
+
+    <form id="adminLoginForm">
+      <div class="field">
+        <input id="adminAccount" class="input" autocomplete="username" placeholder="管理員帳號">
+      </div>
+      <div class="field">
+        <input id="adminPassword" class="input" type="password" autocomplete="current-password" placeholder="管理員密碼">
+      </div>
+
+      <button class="primary" style="width:100%" type="submit">
+        進入管理中心
+      </button>
+
+      <div id="loginMessage" class="message"></div>
+    </form>
+  </div>
+</div>
+
+<main id="adminView" class="shell hidden">
+  <div class="top">
+    <div class="brand">
+      <div class="brand-icon">🎱</div>
+      <div>
+        <div class="brand-title">芯瑤💕539管理中心</div>
+        <div id="adminIdentity" class="brand-sub">ADMIN CENTER</div>
+      </div>
+    </div>
+    <div class="top-actions">
+      <button id="refreshAllBtn" class="mini-btn">↻ 整理</button>
+      <button id="logoutBtn" class="mini-btn">登出</button>
+    </div>
+  </div>
+
+  <section class="hero">
+    <div class="eyebrow">XINYAO 539 ADMIN CENTER</div>
+    <h1>會員與分析管理後台</h1>
+    <p>會員、權限、個人分析與系統狀態集中管理。</p>
+  </section>
+
+  <nav class="nav">
+    <button class="nav-btn active" data-tab="overview">總覽</button>
+    <button class="nav-btn" data-tab="members">會員管理</button>
+    <button class="nav-btn" data-tab="batch">批次新增</button>
+    <button class="nav-btn" data-tab="personal">個人分析</button>
+    <button class="nav-btn" data-tab="system">系統狀態</button>
+    <button class="nav-btn" data-tab="logs">操作紀錄</button>
+  </nav>
+
+  <section id="tab-overview" class="section active">
+    <div class="card">
+      <div class="card-title">📊 總覽儀表板</div>
+      <div class="stats" style="margin-top:15px">
+        <div class="stat"><div class="stat-label">會員總數</div><div id="statTotal" class="stat-value">—</div><div class="stat-foot">全部會員</div></div>
+        <div class="stat"><div class="stat-label">正常使用</div><div id="statActive" class="stat-value">—</div><div class="stat-foot">目前可登入</div></div>
+        <div class="stat"><div class="stat-label">已停權</div><div id="statSuspended" class="stat-value">—</div><div class="stat-foot">人工停權</div></div>
+        <div class="stat"><div class="stat-label">已到期</div><div id="statExpired" class="stat-value">—</div><div class="stat-foot">期限已結束</div></div>
+      </div>
+      <div class="summary-row">
+        <div class="summary-pill">目前登入 Session：<strong id="statSessions">—</strong></div>
+        <div class="summary-pill">累積分析次數：<strong id="statAnalysis">—</strong></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="tab-members" class="section">
+    <div class="card">
+      <div class="card-title">👥 會員管理</div>
+      <div class="grid2" style="margin-top:15px">
+        <div class="field"><label>會員帳號</label><input id="addAccount" class="input" placeholder="例如：member001"></div>
+        <div class="field"><label>會員名稱</label><input id="addName" class="input" placeholder="可留空"></div>
+      </div>
+      <div class="grid2">
+        <div class="field">
+          <label>使用期限</label>
+          <select id="addExpiryType" class="select">
+            <option value="permanent">永久使用</option>
+            <option value="7">7 天</option>
+            <option value="30">30 天</option>
+            <option value="90">90 天</option>
+            <option value="custom">自訂日期</option>
+          </select>
+        </div>
+        <div id="addCustomExpiryWrap" class="field hidden">
+          <label>到期日期</label>
+          <input id="addCustomExpiry" class="input" type="date">
+        </div>
+      </div>
+      <button id="addMemberBtn" class="primary" style="width:100%">＋ 新增會員</button>
+    </div>
+
+    <div class="card">
+      <div class="toolbar">
+        <input id="memberSearch" class="input search" placeholder="搜尋會員帳號或名稱">
+        <button id="memberSearchBtn" class="soft-btn">搜尋</button>
+        <button id="memberReloadBtn" class="soft-btn">重新整理</button>
+      </div>
+      <div id="memberList" class="members"><div class="empty">正在讀取會員資料…</div></div>
+    </div>
+  </section>
+
+  <section id="tab-batch" class="section">
+    <div class="card">
+      <div class="card-title">⚡ 批次新增會員</div>
+      <div class="card-note" style="margin:6px 0 15px">每行一個帳號，也可輸入「帳號,名稱」。最多 200 位。</div>
+      <div class="field">
+        <textarea id="batchMembers" class="textarea" placeholder="member001&#10;member002,王小明"></textarea>
+      </div>
+      <div class="grid2">
+        <div class="field">
+          <label>共同使用期限</label>
+          <select id="batchExpiryType" class="select">
+            <option value="permanent">永久使用</option>
+            <option value="7">7 天</option>
+            <option value="30">30 天</option>
+            <option value="90">90 天</option>
+            <option value="custom">自訂日期</option>
+          </select>
+        </div>
+        <div id="batchCustomExpiryWrap" class="field hidden">
+          <label>到期日期</label>
+          <input id="batchCustomExpiry" class="input" type="date">
+        </div>
+      </div>
+      <button id="batchAddBtn" class="primary" style="width:100%">批次新增</button>
+      <div id="batchResult" class="message"></div>
+    </div>
+  </section>
+
+  <section id="tab-personal" class="section">
+    <div class="card">
+      <div class="card-title">💕 芯瑤今日個人分析管理</div>
+      <div id="personalTarget" class="card-note" style="margin:5px 0 15px">正在讀取…</div>
+
+      <div class="field">
+        <label>主選 5 顆</label>
+        <div class="grid3">
+          <input class="input number-input personal-main" maxlength="2">
+          <input class="input number-input personal-main" maxlength="2">
+          <input class="input number-input personal-main" maxlength="2">
+          <input class="input number-input personal-main" maxlength="2">
+          <input class="input number-input personal-main" maxlength="2">
+        </div>
+      </div>
+
+      <div class="field">
+        <label>全車 3 顆</label>
+        <div class="grid3">
+          <input class="input number-input personal-fullcar" maxlength="2">
+          <input class="input number-input personal-fullcar" maxlength="2">
+          <input class="input number-input personal-fullcar" maxlength="2">
+        </div>
+      </div>
+
+      <div class="field">
+        <label>主尾</label>
+        <input id="personalTail" class="input" maxlength="1" placeholder="0～9">
+      </div>
+
+      <div class="field">
+        <label>備註</label>
+        <textarea id="personalNote" class="textarea" style="min-height:90px"></textarea>
+      </div>
+
+      <button id="savePersonalBtn" class="primary" style="width:100%">發布／更新今日個人分析</button>
+      <div id="personalMessage" class="message"></div>
+    </div>
+  </section>
+
+  <section id="tab-system" class="section">
+    <div class="card">
+      <div class="card-head">
+        <div class="card-title">🧩 系統狀態</div>
+        <button id="systemReloadBtn" class="soft-btn">重新整理</button>
+      </div>
+      <div id="systemGrid" class="system-grid"><div class="empty">正在檢查…</div></div>
+    </div>
+  </section>
+
+  <section id="tab-logs" class="section">
+    <div class="card">
+      <div class="card-head">
+        <div class="card-title">📝 操作紀錄</div>
+        <button id="logsReloadBtn" class="soft-btn">重新整理</button>
+      </div>
+      <div id="logList" class="logs"><div class="empty">正在讀取…</div></div>
+    </div>
+  </section>
+</main>
+
+<div id="memberModal" class="modal">
+  <div class="modal-panel">
+    <div class="modal-head">
+      <div class="card-title">👤 會員詳細資料</div>
+      <button id="memberModalClose" class="close">×</button>
+    </div>
+
+    <input id="detailAccount" type="hidden">
+
+    <div class="field">
+      <label>會員帳號</label>
+      <input id="detailAccountShow" class="input" disabled>
+    </div>
+    <div class="field">
+      <label>會員名稱</label>
+      <input id="detailName" class="input">
+    </div>
+
+    <div class="grid2">
+      <div class="field">
+        <label>狀態</label>
+        <select id="detailStatus" class="select">
+          <option value="active">正常使用</option>
+          <option value="suspended">停權</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>期限類型</label>
+        <select id="detailPermanent" class="select">
+          <option value="true">永久使用</option>
+          <option value="false">設定到期日</option>
+        </select>
+      </div>
+    </div>
+
+    <div id="detailExpiryWrap" class="field hidden">
+      <label>到期日期</label>
+      <input id="detailExpiry" class="input" type="date">
+    </div>
+
+    <div id="detailInfo" class="system-grid" style="margin-bottom:14px"></div>
+
+    <div class="grid2">
+      <button id="detailSaveBtn" class="primary">儲存會員資料</button>
+      <button id="forceLogoutBtn" class="danger-btn">強制登出</button>
+    </div>
+
+    <div id="detailMessage" class="message"></div>
+  </div>
+</div>
+
+<div id="toast" class="toast"></div>
+
+<script>
+const WORKER_URL = "https://xinyao-539-admin-api.love06130430.workers.dev/";
+const TOKEN_KEY = "xinyao539_admin_token";
+
+const loginView=document.getElementById("loginView");
+const adminView=document.getElementById("adminView");
+const loginForm=document.getElementById("adminLoginForm");
+const adminAccount=document.getElementById("adminAccount");
+const adminPassword=document.getElementById("adminPassword");
+const loginMessage=document.getElementById("loginMessage");
+const adminIdentity=document.getElementById("adminIdentity");
+const toast=document.getElementById("toast");
+
+let currentAdmin="";
+let memberCache=[];
+
+function getToken(){return localStorage.getItem(TOKEN_KEY)||""}
+function saveToken(token){localStorage.setItem(TOKEN_KEY,token)}
+function clearToken(){localStorage.removeItem(TOKEN_KEY)}
+
+function escapeHtml(text){
+  return String(text??"")
+    .replaceAll("&","&amp;")
+    .replaceAll("<","&lt;")
+    .replaceAll(">","&gt;")
+    .replaceAll('"',"&quot;")
+    .replaceAll("'","&#039;");
+}
+
+function showToast(message){
+  toast.textContent=message;
+  toast.classList.add("show");
+  clearTimeout(showToast.timer);
+  showToast.timer=setTimeout(()=>toast.classList.remove("show"),2200);
+}
+
+function formatDateTime(value){
+  if(!value)return"—";
+  try{
+    return new Intl.DateTimeFormat("zh-TW",{
+      timeZone:"Asia/Taipei",
+      year:"numeric",month:"2-digit",day:"2-digit",
+      hour:"2-digit",minute:"2-digit"
+    }).format(new Date(value));
+  }catch{
+    return String(value);
+  }
+}
+
+function expiryDateOnly(value){
+  if(!value)return"";
+  const match=String(value).match(/^(\d{4}-\d{2}-\d{2})/);
+  return match?match[1]:"";
+}
+
+function daysFromNow(days){
+  const date=new Date();
+  date.setDate(date.getDate()+Number(days));
+  const parts=new Intl.DateTimeFormat("en-CA",{
+    timeZone:"Asia/Taipei",
+    year:"numeric",month:"2-digit",day:"2-digit"
+  }).formatToParts(date);
+  const map={};
+  parts.forEach(p=>{
+    if(["year","month","day"].includes(p.type))map[p.type]=p.value;
+  });
+  return `${map.year}-${map.month}-${map.day}`;
+}
+
+function resolveExpiry(type,custom){
+  if(type==="permanent")return{permanent:true,expires_at:""};
+  if(type==="custom"){
+    if(!custom)throw new Error("請選擇到期日期");
+    return{permanent:false,expires_at:custom};
+  }
+  return{permanent:false,expires_at:daysFromNow(type)};
+}
+
+async function api(body,auth=true){
+  const headers={"Content-Type":"application/json"};
+  if(auth){
+    const token=getToken();
+    if(token)headers.Authorization=`Bearer ${token}`;
+  }
+
+  const response=await fetch(WORKER_URL,{
+    method:"POST",
+    headers,
+    body:JSON.stringify(body)
+  });
+
+  let data={};
+  try{data=await response.json()}catch{}
+
+  if(!response.ok){
+    const error=new Error(data?.error||`HTTP ${response.status}`);
+    error.status=response.status;
+    throw error;
+  }
+
+  return data;
+}
+
+async function verifySession(){
+  const token=getToken();
+  if(!token)return false;
+
+  try{
+    const data=await api({action:"admin_session"});
+    currentAdmin=data.account;
+    showAdmin();
+    return true;
+  }catch{
+    clearToken();
+    return false;
+  }
+}
+
+function showAdmin(){
+  loginView.classList.add("hidden");
+  adminView.classList.remove("hidden");
+  adminIdentity.textContent=`管理員：${currentAdmin}`;
+  refreshAll();
+}
+
+function showLogin(){
+  adminView.classList.add("hidden");
+  loginView.classList.remove("hidden");
+}
+
+loginForm.addEventListener("submit",async event=>{
+  event.preventDefault();
+
+  const account=adminAccount.value.trim().toLowerCase();
+  const password=adminPassword.value;
+
+  if(!account||!password){
+    loginMessage.textContent="請輸入管理員帳號與密碼";
+    return;
+  }
+
+  loginMessage.textContent="登入中…";
+
+  try{
+    const data=await api({
+      action:"admin_login",
+      account,
+      password
+    },false);
+
+    saveToken(data.token);
+    currentAdmin=data.account;
+    adminPassword.value="";
+    loginMessage.textContent="";
+    showAdmin();
+  }catch(error){
+    clearToken();
+    loginMessage.textContent=error.message||"登入失敗";
+  }
+});
+
+document.getElementById("logoutBtn").addEventListener("click",async()=>{
+  try{await api({action:"admin_logout"})}catch{}
+  clearToken();
+  location.reload();
+});
+
+document.querySelectorAll(".nav-btn").forEach(btn=>{
+  btn.addEventListener("click",()=>{
+    const tab=btn.dataset.tab;
+    document.querySelectorAll(".nav-btn").forEach(x=>x.classList.toggle("active",x===btn));
+    document.querySelectorAll(".section").forEach(x=>x.classList.toggle("active",x.id===`tab-${tab}`));
+
+    if(tab==="members")loadMembers();
+    if(tab==="personal")loadPersonal();
+    if(tab==="system")loadSystem();
+    if(tab==="logs")loadLogs();
+  });
+});
+
+async function loadOverview(){
+  try{
+    const data=await api({action:"admin_overview"});
+    const t=data.totals||{};
+    document.getElementById("statTotal").textContent=t.total??0;
+    document.getElementById("statActive").textContent=t.active??0;
+    document.getElementById("statSuspended").textContent=t.suspended??0;
+    document.getElementById("statExpired").textContent=t.expired??0;
+    document.getElementById("statSessions").textContent=t.active_sessions??0;
+    document.getElementById("statAnalysis").textContent=t.total_analysis??0;
+  }catch(error){showToast(error.message)}
+}
+
+function statusLabel(status){
+  if(status==="suspended")return"已停權";
+  if(status==="expired")return"已到期";
+  return"正常使用";
+}
+
+function renderMembers(members){
+  const list=document.getElementById("memberList");
+
+  if(!members.length){
+    list.innerHTML='<div class="empty">找不到會員資料</div>';
+    return;
+  }
+
+  list.innerHTML=members.map(member=>{
+    const status=member.effective_status||"active";
+
+    return `
+      <div class="member">
+        <div class="member-top">
+          <div>
+            <div class="member-name">${escapeHtml(member.name||member.account)}</div>
+            <div class="member-account">${escapeHtml(member.account)}</div>
+          </div>
+          <span class="badge ${status}">${statusLabel(status)}</span>
+        </div>
+
+        <div class="member-meta">
+          <div class="meta">使用期限<br><strong>${member.permanent?"永久":escapeHtml(expiryDateOnly(member.expires_at)||"未設定")}</strong></div>
+          <div class="meta">最後登入<br><strong>${escapeHtml(formatDateTime(member.last_login_at))}</strong></div>
+          <div class="meta">分析次數<br><strong>${Number(member.analysis_count||0)}</strong></div>
+        </div>
+
+        <div class="member-actions">
+          <button class="detail-btn" data-detail="${escapeHtml(member.account)}">詳細資料</button>
+          ${
+            status==="suspended"
+            ? `<button class="resume-btn" data-status-account="${escapeHtml(member.account)}" data-next-status="active">恢復使用</button>`
+            : `<button class="suspend-btn" data-status-account="${escapeHtml(member.account)}" data-next-status="suspended">停權</button>`
+          }
+        </div>
+      </div>
+    `;
+  }).join("");
+
+  list.querySelectorAll("[data-detail]").forEach(btn=>{
+    btn.addEventListener("click",()=>openMemberDetail(btn.dataset.detail));
+  });
+
+  list.querySelectorAll("[data-status-account]").forEach(btn=>{
+    btn.addEventListener("click",()=>quickStatus(
+      btn.dataset.statusAccount,
+      btn.dataset.nextStatus
+    ));
+  });
+}
+
+async function loadMembers(keyword=""){
+  const list=document.getElementById("memberList");
+  list.innerHTML='<div class="empty">正在讀取會員資料…</div>';
+
+  try{
+    const data=await api({action:"admin_members",keyword});
+    memberCache=data.members||[];
+    renderMembers(memberCache);
+  }catch(error){
+    list.innerHTML=`<div class="empty">${escapeHtml(error.message)}</div>`;
+  }
+}
+
+async function quickStatus(account,status){
+  const member=memberCache.find(x=>x.account===account);
+  if(!member)return;
+
+  if(!confirm(`確定要${status==="suspended"?"停權":"恢復"} ${account}？`))return;
+
+  try{
+    await api({
+      action:"admin_update_member",
+      account,
+      name:member.name,
+      status,
+      permanent:member.permanent,
+      expires_at:member.expires_at
+    });
+    showToast("更新完成");
+    await Promise.all([loadMembers(),loadOverview()]);
+  }catch(error){showToast(error.message)}
+}
+
+document.getElementById("memberSearchBtn").addEventListener("click",()=>loadMembers(document.getElementById("memberSearch").value.trim()));
+document.getElementById("memberReloadBtn").addEventListener("click",()=>{document.getElementById("memberSearch").value="";loadMembers()});
+
+function bindExpiryToggle(selectId,wrapId){
+  document.getElementById(selectId).addEventListener("change",e=>{
+    document.getElementById(wrapId).classList.toggle("hidden",e.target.value!=="custom");
+  });
+}
+bindExpiryToggle("addExpiryType","addCustomExpiryWrap");
+bindExpiryToggle("batchExpiryType","batchCustomExpiryWrap");
+
+document.getElementById("addMemberBtn").addEventListener("click",async()=>{
+  try{
+    const expiry=resolveExpiry(
+      document.getElementById("addExpiryType").value,
+      document.getElementById("addCustomExpiry").value
+    );
+
+    await api({
+      action:"admin_add_member",
+      account:document.getElementById("addAccount").value.trim().toLowerCase(),
+      name:document.getElementById("addName").value.trim(),
+      ...expiry
+    });
+
+    document.getElementById("addAccount").value="";
+    document.getElementById("addName").value="";
+    showToast("新增會員成功");
+    await Promise.all([loadMembers(),loadOverview()]);
+  }catch(error){showToast(error.message)}
+});
+
+const memberModal=document.getElementById("memberModal");
+document.getElementById("memberModalClose").addEventListener("click",()=>memberModal.classList.remove("open"));
+memberModal.addEventListener("click",e=>{if(e.target===memberModal)memberModal.classList.remove("open")});
+document.getElementById("detailPermanent").addEventListener("change",e=>{
+  document.getElementById("detailExpiryWrap").classList.toggle("hidden",e.target.value==="true");
+});
+
+async function openMemberDetail(account){
+  try{
+    const data=await api({action:"admin_member_detail",account});
+    const m=data.member;
+
+    document.getElementById("detailAccount").value=m.account;
+    document.getElementById("detailAccountShow").value=m.account;
+    document.getElementById("detailName").value=m.name||m.account;
+    document.getElementById("detailStatus").value=m.status==="suspended"?"suspended":"active";
+    document.getElementById("detailPermanent").value=m.permanent?"true":"false";
+    document.getElementById("detailExpiry").value=expiryDateOnly(m.expires_at);
+    document.getElementById("detailExpiryWrap").classList.toggle("hidden",m.permanent);
+
+    document.getElementById("detailInfo").innerHTML=`
+      <div class="system-item"><div class="system-key">建立時間</div><div class="system-val">${escapeHtml(formatDateTime(m.created_at))}</div></div>
+      <div class="system-item"><div class="system-key">最後登入</div><div class="system-val">${escapeHtml(formatDateTime(m.last_login_at))}</div></div>
+      <div class="system-item"><div class="system-key">最後分析</div><div class="system-val">${escapeHtml(formatDateTime(m.last_analysis_at))}</div></div>
+      <div class="system-item"><div class="system-key">分析次數</div><div class="system-val">${Number(m.analysis_count||0)}</div></div>
+      <div class="system-item"><div class="system-key">目前 Session</div><div class="system-val">${Number(m.active_sessions||0)}</div></div>
+      <div class="system-item"><div class="system-key">分析紀錄筆數</div><div class="system-val">${Number(m.history_count||0)}</div></div>
+    `;
+
+    document.getElementById("detailMessage").textContent="";
+    memberModal.classList.add("open");
+  }catch(error){showToast(error.message)}
+}
+
+document.getElementById("detailSaveBtn").addEventListener("click",async()=>{
+  const permanent=document.getElementById("detailPermanent").value==="true";
+  const expiresAt=permanent?"":document.getElementById("detailExpiry").value;
+
+  if(!permanent&&!expiresAt){
+    document.getElementById("detailMessage").textContent="請選擇到期日期";
+    return;
+  }
+
+  try{
+    await api({
+      action:"admin_update_member",
+      account:document.getElementById("detailAccount").value,
+      name:document.getElementById("detailName").value.trim(),
+      status:document.getElementById("detailStatus").value,
+      permanent,
+      expires_at:expiresAt
+    });
+
+    memberModal.classList.remove("open");
+    showToast("會員資料已更新");
+    await Promise.all([loadMembers(),loadOverview()]);
+  }catch(error){
+    document.getElementById("detailMessage").textContent=error.message;
+  }
+});
+
+document.getElementById("forceLogoutBtn").addEventListener("click",async()=>{
+  const account=document.getElementById("detailAccount").value;
+  if(!confirm(`確定強制登出 ${account}？`))return;
+
+  try{
+    const data=await api({action:"admin_force_logout",account});
+    document.getElementById("detailMessage").textContent=`已移除 ${data.removed||0} 個登入 Session`;
+    showToast("強制登出完成");
+  }catch(error){
+    document.getElementById("detailMessage").textContent=error.message;
+  }
+});
+
+document.getElementById("batchAddBtn").addEventListener("click",async()=>{
+  const raw=document.getElementById("batchMembers").value.trim();
+  if(!raw){
+    document.getElementById("batchResult").textContent="請輸入會員清單";
+    return;
+  }
+
+  const members=raw.split(/\r?\n/)
+    .map(x=>x.trim())
+    .filter(Boolean)
+    .map(line=>{
+      const [account,name]=line.split(",").map(v=>v.trim());
+      return{account:(account||"").toLowerCase(),name:name||account};
+    });
+
+  try{
+    const expiry=resolveExpiry(
+      document.getElementById("batchExpiryType").value,
+      document.getElementById("batchCustomExpiry").value
+    );
+
+    const data=await api({
+      action:"admin_batch_add",
+      members,
+      ...expiry
+    });
+
+    const r=data.result||{};
+    document.getElementById("batchResult").textContent=
+      `新增 ${r.added?.length||0}｜略過 ${r.skipped?.length||0}｜失敗 ${r.failed?.length||0}`;
+
+    showToast("批次新增完成");
+    await Promise.all([loadMembers(),loadOverview()]);
+  }catch(error){
+    document.getElementById("batchResult").textContent=error.message;
+  }
+});
+
+async function loadPersonal(){
+  const target=document.getElementById("personalTarget");
+  try{
+    const data=await api({action:"admin_personal_analysis"});
+    const p=data.personal;
+
+    if(!p){
+      target.textContent="目前尚未發布";
+      return;
+    }
+
+    target.textContent=`目前資料日期：${p.display_date||p.target_display_date||"—"}`;
+
+    const mains=document.querySelectorAll(".personal-main");
+    const cars=document.querySelectorAll(".personal-fullcar");
+
+    (p.main_numbers||[]).forEach((n,i)=>{if(mains[i])mains[i].value=n});
+    (p.fullcar_numbers||[]).forEach((n,i)=>{if(cars[i])cars[i].value=n});
+
+    document.getElementById("personalTail").value=String(p.main_tail||"").replace("尾","");
+    document.getElementById("personalNote").value=p.note||"";
+  }catch(error){target.textContent=error.message}
+}
+
+function collectNumbers(selector){
+  return Array.from(document.querySelectorAll(selector))
+    .map(x=>String(x.value||"").trim().padStart(2,"0"));
+}
+
+document.getElementById("savePersonalBtn").addEventListener("click",async()=>{
+  const msg=document.getElementById("personalMessage");
+  msg.textContent="正在儲存…";
+
+  try{
+    await api({
+      action:"admin_save_personal_analysis",
+      main_numbers:collectNumbers(".personal-main"),
+      fullcar_numbers:collectNumbers(".personal-fullcar"),
+      main_tail:document.getElementById("personalTail").value.trim(),
+      note:document.getElementById("personalNote").value.trim()
+    });
+
+    msg.textContent="✓ 已發布";
+    showToast("個人分析已更新");
+    loadPersonal();
+  }catch(error){msg.textContent=error.message}
+});
+
+async function loadSystem(){
+  const grid=document.getElementById("systemGrid");
+  grid.innerHTML='<div class="empty">正在檢查…</div>';
+
+  try{
+    const data=await api({action:"admin_system_status"});
+    const s=data.status||{};
+
+    const entries=[
+      ["Worker狀態",s.worker],
+      ["Worker版本",s.worker_version],
+      ["MEMBERS_KV",s.members_kv?"正常":"異常"],
+      ["RESULTS_KV",s.results_kv?"正常":"異常"],
+      ["會員數",s.member_count],
+      ["登入 Session",s.active_sessions],
+      ["最新數據日期",s.latest_dashboard_date||"尚無"],
+      ["數據更新時間",formatDateTime(s.dashboard_updated_at)],
+      ["個人分析",s.personal_analysis?"已發布":"未發布"],
+      ["檢查時間",formatDateTime(s.checked_at)]
+    ];
+
+    grid.innerHTML=entries.map(([k,v])=>`
+      <div class="system-item">
+        <div class="system-key">${escapeHtml(k)}</div>
+        <div class="system-val">${escapeHtml(v??"—")}</div>
+      </div>
+    `).join("");
+  }catch(error){
+    grid.innerHTML=`<div class="empty">${escapeHtml(error.message)}</div>`;
+  }
+}
+
+document.getElementById("systemReloadBtn").addEventListener("click",loadSystem);
+
+async function loadLogs(){
+  const list=document.getElementById("logList");
+  list.innerHTML='<div class="empty">正在讀取…</div>';
+
+  try{
+    const data=await api({action:"admin_logs",limit:100});
+    const logs=data.logs||[];
+
+    if(!logs.length){
+      list.innerHTML='<div class="empty">目前沒有操作紀錄</div>';
+      return;
+    }
+
+    list.innerHTML=logs.map(log=>`
+      <div class="log">
+        <div class="log-top">
+          <div class="log-action">${escapeHtml(log.action||"操作")}</div>
+          <div class="log-time">${escapeHtml(formatDateTime(log.created_at))}</div>
+        </div>
+        <div class="log-detail">
+          ${log.target?`對象：${escapeHtml(log.target)}<br>`:""}
+          ${escapeHtml(log.detail||"")}
+        </div>
+      </div>
+    `).join("");
+  }catch(error){
+    list.innerHTML=`<div class="empty">${escapeHtml(error.message)}</div>`;
+  }
+}
+
+document.getElementById("logsReloadBtn").addEventListener("click",loadLogs);
+
+async function refreshAll(){
+  await Promise.all([
+    loadOverview(),
+    loadMembers(),
+    loadPersonal(),
+    loadSystem(),
+    loadLogs()
+  ]);
+}
+
+document.getElementById("refreshAllBtn").addEventListener("click",async()=>{
+  showToast("正在重新整理");
+  await refreshAll();
+  showToast("資料已更新");
+});
+
+(async()=>{
+  const ok=await verifySession();
+  if(!ok)showLogin();
+})();
+</script>
+</body>
+</html>
