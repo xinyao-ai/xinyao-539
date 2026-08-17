@@ -3396,8 +3396,11 @@
     <div class="personal-modal-panel">
 
       <div class="personal-modal-head">
-        <div class="personal-modal-title">
-          💕 編輯今日個人分析
+        <div
+          id="personalModalTitle"
+          class="personal-modal-title"
+        >
+          💕 編輯個人分析
         </div>
 
         <button
@@ -3410,8 +3413,11 @@
         </button>
       </div>
 
-      <div class="personal-modal-tip">
-        儲存後所有會員重新整理即可看到最新內容；日期會自動使用台灣當日日期。
+      <div
+        id="personalModalTip"
+        class="personal-modal-tip"
+      >
+        正在確認本次分享目標日期…
       </div>
 
       <div class="personal-field">
@@ -3624,6 +3630,13 @@
 
     const personalModal =
       document.getElementById("personalModal");
+
+    const personalModalTitle =
+      document.getElementById("personalModalTitle");
+
+    const personalModalTip =
+      document.getElementById("personalModalTip");
+
 
     const personalModalClose =
       document.getElementById("personalModalClose");
@@ -4944,6 +4957,19 @@
         "🎯 分析目標 " +
         personalTargetDate;
 
+      if (
+        personalCanEdit &&
+        data.target_display_date
+      ) {
+        personalEditBtn.textContent =
+          "✏️ 編輯 " +
+          data.target_display_date +
+          " 分享";
+      } else {
+        personalEditBtn.textContent =
+          "✏️ 編輯今日分析";
+      }
+
       const mainNumbers =
         Array.isArray(
           data.main_numbers
@@ -5134,6 +5160,38 @@
       const data =
         personalAnalysisData;
 
+      const targetDisplay =
+        String(
+          data?.target_display_date ||
+          ""
+        ).trim();
+
+      if (targetDisplay) {
+        personalModalTitle.textContent =
+          "💕 編輯 " +
+          targetDisplay +
+          " 個人分析";
+
+        personalModalTip.textContent =
+          "🎯 本次編輯分享目標：" +
+          targetDisplay +
+          "。儲存後只更新這一期，不會改動其他日期的歷史分享。";
+
+        personalSaveBtn.textContent =
+          "✨ 儲存 " +
+          targetDisplay +
+          " 分享";
+      } else {
+        personalModalTitle.textContent =
+          "💕 編輯個人分析";
+
+        personalModalTip.textContent =
+          "🎯 系統會自動判斷下一個實際開獎日作為分享目標。";
+
+        personalSaveBtn.textContent =
+          "✨ 發布今日分析";
+      }
+
       personalMainNumbers.value =
         Array.isArray(
           data?.main_numbers
@@ -5245,7 +5303,11 @@
                   personalMainTail.value,
 
                 note:
-                  personalNote.value
+                  personalNote.value,
+
+                target_date:
+                  personalAnalysisData?.target_date ||
+                  ""
               },
               true
             );
@@ -5258,7 +5320,12 @@
           );
 
           personalSaveMessage.textContent =
-            "✓ 今日個人分析發布成功";
+            "✓ " +
+            (
+              data.personal?.target_display_date ||
+              "本期"
+            ) +
+            " 個人分析已儲存";
 
           renderPersonalAnalysis();
 
@@ -5288,8 +5355,20 @@
           personalSaveBtn.disabled =
             false;
 
+          const savedTargetDisplay =
+            String(
+              personalAnalysisData?.target_display_date ||
+              ""
+            );
+
           personalSaveBtn.textContent =
-            "✨ 發布今日分析";
+            savedTargetDisplay
+              ? (
+                  "✨ 儲存 " +
+                  savedTargetDisplay +
+                  " 分享"
+                )
+              : "✨ 發布今日分析";
         }
       }
     );
