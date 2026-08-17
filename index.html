@@ -2692,6 +2692,69 @@
       color:#9A775B;
     }
 
+    .draw-review-section{
+      margin-top:11px;
+      padding:11px 12px;
+      border-radius:14px;
+      background:rgba(255,250,239,.72);
+      border:1px solid rgba(241,197,121,.42);
+    }
+
+    .draw-review-section:first-of-type{
+      margin-top:0;
+    }
+
+    .draw-review-section-head{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:8px;
+      flex-wrap:wrap;
+      margin-bottom:7px;
+    }
+
+    .draw-review-section-head .draw-review-label{
+      margin:0;
+    }
+
+    .draw-review-mini-status{
+      padding:4px 8px;
+      border-radius:999px;
+      background:#FFF0CF;
+      color:#9A775B;
+      font-size:9px;
+      font-weight:950;
+      white-space:nowrap;
+    }
+
+    .draw-review-mini-status.hit{
+      background:#FFE3E3;
+      color:#C92F36;
+      border:1px solid #FFB7BA;
+    }
+
+    .review-tail-chip{
+      min-width:46px;
+      height:34px;
+      padding:0 11px;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      border-radius:999px;
+      background:#FFF0C6;
+      border:1px solid #F1C579;
+      color:#8C561F;
+      font-size:11px;
+      font-weight:950;
+    }
+
+    .review-tail-chip.hit{
+      color:#C92F36;
+      background:#FFE3E3;
+      border:2px solid #E8343E;
+      box-shadow:0 0 0 3px rgba(232,52,62,.12);
+    }
+
     .draw-review-empty{
       padding:10px 4px;
       color:#A1836A;
@@ -3706,17 +3769,297 @@
         );
       }
 
+      /* ---------------------------------
+         芯瑤個人分析：
+         主選 / 全車 / 主尾 分開驗證
+      --------------------------------- */
+      if(type === "personal"){
+        const drawNumbers =
+          Array.isArray(draw.numbers)
+            ? draw.numbers.map(
+                number =>
+                  String(number)
+                    .padStart(2,"0")
+              )
+            : [];
+
+        const drawSet =
+          new Set(drawNumbers);
+
+        const mainNumbers =
+          Array.isArray(review.main_numbers)
+            ? review.main_numbers.map(
+                number =>
+                  String(number)
+                    .padStart(2,"0")
+              )
+            : [];
+
+        const fullcarNumbers =
+          Array.isArray(review.fullcar_numbers)
+            ? review.fullcar_numbers.map(
+                number =>
+                  String(number)
+                    .padStart(2,"0")
+              )
+            : [];
+
+        const mainHits =
+          mainNumbers.filter(
+            number =>
+              drawSet.has(number)
+          );
+
+        const fullcarHits =
+          fullcarNumbers.filter(
+            number =>
+              drawSet.has(number)
+          );
+
+        const tailText =
+          String(
+            review.main_tail ||
+            ""
+          ).trim();
+
+        const tailMatch =
+          tailText.match(/[0-9]/);
+
+        const tail =
+          tailMatch
+            ? tailMatch[0]
+            : "";
+
+        const tailHits =
+          tail
+            ? drawNumbers.filter(
+                number =>
+                  String(
+                    Number(number) % 10
+                  ) === tail
+              )
+            : [];
+
+        const tailHit =
+          tailHits.length > 0;
+
+        const summaryParts = [
+          "主選" + mainHits.length,
+          "全車" + fullcarHits.length,
+          "主尾" + (
+            tailHit
+              ? "✓"
+              : "—"
+          )
+        ];
+
+        const anyHit =
+          mainHits.length > 0 ||
+          fullcarHits.length > 0 ||
+          tailHit;
+
+        return (
+          '<div class="draw-review-box">' +
+
+            '<div class="draw-review-head">' +
+              '<div class="draw-review-title">' +
+                title +
+              '</div>' +
+              '<div class="draw-review-status' +
+                (
+                  anyHit
+                    ? ' hit'
+                    : ''
+                ) +
+              '">' +
+                (
+                  anyHit
+                    ? '⭕ ' + summaryParts.join("・")
+                    : '本期未命中'
+                ) +
+              '</div>' +
+            '</div>' +
+
+            '<div class="draw-review-section">' +
+              '<div class="draw-review-section-head">' +
+                '<div class="draw-review-label">🎯 主選 5 顆</div>' +
+                '<div class="draw-review-mini-status' +
+                  (
+                    mainHits.length > 0
+                      ? ' hit'
+                      : ''
+                  ) +
+                '">' +
+                  (
+                    mainHits.length > 0
+                      ? '命中 ' + mainHits.length + ' 顆'
+                      : '未命中'
+                  ) +
+                '</div>' +
+              '</div>' +
+
+              '<div class="draw-review-balls">' +
+                buildReviewPredictionBalls(
+                  mainNumbers,
+                  mainHits
+                ) +
+              '</div>' +
+
+              '<div class="draw-review-hit-text' +
+                (
+                  mainHits.length > 0
+                    ? ''
+                    : ' none'
+                ) +
+              '">' +
+                (
+                  mainHits.length > 0
+                    ? '✅ 主選命中：' +
+                      mainHits.join("、")
+                    : '主選 5 顆本期未命中。'
+                ) +
+              '</div>' +
+            '</div>' +
+
+            '<div class="draw-review-section">' +
+              '<div class="draw-review-section-head">' +
+                '<div class="draw-review-label">🚗 全車 3 顆</div>' +
+                '<div class="draw-review-mini-status' +
+                  (
+                    fullcarHits.length > 0
+                      ? ' hit'
+                      : ''
+                  ) +
+                '">' +
+                  (
+                    fullcarHits.length > 0
+                      ? '命中 ' + fullcarHits.length + ' 顆'
+                      : '未命中'
+                  ) +
+                '</div>' +
+              '</div>' +
+
+              '<div class="draw-review-balls">' +
+                buildReviewPredictionBalls(
+                  fullcarNumbers,
+                  fullcarHits
+                ) +
+              '</div>' +
+
+              '<div class="draw-review-hit-text' +
+                (
+                  fullcarHits.length > 0
+                    ? ''
+                    : ' none'
+                ) +
+              '">' +
+                (
+                  fullcarHits.length > 0
+                    ? '✅ 全車命中：' +
+                      fullcarHits.join("、")
+                    : '全車 3 顆本期未命中。'
+                ) +
+              '</div>' +
+            '</div>' +
+
+            '<div class="draw-review-section">' +
+              '<div class="draw-review-section-head">' +
+                '<div class="draw-review-label">🔢 主尾</div>' +
+                '<div class="draw-review-mini-status' +
+                  (
+                    tailHit
+                      ? ' hit'
+                      : ''
+                  ) +
+                '">' +
+                  (
+                    tailHit
+                      ? '命中'
+                      : '未命中'
+                  ) +
+                '</div>' +
+              '</div>' +
+
+              '<div class="draw-review-balls">' +
+                (
+                  tail
+                    ? (
+                        '<span class="review-tail-chip' +
+                          (
+                            tailHit
+                              ? ' hit'
+                              : ''
+                          ) +
+                        '">' +
+                          escapeHtml(
+                            tail + "尾"
+                          ) +
+                        '</span>'
+                      )
+                    : (
+                        '<span class="review-tail-chip">' +
+                          '未設定' +
+                        '</span>'
+                      )
+                ) +
+              '</div>' +
+
+              '<div class="draw-review-hit-text' +
+                (
+                  tailHit
+                    ? ''
+                    : ' none'
+                ) +
+              '">' +
+                (
+                  tailHit
+                    ? '✅ 主尾命中：' +
+                      escapeHtml(
+                        tail + "尾"
+                      ) +
+                      '（開出 ' +
+                      tailHits
+                        .map(escapeHtml)
+                        .join("、") +
+                      '）'
+                    : (
+                        tail
+                          ? '主尾 ' +
+                            escapeHtml(
+                              tail + "尾"
+                            ) +
+                            ' 本期未命中。'
+                          : '此期沒有主尾資料。'
+                      )
+                ) +
+              '</div>' +
+            '</div>' +
+
+            '<div class="draw-review-label">' +
+              '🎱 ' +
+              escapeHtml(
+                draw.display_date ||
+                ""
+              ) +
+              ' 開獎號碼' +
+            '</div>' +
+
+            '<div class="draw-review-balls">' +
+              buildReviewDrawBalls(
+                drawNumbers
+              ) +
+            '</div>' +
+
+          '</div>'
+        );
+      }
+
+      /* ---------------------------------
+         系統分析：維持原本顯示
+      --------------------------------- */
       const predictions =
-        type === "personal"
-          ? (
-              review.main_numbers ||
-              review.prediction_numbers ||
-              []
-            )
-          : (
-              review.prediction_numbers ||
-              []
-            );
+        review.prediction_numbers ||
+        [];
 
       const hits =
         review.hits ||
@@ -3789,7 +4132,6 @@
         '</div>'
       );
     }
-
 
     function renderDrawReview(){
       if(
