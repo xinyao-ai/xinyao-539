@@ -324,11 +324,15 @@
       <div class="stats" style="margin-top:15px">
         <div class="stat"><div class="stat-label">會員總數</div><div id="statTotal" class="stat-value">—</div><div class="stat-foot">全部會員</div></div>
         <div class="stat"><div class="stat-label">正常使用</div><div id="statActive" class="stat-value">—</div><div class="stat-foot">目前可登入</div></div>
+        <div class="stat"><div class="stat-label">目前在線</div><div id="statOnline" class="stat-value">—</div><div class="stat-foot">8 分鐘內有活動</div></div>
+        <div class="stat"><div class="stat-label">今日活躍</div><div id="statTodayActive" class="stat-value">—</div><div class="stat-foot">今天有操作的會員</div></div>
+        <div class="stat"><div class="stat-label">今日登入</div><div id="statTodayLogin" class="stat-value">—</div><div class="stat-foot">今天登入次數</div></div>
+        <div class="stat"><div class="stat-label">今日分析</div><div id="statTodayAnalysis" class="stat-value">—</div><div class="stat-foot">今天執行分析次數</div></div>
         <div class="stat"><div class="stat-label">已停權</div><div id="statSuspended" class="stat-value">—</div><div class="stat-foot">人工停權</div></div>
         <div class="stat"><div class="stat-label">已到期</div><div id="statExpired" class="stat-value">—</div><div class="stat-foot">期限已結束</div></div>
       </div>
       <div class="summary-row">
-        <div class="summary-pill">目前登入 Session：<strong id="statSessions">—</strong></div>
+        <div class="summary-pill">登入 Session：<strong id="statSessions">—</strong></div>
         <div class="summary-pill">累積分析次數：<strong id="statAnalysis">—</strong></div>
       </div>
     </div>
@@ -451,10 +455,29 @@
   <section id="tab-logs" class="section">
     <div class="card">
       <div class="card-head">
-        <div class="card-title">📝 操作紀錄</div>
+        <div>
+          <div class="card-title">📝 操作紀錄</div>
+          <div class="card-note">會員操作與管理員操作分開顯示。</div>
+        </div>
         <button id="logsReloadBtn" class="soft-btn">重新整理</button>
       </div>
-      <div id="logList" class="logs"><div class="empty">正在讀取…</div></div>
+
+      <div class="toolbar" style="margin-top:4px">
+        <button id="memberActivityTabBtn" class="primary" type="button">👤 會員操作</button>
+        <button id="adminLogTabBtn" class="soft-btn" type="button">🛠 管理員操作</button>
+      </div>
+
+      <div id="memberActivityWrap">
+        <div id="memberActivityList" class="logs">
+          <div class="empty">正在讀取會員操作…</div>
+        </div>
+      </div>
+
+      <div id="adminLogWrap" class="hidden">
+        <div id="logList" class="logs">
+          <div class="empty">正在讀取管理員操作…</div>
+        </div>
+      </div>
     </div>
   </section>
 </main>
@@ -688,7 +711,11 @@ document.querySelectorAll(".nav-btn").forEach(btn=>{
     if(tab==="members")loadMembers();
     if(tab==="personal")loadPersonal();
     if(tab==="system")loadSystem();
-    if(tab==="logs")loadLogs();
+    if(tab==="logs"){
+      showMemberActivityTab();
+      loadMemberActivity();
+      loadLogs();
+    }
   });
 });
 
@@ -698,6 +725,10 @@ async function loadOverview(){
     const t=data.totals||{};
     document.getElementById("statTotal").textContent=t.total??0;
     document.getElementById("statActive").textContent=t.active??0;
+    document.getElementById("statOnline").textContent=t.online_members??0;
+    document.getElementById("statTodayActive").textContent=t.today_active_members??0;
+    document.getElementById("statTodayLogin").textContent=t.today_login??0;
+    document.getElementById("statTodayAnalysis").textContent=t.today_analysis??0;
     document.getElementById("statSuspended").textContent=t.suspended??0;
     document.getElementById("statExpired").textContent=t.expired??0;
     document.getElementById("statSessions").textContent=t.active_sessions??0;
@@ -735,6 +766,8 @@ function renderMembers(members){
         <div class="member-meta">
           <div class="meta">使用期限<br><strong>${member.permanent?"永久":escapeHtml(expiryDateOnly(member.expires_at)||"未設定")}</strong></div>
           <div class="meta">最後登入<br><strong>${escapeHtml(formatDateTime(member.last_login_at))}</strong></div>
+          <div class="meta">最後活動<br><strong>${escapeHtml(formatDateTime(member.last_activity_at))}</strong></div>
+          <div class="meta">最後分析<br><strong>${escapeHtml(formatDateTime(member.last_analysis_at))}</strong></div>
           <div class="meta">分析次數<br><strong>${Number(member.analysis_count||0)}</strong></div>
         </div>
 
@@ -850,6 +883,7 @@ async function openMemberDetail(account){
     document.getElementById("detailInfo").innerHTML=`
       <div class="system-item"><div class="system-key">建立時間</div><div class="system-val">${escapeHtml(formatDateTime(m.created_at))}</div></div>
       <div class="system-item"><div class="system-key">最後登入</div><div class="system-val">${escapeHtml(formatDateTime(m.last_login_at))}</div></div>
+      <div class="system-item"><div class="system-key">最後活動</div><div class="system-val">${escapeHtml(formatDateTime(m.last_activity_at))}</div></div>
       <div class="system-item"><div class="system-key">最後分析</div><div class="system-val">${escapeHtml(formatDateTime(m.last_analysis_at))}</div></div>
       <div class="system-item"><div class="system-key">分析次數</div><div class="system-val">${Number(m.analysis_count||0)}</div></div>
       <div class="system-item"><div class="system-key">目前 Session</div><div class="system-val">${Number(m.active_sessions||0)}</div></div>
@@ -1021,6 +1055,83 @@ async function loadSystem(){
 
 document.getElementById("systemReloadBtn").addEventListener("click",loadSystem);
 
+function memberActivityLabel(type,action){
+  if(type==="login")return"會員登入";
+  if(type==="logout")return"會員登出";
+  if(type==="analyze")return"執行系統分析";
+  if(type==="view_personal")return"查看芯瑤個人分析";
+  return action||"會員操作";
+}
+
+async function loadMemberActivity(){
+  const list=document.getElementById("memberActivityList");
+  list.innerHTML='<div class="empty">正在讀取會員操作…</div>';
+
+  try{
+    const data=await api({
+      action:"admin_member_activity",
+      limit:150
+    });
+
+    const activities=data.activities||[];
+
+    if(!activities.length){
+      list.innerHTML='<div class="empty">目前還沒有會員操作紀錄。<br>會員重新開啟 539、登入或進行分析後就會開始累積。</div>';
+      return;
+    }
+
+    list.innerHTML=activities.map(item=>{
+      const label=memberActivityLabel(item.event_type,item.action);
+      const account=item.account||"—";
+      const name=item.member_name||account;
+      const detail=item.detail||"";
+
+      return `
+        <div class="log">
+          <div class="log-top">
+            <div class="log-action">👤 ${escapeHtml(label)}</div>
+            <div class="log-time">${escapeHtml(formatDateTime(item.created_at))}</div>
+          </div>
+          <div class="log-detail">
+            會員：<strong>${escapeHtml(name)}</strong>
+            ${name!==account?`（${escapeHtml(account)}）`:""}
+            ${detail?`<br>內容：${escapeHtml(detail)}`:""}
+          </div>
+        </div>
+      `;
+    }).join("");
+
+  }catch(error){
+    list.innerHTML=`<div class="empty">${escapeHtml(error.message)}</div>`;
+  }
+}
+
+function showMemberActivityTab(){
+  document.getElementById("memberActivityWrap").classList.remove("hidden");
+  document.getElementById("adminLogWrap").classList.add("hidden");
+
+  document.getElementById("memberActivityTabBtn").className="primary";
+  document.getElementById("adminLogTabBtn").className="soft-btn";
+}
+
+function showAdminLogTab(){
+  document.getElementById("memberActivityWrap").classList.add("hidden");
+  document.getElementById("adminLogWrap").classList.remove("hidden");
+
+  document.getElementById("memberActivityTabBtn").className="soft-btn";
+  document.getElementById("adminLogTabBtn").className="primary";
+}
+
+document.getElementById("memberActivityTabBtn").addEventListener("click",()=>{
+  showMemberActivityTab();
+  loadMemberActivity();
+});
+
+document.getElementById("adminLogTabBtn").addEventListener("click",()=>{
+  showAdminLogTab();
+  loadLogs();
+});
+
 async function loadLogs(){
   const list=document.getElementById("logList");
   list.innerHTML='<div class="empty">正在讀取…</div>';
@@ -1051,7 +1162,12 @@ async function loadLogs(){
   }
 }
 
-document.getElementById("logsReloadBtn").addEventListener("click",loadLogs);
+document.getElementById("logsReloadBtn").addEventListener("click",async()=>{
+  await Promise.all([
+    loadMemberActivity(),
+    loadLogs()
+  ]);
+});
 
 async function refreshAll(){
   await Promise.all([
@@ -1059,6 +1175,7 @@ async function refreshAll(){
     loadMembers(),
     loadPersonal(),
     loadSystem(),
+    loadMemberActivity(),
     loadLogs()
   ]);
 }
