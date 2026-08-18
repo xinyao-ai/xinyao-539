@@ -1905,6 +1905,26 @@
       line-height:1.5;
     }
 
+    .block-notice-date.stale{
+      background:#FFF1D2;
+      color:#9B6C3C;
+    }
+
+    .wg-update-status{
+      flex:1 1 100%;
+      margin-top:2px;
+      padding-top:7px;
+      border-top:1px dashed rgba(224,177,111,.48);
+      color:#9A7354;
+      font-size:9px;
+      font-weight:750;
+      line-height:1.55;
+    }
+
+    .wg-update-status.live{
+      color:#51805B;
+    }
+
     .block-refresh-btn{
       border:0;
       padding:6px 9px;
@@ -6651,7 +6671,8 @@
         const data =
           await callAPI(
             {
-              action:"block_notice"
+              action:"block_notice",
+              force_refresh:true
             },
             true
           );
@@ -6797,17 +6818,51 @@
         notice?.systems?.wg ||
         {};
 
+      const displayDate =
+        notice.display_date ||
+        notice.date ||
+        '最新';
+
+      const stale =
+        notice.stale === true;
+
+      const live =
+        notice.live === true;
+
+      const titleText =
+        stale
+          ? '🛑 WG 擋牌通知'
+          : '🛑 WG 今日擋牌通知';
+
+      const dateText =
+        stale
+          ? (
+              '最後更新 ' +
+              displayDate
+            )
+          : displayDate;
+
+      const statusText =
+        notice.status_text ||
+        (
+          live
+            ? '已重新檢查 WG 公告來源'
+            : '目前顯示最後成功取得的資料'
+        );
+
       dataCenterContent.innerHTML =
         '<div class="block-notice-head">' +
           '<div class="block-notice-title">' +
-            '🛑 WG 今日擋牌通知' +
+            escapeHtml(titleText) +
           '</div>' +
-          '<div class="block-notice-date">' +
-            escapeHtml(
-              notice.display_date ||
-              notice.date ||
-              '最新'
+          '<div class="block-notice-date' +
+            (
+              stale
+                ? ' stale'
+                : ''
             ) +
+          '">' +
+            escapeHtml(dateText) +
           '</div>' +
         '</div>' +
 
@@ -6815,8 +6870,17 @@
           '<span>資料來源：WG彩票</span>' +
           '<button id="refreshBlockNoticeBtn" ' +
             'class="block-refresh-btn" type="button">' +
-            '🔄 更新' +
+            '🔄 重新抓最新' +
           '</button>' +
+          '<div class="wg-update-status' +
+            (
+              live
+                ? ' live'
+                : ''
+            ) +
+          '">' +
+            escapeHtml(statusText) +
+          '</div>' +
         '</div>' +
 
         '<div class="wg-notice">' +
@@ -6857,6 +6921,7 @@
         );
       }
     }
+
 
     function renderBlockNumbers(){
       if(blockNoticeData){
