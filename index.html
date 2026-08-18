@@ -3675,6 +3675,8 @@
     let currentIsAdmin = false;
 
     let drawReviewData = null;
+    let onlineHeartbeatTimer = null;
+    let onlineHeartbeatBusy = false;
 
 
     /* =========================
@@ -4315,6 +4317,91 @@
 
 
     /* =========================
+       會員在線 Heartbeat
+       - 登入後立即回報一次
+       - 頁面保持開啟時每 60 秒回報
+       - 回到前景時立即更新
+       - Worker 端 8 分鐘沒收到回報就自動視為離線
+    ========================= */
+
+    async function sendOnlineHeartbeat(){
+      if(
+        !getSavedToken() ||
+        document.visibilityState === "hidden" ||
+        onlineHeartbeatBusy
+      ){
+        return;
+      }
+
+      onlineHeartbeatBusy = true;
+
+      try{
+        await callAPI(
+          {
+            action:"heartbeat"
+          },
+          true
+        );
+      }catch(error){
+        // heartbeat 失敗不影響會員正常使用程式。
+        if(
+          error?.status === 401
+        ){
+          stopOnlineHeartbeat();
+        }
+      }finally{
+        onlineHeartbeatBusy = false;
+      }
+    }
+
+
+    function startOnlineHeartbeat(){
+      stopOnlineHeartbeat();
+
+      if(!getSavedToken()){
+        return;
+      }
+
+      sendOnlineHeartbeat();
+
+      onlineHeartbeatTimer =
+        window.setInterval(
+          sendOnlineHeartbeat,
+          60 * 1000
+        );
+    }
+
+
+    function stopOnlineHeartbeat(){
+      if(
+        onlineHeartbeatTimer
+      ){
+        window.clearInterval(
+          onlineHeartbeatTimer
+        );
+
+        onlineHeartbeatTimer = null;
+      }
+
+      onlineHeartbeatBusy = false;
+    }
+
+
+    document.addEventListener(
+      "visibilitychange",
+      ()=>{
+        if(
+          document.visibilityState === "visible" &&
+          getSavedToken() &&
+          !appView.classList.contains("hidden")
+        ){
+          sendOnlineHeartbeat();
+        }
+      }
+    );
+
+
+    /* =========================
        View
     ========================= */
 
@@ -4334,6 +4421,8 @@
     }
 
     function showLogin(){
+      stopOnlineHeartbeat();
+
       appView.classList.add(
         "hidden"
       );
@@ -4388,6 +4477,9 @@
         "hidden",
         !currentIsAdmin
       );
+
+      // 會員進入 539 主畫面後開始回報在線狀態。
+      startOnlineHeartbeat();
 
       loadDashboardFromWorker();
       loadPersonalAnalysis();
@@ -4604,6 +4696,8 @@
     logoutBtn.addEventListener(
       "click",
       async ()=>{
+
+        stopOnlineHeartbeat();
 
         try{
           await callAPI(
