@@ -199,6 +199,64 @@
     .system-key{color:#9A795A;font-size:9px;font-weight:850}
     .system-val{margin-top:5px;color:#6D4D33;font-size:12px;font-weight:950;word-break:break-word}
 
+    .wg-form-grid{
+      display:grid;
+      grid-template-columns:1fr;
+      gap:12px;
+    }
+
+    .wg-paste{
+      width:100%;
+      min-height:82px;
+      resize:vertical;
+      padding:13px 14px;
+      border:1px solid #EFCB91;
+      border-radius:15px;
+      background:#FFFDF8;
+      color:#5F452F;
+      font:inherit;
+      font-size:11px;
+      font-weight:750;
+      line-height:1.55;
+      outline:none;
+    }
+
+    .wg-paste:focus{
+      border-color:#F49A32;
+      box-shadow:0 0 0 3px rgba(244,154,50,.10);
+    }
+
+    .wg-tip{
+      margin-top:6px;
+      color:#9B785A;
+      font-size:9px;
+      line-height:1.55;
+    }
+
+    .wg-current-box{
+      margin-top:13px;
+      padding:14px;
+      border:1px solid #F0D2A0;
+      border-radius:18px;
+      background:linear-gradient(145deg,#FFFDF8,#FFF3D8);
+    }
+
+    .wg-current-title{
+      font-size:12px;
+      font-weight:1000;
+      color:#6D4529;
+      margin-bottom:8px;
+    }
+
+    .wg-current-row{
+      margin-top:7px;
+      color:#7E5A3D;
+      font-size:10px;
+      font-weight:800;
+      line-height:1.55;
+      word-break:break-word;
+    }
+
     .record-form-grid{
       display:grid;grid-template-columns:1.1fr .9fr;gap:12px;
     }
@@ -378,6 +436,7 @@
     <button class="nav-btn" data-tab="batch">批次新增</button>
     <button class="nav-btn" data-tab="personal">個人分析</button>
     <button class="nav-btn" data-tab="records">539戰績</button>
+    <button class="nav-btn" data-tab="wg">WG擋牌</button>
     <button class="nav-btn" data-tab="system">系統狀態</button>
     <button class="nav-btn" data-tab="logs">操作紀錄</button>
   </nav>
@@ -572,6 +631,58 @@
       </div>
       <div id="recordList" class="record-list">
         <div class="empty">正在讀取戰績…</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="tab-wg" class="section">
+    <div class="card">
+      <div class="card-head">
+        <div>
+          <div class="card-title">🛑 WG 擋牌同步管理</div>
+          <div class="card-note">
+            自動來源正常時仍會自動抓取；如果來源暫時卡住，可在這裡同步最新 WG 資料。之後自動來源出現更晚日期會自動接回。
+          </div>
+        </div>
+        <button id="wgReloadBtn" class="soft-btn" type="button">重新整理</button>
+      </div>
+
+      <div class="field">
+        <label>擋牌日期</label>
+        <input id="wgDate" class="input" type="date">
+      </div>
+
+      <div class="wg-form-grid">
+        <div class="field">
+          <label>二星擋牌號碼</label>
+          <textarea id="wgTwo" class="wg-paste" placeholder="例如：08 10 14 15 26 27 28 33 36 38"></textarea>
+          <div class="wg-tip">可用空格、逗號、頓號或 x 分隔，系統會自動整理成 01～39。</div>
+        </div>
+
+        <div class="field">
+          <label>三星擋牌號碼</label>
+          <textarea id="wgThree" class="wg-paste" placeholder="例如：08 09 10 14 15 22 26 27 28 33 36 38 39"></textarea>
+        </div>
+
+        <div class="field">
+          <label>四星擋牌號碼</label>
+          <textarea id="wgFour" class="wg-paste" placeholder="例如：08 09 10 14 15 22 26 27 28 33 36 38 39"></textarea>
+        </div>
+      </div>
+
+      <button id="wgSaveBtn" class="primary" type="button" style="width:100%">
+        💾 同步最新 WG 擋牌
+      </button>
+
+      <button id="wgClearBtn" class="soft-btn" type="button" style="width:100%;margin-top:9px">
+        ↩ 清除手動同步，恢復完全自動
+      </button>
+
+      <div id="wgMessage" class="message"></div>
+
+      <div id="wgCurrentBox" class="wg-current-box">
+        <div class="wg-current-title">目前後台同步狀態</div>
+        <div class="wg-current-row">正在讀取…</div>
       </div>
     </div>
   </section>
@@ -845,6 +956,7 @@ document.querySelectorAll(".nav-btn").forEach(btn=>{
     if(tab==="members")loadMembers();
     if(tab==="personal")loadPersonal();
     if(tab==="records")loadRecords();
+    if(tab==="wg")loadWGOverride();
     if(tab==="system")loadSystem();
     if(tab==="logs"){
       showMemberActivityTab();
@@ -1355,6 +1467,132 @@ document.getElementById("recordSaveBtn").addEventListener("click",async()=>{
 document.getElementById("recordClearBtn").addEventListener("click",clearRecordForm);
 document.getElementById("recordsReloadBtn").addEventListener("click",loadRecords);
 
+function normalizeWGTextForInput(numbers){
+  return Array.isArray(numbers)
+    ? numbers.join(" ")
+    : "";
+}
+
+function renderWGCurrent(record){
+  const box=document.getElementById("wgCurrentBox");
+
+  if(!record){
+    box.innerHTML=`
+      <div class="wg-current-title">目前後台同步狀態</div>
+      <div class="wg-current-row">沒有手動同步資料，目前完全使用自動來源。</div>
+    `;
+    return;
+  }
+
+  const wg=record.wg||{};
+
+  box.innerHTML=`
+    <div class="wg-current-title">
+      ✅ 已同步 ${escapeHtml(record.display_date||record.date||"—")}
+    </div>
+    <div class="wg-current-row">
+      二星：${escapeHtml((wg.two_star?.numbers||[]).join("、"))}
+    </div>
+    <div class="wg-current-row">
+      三星：${escapeHtml((wg.three_star?.numbers||[]).join("、"))}
+    </div>
+    <div class="wg-current-row">
+      四星：${escapeHtml((wg.four_star?.numbers||[]).join("、"))}
+    </div>
+    <div class="wg-current-row">
+      自動來源若出現比 ${escapeHtml(record.display_date||record.date||"—")} 更晚的資料，前台會自動改回自動來源。
+    </div>
+  `;
+}
+
+async function loadWGOverride(){
+  const msg=document.getElementById("wgMessage");
+  msg.textContent="";
+
+  try{
+    const data=await api({
+      action:"admin_wg_override_get"
+    });
+
+    const record=data.record||null;
+
+    renderWGCurrent(record);
+
+    if(record){
+      document.getElementById("wgDate").value=record.date||"";
+      document.getElementById("wgTwo").value=normalizeWGTextForInput(record.wg?.two_star?.numbers);
+      document.getElementById("wgThree").value=normalizeWGTextForInput(record.wg?.three_star?.numbers);
+      document.getElementById("wgFour").value=normalizeWGTextForInput(record.wg?.four_star?.numbers);
+    }
+
+  }catch(error){
+    msg.textContent=error.message;
+  }
+}
+
+document.getElementById("wgSaveBtn").addEventListener("click",async()=>{
+  const msg=document.getElementById("wgMessage");
+
+  const date=document.getElementById("wgDate").value;
+  const two=document.getElementById("wgTwo").value.trim();
+  const three=document.getElementById("wgThree").value.trim();
+  const four=document.getElementById("wgFour").value.trim();
+
+  if(!date||!two||!three||!four){
+    msg.textContent="請完整填寫日期、二星、三星、四星資料。";
+    return;
+  }
+
+  msg.textContent="正在同步…";
+
+  try{
+    const data=await api({
+      action:"admin_wg_override_save",
+      date,
+      two_star:two,
+      three_star:three,
+      four_star:four
+    });
+
+    msg.textContent=`✓ 已同步 ${data.record?.display_date||date} WG 擋牌`;
+    showToast("WG 擋牌已同步");
+    renderWGCurrent(data.record||null);
+    await loadLogs();
+
+  }catch(error){
+    msg.textContent=error.message;
+  }
+});
+
+document.getElementById("wgClearBtn").addEventListener("click",async()=>{
+  if(!confirm("確定清除後台同步資料，恢復完全自動抓取？"))return;
+
+  const msg=document.getElementById("wgMessage");
+  msg.textContent="正在清除…";
+
+  try{
+    await api({
+      action:"admin_wg_override_clear"
+    });
+
+    document.getElementById("wgDate").value="";
+    document.getElementById("wgTwo").value="";
+    document.getElementById("wgThree").value="";
+    document.getElementById("wgFour").value="";
+
+    renderWGCurrent(null);
+    msg.textContent="✓ 已恢復完全自動抓取";
+    showToast("已恢復自動抓取");
+    await loadLogs();
+
+  }catch(error){
+    msg.textContent=error.message;
+  }
+});
+
+document.getElementById("wgReloadBtn").addEventListener("click",loadWGOverride);
+
+
 async function loadSystem(){
   const grid=document.getElementById("systemGrid");
   grid.innerHTML='<div class="empty">正在檢查…</div>';
@@ -1510,6 +1748,7 @@ async function refreshAll(){
     loadMembers(),
     loadPersonal(),
     loadRecords(),
+    loadWGOverride(),
     loadSystem(),
     loadMemberActivity(),
     loadLogs()
