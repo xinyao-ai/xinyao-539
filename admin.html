@@ -531,6 +531,14 @@
       <div id="personalTarget" class="card-note" style="margin:5px 0 15px">正在讀取…</div>
 
       <div class="field">
+        <label>🎯 分析目標日期（可手動修改）</label>
+        <input id="personalTargetDate" class="input" type="date">
+        <div class="card-note" style="margin-top:6px">
+          這個日期會直接顯示在前台「分析目標」與「編輯分享」上，不再由系統自動跳到隔天。
+        </div>
+      </div>
+
+      <div class="field">
         <label>主選 5 顆</label>
         <div class="grid3">
           <input class="input number-input personal-main" maxlength="2">
@@ -560,7 +568,7 @@
         <textarea id="personalNote" class="textarea" style="min-height:90px"></textarea>
       </div>
 
-      <button id="savePersonalBtn" class="primary" style="width:100%">發布／更新今日個人分析</button>
+      <button id="savePersonalBtn" class="primary" style="width:100%">發布／更新個人分析</button>
       <div id="personalMessage" class="message"></div>
     </div>
   </section>
@@ -1228,10 +1236,15 @@ async function loadPersonal(){
 
     if(!p){
       target.textContent="目前尚未發布";
+      document.getElementById("personalTargetDate").value=
+        new Date().toLocaleDateString("en-CA",{timeZone:"Asia/Taipei"});
       return;
     }
 
-    target.textContent=`目前資料日期：${p.display_date||p.target_display_date||"—"}`;
+    target.textContent=`目前分析目標：${p.target_display_date||p.display_date||"—"}`;
+
+    const dateInput=document.getElementById("personalTargetDate");
+    dateInput.value=p.target_date||new Date().toLocaleDateString("en-CA",{timeZone:"Asia/Taipei"});
 
     const mains=document.querySelectorAll(".personal-main");
     const cars=document.querySelectorAll(".personal-fullcar");
@@ -1256,14 +1269,17 @@ document.getElementById("savePersonalBtn").addEventListener("click",async()=>{
   try{
     await api({
       action:"admin_save_personal_analysis",
+      target_date:document.getElementById("personalTargetDate").value,
       main_numbers:collectNumbers(".personal-main"),
       fullcar_numbers:collectNumbers(".personal-fullcar"),
       main_tail:document.getElementById("personalTail").value.trim(),
       note:document.getElementById("personalNote").value.trim()
     });
 
-    msg.textContent="✓ 已發布";
-    showToast("個人分析已更新");
+    const targetDate=document.getElementById("personalTargetDate").value;
+    const displayTarget=targetDate ? targetDate.slice(5).replace("-","/") : "";
+    msg.textContent=`✓ 已發布 ${displayTarget}`;
+    showToast(`個人分析已更新 ${displayTarget}`);
     loadPersonal();
   }catch(error){msg.textContent=error.message}
 });
