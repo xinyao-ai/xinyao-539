@@ -876,7 +876,8 @@ async function api(body,auth=true){
   const response=await fetch(WORKER_URL,{
     method:"POST",
     headers,
-    body:JSON.stringify(body)
+    body:JSON.stringify(body),
+    cache:"no-store"
   });
 
   let data={};
@@ -902,6 +903,7 @@ async function verifySession(){
     return true;
   }catch{
     clearToken();
+    loginMessage.textContent="";
     return false;
   }
 }
@@ -929,6 +931,8 @@ loginForm.addEventListener("submit",async event=>{
     return;
   }
 
+  // 每次按登入都先清除舊 Session，避免舊 token 干擾。
+  clearToken();
   loginMessage.textContent="登入中…";
 
   try{
@@ -938,11 +942,23 @@ loginForm.addEventListener("submit",async event=>{
       password
     },false);
 
+    if(!data?.token){
+      throw new Error("登入成功但沒有取得 Session，請重新整理後再試");
+    }
+
     saveToken(data.token);
-    currentAdmin=data.account;
+
+    // v6 簽章 Session 可立即驗證。
+    // 這一步成功才真正進管理中心。
+    const session=await api({
+      action:"admin_session"
+    },true);
+
+    currentAdmin=session.account||data.account||account;
     adminPassword.value="";
     loginMessage.textContent="";
     showAdmin();
+
   }catch(error){
     clearToken();
     loginMessage.textContent=error.message||"登入失敗";
